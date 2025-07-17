@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowLeft, RefreshCw } from "lucide-react";
+import comingSoonHero from "@/assets/coming-soon-hero.jpg";
 
 const NotFound = () => {
   const location = useLocation();
@@ -15,17 +16,17 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 p-4">
-      <Card className="max-w-2xl w-full glass-effect border-0 shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/10 to-background p-4">
+      <Card className="max-w-2xl w-full bg-white/80 backdrop-blur-sm border border-border/20 shadow-2xl">
         <CardContent className="p-12 text-center">
-          {/* Animated Image */}
+          {/* Hero Image */}
           <div className="mb-8 relative">
             <img 
-              src="/src/assets/coming-soon.png" 
+              src={comingSoonHero} 
               alt="Coming Soon" 
-              className="w-full max-w-md mx-auto animate-float"
+              className="w-full max-w-md mx-auto rounded-xl shadow-lg animate-float"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-primary/5 rounded-lg" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-primary/5 rounded-xl" />
           </div>
           
           {/* Content */}
@@ -49,27 +50,14 @@ const NotFound = () => {
             
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/dashboard">
+              <Link to="/">
                 <Button className="w-full sm:w-auto bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 group">
                   <Home className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
                   Back to Dashboard
                 </Button>
               </Link>
               
-              <Link to="/">
-                <Button variant="outline" className="w-full sm:w-auto glass-effect hover:bg-primary/10 transition-all duration-300 group">
-                  <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-                  Return Home
-                </Button>
-              </Link>
-            </div>
-            
-            {/* Notification Signup */}
-            <div className="mt-8 p-6 rounded-lg bg-muted/30 border border-border/20">
-              <p className="text-sm font-medium text-muted-foreground mb-3">
-                Want to be notified when this feature is ready?
-              </p>
-              <Button variant="secondary" className="group hover:bg-secondary/80 transition-all duration-300">
+              <Button variant="outline" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300 group">
                 <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
                 Notify Me
               </Button>

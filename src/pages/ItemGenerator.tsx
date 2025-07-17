@@ -24,6 +24,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
+import { ProfileDropdown } from "@/components/ProfileDropdown"
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar } from 'recharts'
 
 const ItemGenerator = () => {
@@ -114,27 +115,21 @@ const ItemGenerator = () => {
   ]
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-muted/10 to-background">
         <AppSidebar />
         
-        <SidebarInset>
+        <SidebarInset className="ml-64">
           {/* Header */}
-          <header className="sticky top-0 z-50 glass-effect border-b border-border/40">
+          <header className="sticky top-0 z-50 glass-effect border-b border-border/30">
             <div className="flex h-16 items-center gap-4 px-6">
-              <SidebarTrigger />
               <div className="flex-1 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Link to="/dashboard">
-                    <Button variant="ghost" size="icon" className="hover-scale">
+                  <Link to="/">
+                    <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
                       <ArrowLeft className="h-5 w-5" />
                     </Button>
                   </Link>
-                  <img 
-                    src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                    alt="AI-Levate" 
-                    className="h-8 w-auto"
-                  />
                   <div className="h-6 w-px bg-border/40" />
                   <h1 className="text-xl font-semibold text-foreground">Item Generator</h1>
                 </div>
@@ -144,15 +139,13 @@ const ItemGenerator = () => {
                     <span>Welcome Back,</span>
                     <span className="font-semibold text-primary">Shivaraj Mi</span>
                   </div>
-                  <Button variant="ghost" size="icon" className="hover-scale">
+                  <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
                     <Bell className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="hover-scale">
+                  <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
                     <Settings className="h-5 w-5" />
                   </Button>
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
-                  </Avatar>
+                  <ProfileDropdown />
                 </div>
               </div>
             </div>
@@ -164,7 +157,7 @@ const ItemGenerator = () => {
               
               {/* Generated Books Section */}
               <div className="col-span-12 lg:col-span-4">
-                <Card className="h-full glass-effect border-0">
+                <Card className="h-full bg-white/80 backdrop-blur-sm border border-border/20 shadow-lg">
                   <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl font-bold">
                       <BookOpen className="h-6 w-6 text-primary" />
@@ -175,7 +168,7 @@ const ItemGenerator = () => {
                     {books.map((book, index) => (
                       <Card 
                         key={index}
-                        className="group p-4 glass-effect border border-border/20 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1"
+                        className="group p-4 bg-white/90 backdrop-blur-sm border border-border/20 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1"
                       >
                         <div className="flex items-start gap-4">
                           <div className="w-12 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center text-xs font-bold text-primary border border-primary/30">
@@ -195,7 +188,7 @@ const ItemGenerator = () => {
                               <span className="text-xs font-medium text-primary">
                                 {book.questions} Questions
                               </span>
-                              <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover-scale">
+                              <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover:scale-105 transition-transform">
                                 <Download className="h-3 w-3 mr-1" />
                                 Export
                               </Button>
@@ -216,7 +209,7 @@ const ItemGenerator = () => {
                   {stats.map((stat, index) => (
                     <Card 
                       key={index}
-                      className={`group glass-effect border-0 hover:shadow-xl hover-glow transition-all duration-500 hover:-translate-y-1 ${stat.bgColor} relative overflow-hidden`}
+                      className={`group bg-white/80 backdrop-blur-sm border border-border/20 shadow-lg hover:shadow-2xl hover-glow transition-all duration-500 hover:-translate-y-1 relative overflow-hidden`}
                       style={{ animationDelay: `${index * 150}ms` }}
                     >
                       {/* Background Pattern */}
@@ -270,7 +263,7 @@ const ItemGenerator = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   
                   {/* Daily Usage Trend */}
-                  <Card className="glass-effect border-0">
+                  <Card className="bg-white/80 backdrop-blur-sm border border-border/20 shadow-lg">
                     <CardHeader className="pb-4">
                       <CardTitle className="flex items-center gap-2 text-lg">
                         <TrendingUp className="h-5 w-5 text-primary" />
@@ -311,7 +304,7 @@ const ItemGenerator = () => {
                   </Card>
 
                   {/* Weekly Progress */}
-                  <Card className="glass-effect border-0">
+                  <Card className="bg-white/80 backdrop-blur-sm border border-border/20 shadow-lg">
                     <CardHeader className="pb-4">
                       <CardTitle className="flex items-center gap-2 text-lg">
                         <BarChart3 className="h-5 w-5 text-primary" />
@@ -352,7 +345,7 @@ const ItemGenerator = () => {
                 </div>
 
                 {/* Quick Actions */}
-                <Card className="glass-effect border-0">
+                <Card className="bg-white/80 backdrop-blur-sm border border-border/20 shadow-lg">
                   <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-lg">
                       <Clock className="h-5 w-5 text-primary" />
