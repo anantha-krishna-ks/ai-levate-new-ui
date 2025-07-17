@@ -14,7 +14,10 @@ import {
   FileText,
   Book,
   Settings,
-  Save
+  Save,
+  Home,
+  Plus,
+  FileSpreadsheet
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -74,9 +77,10 @@ const QuestionGenerator = () => {
           <Link to="/dashboard">
             <Button 
               variant="outline" 
-              className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 hover:from-amber-600 hover:to-orange-600 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground border-border hover:bg-muted/50 transition-all duration-200"
             >
-              Back to Dashboard
+              <Home className="h-4 w-4" />
+              Dashboard
             </Button>
           </Link>
         </div>
@@ -114,17 +118,17 @@ const QuestionGenerator = () => {
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             
             {/* Tab Navigation */}
-            <div className="flex items-center justify-center mb-6">
-              <TabsList className="grid w-full max-w-md grid-cols-2 bg-muted/50">
+            <div className="flex items-center justify-center mb-8">
+              <TabsList className="grid w-full max-w-lg grid-cols-2 bg-white border border-border shadow-sm p-1 rounded-lg">
                 <TabsTrigger 
                   value="generate" 
-                  className="data-[state=active]:bg-primary data-[state=active]:text-white"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/90 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-200 rounded-md px-6 py-3 font-medium"
                 >
                   Generate Questions
                 </TabsTrigger>
                 <TabsTrigger 
                   value="repository"
-                  className="data-[state=active]:bg-primary data-[state=active]:text-white"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary/90 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-200 rounded-md px-6 py-3 font-medium"
                 >
                   Question Repository
                 </TabsTrigger>
@@ -132,9 +136,17 @@ const QuestionGenerator = () => {
             </div>
 
             {/* Generate Questions Tab */}
-            <TabsContent value="generate" className="space-y-6">
-              <Card className="bg-white/90 backdrop-blur-sm border border-border/20 shadow-lg">
-                <CardContent className="p-8">
+            <TabsContent value="generate" className="space-y-8">
+              <Card className="bg-white border border-border shadow-lg rounded-xl">
+                <CardHeader className="pb-0">
+                  <CardTitle className="text-xl font-semibold text-foreground flex items-center gap-3">
+                    <div className="h-8 w-8 bg-gradient-to-r from-primary to-primary/80 rounded-lg flex items-center justify-center">
+                      <Plus className="h-4 w-4 text-white" />
+                    </div>
+                    Generate Questions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-8 pt-6">
                   
                   {/* Token Info */}
                   <div className="flex items-center justify-between mb-8">
@@ -157,123 +169,135 @@ const QuestionGenerator = () => {
                     </div>
                   </div>
 
-                  {/* Form Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  {/* Filters Section */}
+                  <div className="bg-muted/30 rounded-lg p-6 mb-8">
+                    <h3 className="text-lg font-semibold mb-4 text-foreground">Question Configuration</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     
-                    {/* Study */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Study</label>
-                      <Select defaultValue="defining-risk">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="defining-risk">1. Defining Risk and Cyber</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                      {/* Study */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Study</label>
+                        <Select defaultValue="defining-risk">
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="defining-risk">1. Defining Risk and Cyber</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
 
-                    {/* LOs */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">LOs</label>
-                      <Select defaultValue="explain-pure-risk">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="explain-pure-risk">1. Explain why pure risk is</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                      {/* LOs */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Learning Outcomes</label>
+                        <Select defaultValue="explain-pure-risk">
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="explain-pure-risk">1. Explain why pure risk is</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
 
-                    {/* Taxonomy */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Taxonomy</label>
-                      <Select>
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue placeholder="-- Select --" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="remember">Remember</SelectItem>
-                          <SelectItem value="understand">Understand</SelectItem>
-                          <SelectItem value="apply">Apply</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                      {/* Taxonomy */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Taxonomy</label>
+                        <Select>
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue placeholder="-- Select --" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="remember">Remember</SelectItem>
+                            <SelectItem value="understand">Understand</SelectItem>
+                            <SelectItem value="apply">Apply</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
 
-                    {/* Question Type */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Question Type</label>
-                      <Select defaultValue="multiple-choice">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
-                          <SelectItem value="true-false">True/False</SelectItem>
-                          <SelectItem value="essay">Essay</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      {/* Question Type */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Question Type</label>
+                        <Select defaultValue="multiple-choice">
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                            <SelectItem value="true-false">True/False</SelectItem>
+                            <SelectItem value="essay">Essay</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Number of Questions & Marks */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Number of Questions</label>
-                      <Select defaultValue="1">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="10">10</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Marks</label>
-                      <Select defaultValue="1">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  {/* Additional Configuration */}
+                  <div className="bg-muted/30 rounded-lg p-6 mb-8">
+                    <h3 className="text-lg font-semibold mb-4 text-foreground">Question Details</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Number of Questions</label>
+                        <Select defaultValue="1">
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                            <SelectItem value="10">10</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Marks</label>
+                        <Select defaultValue="1">
+                          <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="2">2</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Upload & Generate Section */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button 
-                      variant="outline" 
-                      className="flex items-center gap-2 bg-white border-border/30 hover:bg-muted/50"
-                    >
-                      <Upload className="h-4 w-4" />
-                      Upload File
-                    </Button>
-                    
-                    <Button 
-                      className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 hover:from-amber-600 hover:to-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 px-8"
-                    >
-                      Generate
-                    </Button>
+                  {/* Generate Section */}
+                  <div className="border-t border-border pt-8">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                      <Button 
+                        variant="outline" 
+                        className="flex items-center gap-2 bg-white border-2 border-border hover:bg-muted/50 hover:border-primary/50 transition-all duration-200 px-6"
+                      >
+                        <Plus className="h-4 w-4" />
+                        Add Additional Instructions
+                      </Button>
+                      
+                      <Button 
+                        size="lg"
+                        className="bg-gradient-to-r from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 px-12 py-3 text-lg font-semibold"
+                      >
+                        Generate Questions
+                      </Button>
+                    </div>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-wrap items-center justify-end gap-4 mt-8 pt-6 border-t border-border/20">
-                    <Button variant="outline" className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 hover:from-blue-600 hover:to-blue-700">
+                  <div className="flex flex-wrap items-center justify-end gap-3 mt-8 pt-6 border-t border-border">
+                    <Button variant="outline" className="flex items-center gap-2 border-border hover:bg-muted/50 transition-colors">
+                      <FileText className="h-4 w-4" />
                       Export to Word
                     </Button>
-                    <Button variant="outline" className="bg-gradient-to-r from-green-500 to-green-600 text-white border-0 hover:from-green-600 hover:to-green-700">
+                    <Button variant="outline" className="flex items-center gap-2 border-border hover:bg-muted/50 transition-colors">
+                      <FileSpreadsheet className="h-4 w-4" />
                       Export to Excel
                     </Button>
-                    <Button variant="outline" className="bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0 hover:from-purple-600 hover:to-purple-700">
+                    <Button variant="outline" className="flex items-center gap-2 border-border hover:bg-muted/50 transition-colors">
+                      <Save className="h-4 w-4" />
                       Save Data
                     </Button>
                   </div>
@@ -282,185 +306,225 @@ const QuestionGenerator = () => {
             </TabsContent>
 
             {/* Question Repository Tab */}
-            <TabsContent value="repository" className="space-y-6">
+            <TabsContent value="repository" className="space-y-8">
               
-              {/* Filters Section */}
-              <Card className="bg-white/90 backdrop-blur-sm border border-border/20 shadow-lg">
+              {/* Search Bar */}
+              <Card className="bg-white border border-border shadow-lg rounded-xl">
                 <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                    
-                    {/* Source */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Source</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Study */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Study</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* LOs */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">LOs</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Question Type */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Question Type</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {/* Additional Filters */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Taxonomy</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Created By</label>
-                      <Select defaultValue="me">
-                        <SelectTrigger className="bg-white border-border/30">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="me">Me</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Search</label>
+                  <div className="flex flex-col sm:flex-row gap-4 items-end">
+                    <div className="flex-1 space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Search Questions</label>
                       <div className="flex gap-2">
                         <Input 
-                          placeholder="Enter search text" 
-                          className="bg-white border-border/30"
+                          placeholder="Enter search keywords..." 
+                          className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors"
                         />
                         <Button 
-                          className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 hover:from-amber-600 hover:to-orange-600"
+                          className="bg-gradient-to-r from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 px-8"
                         >
-                          Go
+                          <Search className="h-4 w-4 mr-2" />
+                          Search
                         </Button>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
+              
+              {/* Filters Section */}
+              <Card className="bg-white border border-border shadow-lg rounded-xl">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-3">
+                    <div className="h-8 w-8 bg-gradient-to-r from-muted-foreground to-muted-foreground/80 rounded-lg flex items-center justify-center">
+                      <Settings className="h-4 w-4 text-white" />
+                    </div>
+                    Filter Questions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    
+                    {/* Source */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Source</label>
+                      <Select defaultValue="all">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Sources</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Study */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Study</label>
+                      <Select defaultValue="all">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Studies</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* LOs */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Learning Outcomes</label>
+                      <Select defaultValue="all">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Learning Outcomes</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Question Type */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Question Type</label>
+                      <Select defaultValue="all">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Question Types</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Additional Filters */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Taxonomy</label>
+                      <Select defaultValue="all">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Taxonomies</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Created By</label>
+                      <Select defaultValue="me">
+                        <SelectTrigger className="bg-white border-2 border-border shadow-sm hover:border-primary/50 transition-colors">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="me">Me</SelectItem>
+                          <SelectItem value="all">All Users</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Results Section */}
-              <Card className="bg-white/90 backdrop-blur-sm border border-border/20 shadow-lg">
+              <Card className="bg-white border border-border shadow-lg rounded-xl">
                 <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-semibold">Questions</CardTitle>
-                    <div className="text-sm text-muted-foreground">
-                      Total Questions: <span className="font-bold text-primary">11</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <CardTitle className="text-xl font-semibold text-foreground flex items-center gap-3">
+                      <div className="h-8 w-8 bg-gradient-to-r from-primary to-primary/80 rounded-lg flex items-center justify-center">
+                        <FileText className="h-4 w-4 text-white" />
+                      </div>
+                      Question Repository
+                    </CardTitle>
+                    <div className="flex items-center gap-4">
+                      <div className="text-sm text-muted-foreground">
+                        Total Questions: <span className="font-bold text-primary text-base">11</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" className="flex items-center gap-2 border-border hover:bg-muted/50">
+                          <Trash2 className="h-4 w-4" />
+                          Delete Selected
+                        </Button>
+                        <Button variant="outline" size="sm" className="flex items-center gap-2 border-border hover:bg-muted/50">
+                          <FileText className="h-4 w-4" />
+                          Export Word
+                        </Button>
+                        <Button variant="outline" size="sm" className="flex items-center gap-2 border-border hover:bg-muted/50">
+                          <FileSpreadsheet className="h-4 w-4" />
+                          Export Excel
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap items-center justify-end gap-4 mb-6">
-                    <Button variant="outline" className="bg-gradient-to-r from-red-500 to-red-600 text-white border-0 hover:from-red-600 hover:to-red-700">
-                      Delete Question(s)
-                    </Button>
-                    <Button variant="outline" className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 hover:from-blue-600 hover:to-blue-700">
-                      Export to Word
-                    </Button>
-                    <Button variant="outline" className="bg-gradient-to-r from-green-500 to-green-600 text-white border-0 hover:from-green-600 hover:to-green-700">
-                      Export to Excel
-                    </Button>
-                  </div>
+                <CardContent className="pt-0">
 
                   {/* Questions Table */}
-                  <div className="border border-border/20 rounded-lg overflow-hidden">
+                  <div className="border border-border rounded-lg overflow-hidden">
                     <Table>
-                      <TableHeader>
-                        <TableRow className="bg-muted/30">
-                          <TableHead className="w-12">
-                            <Checkbox />
+                      <TableHeader className="bg-muted/50">
+                        <TableRow className="border-b border-border hover:bg-muted/50">
+                          <TableHead className="w-12 py-4">
+                            <Checkbox className="border-2" />
                           </TableHead>
-                          <TableHead className="font-semibold">Sl No</TableHead>
-                          <TableHead className="font-semibold">Question Identifier</TableHead>
-                          <TableHead className="font-semibold">Question</TableHead>
-                          <TableHead className="font-semibold">User Name</TableHead>
-                          <TableHead className="font-semibold">Type</TableHead>
-                          <TableHead className="font-semibold">Preview</TableHead>
-                          <TableHead className="font-semibold">Edit</TableHead>
-                          <TableHead className="font-semibold">Delete</TableHead>
+                          <TableHead className="font-semibold py-4">Question ID</TableHead>
+                          <TableHead className="font-semibold py-4">Question Text</TableHead>
+                          <TableHead className="font-semibold py-4">Type</TableHead>
+                          <TableHead className="font-semibold py-4">Created By</TableHead>
+                          <TableHead className="font-semibold py-4 text-center">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {questions.map((question, index) => (
-                          <TableRow key={question.id} className="hover:bg-muted/20">
-                            <TableCell>
+                        {questions.map((question) => (
+                          <TableRow key={question.id} className="border-b border-border hover:bg-muted/30 transition-colors">
+                            <TableCell className="py-4">
                               <Checkbox 
+                                className="border-2"
                                 checked={selectedQuestions.includes(question.id)}
                                 onCheckedChange={() => handleQuestionSelect(question.id)}
                               />
                             </TableCell>
-                            <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell className="font-mono text-xs">{question.id}</TableCell>
-                            <TableCell className="max-w-md">
-                              <p className="line-clamp-2 text-sm">{question.question}</p>
+                            <TableCell className="font-mono text-xs py-4 max-w-48">
+                              <div className="truncate text-muted-foreground">
+                                {question.id}
+                              </div>
                             </TableCell>
-                            <TableCell>{question.user}</TableCell>
-                            <TableCell>
-                              <Badge variant="secondary">{question.type}</Badge>
+                            <TableCell className="max-w-md py-4">
+                              <div className="truncate font-medium">
+                                {question.question}
+                              </div>
                             </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="icon" className="h-8 w-8">
-                                <Eye className="h-4 w-4" />
-                              </Button>
+                            <TableCell className="py-4">
+                              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                                {question.type}
+                              </Badge>
                             </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="icon" className="h-8 w-8">
-                                <Edit className="h-4 w-4" />
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:text-red-700">
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
+                            <TableCell className="py-4 text-muted-foreground">{question.user}</TableCell>
+                            <TableCell className="py-4">
+                              <div className="flex items-center justify-center gap-1">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  className="h-8 w-8 p-0 border-border hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 transition-colors"
+                                >
+                                  <Eye className="h-3 w-3" />
+                                </Button>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  className="h-8 w-8 p-0 border-border hover:bg-amber-50 hover:border-amber-200 hover:text-amber-600 transition-colors"
+                                >
+                                  <Edit className="h-3 w-3" />
+                                </Button>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  className="h-8 w-8 p-0 border-border hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </Button>
+                              </div>
                             </TableCell>
                           </TableRow>
                         ))}
