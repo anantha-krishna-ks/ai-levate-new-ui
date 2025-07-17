@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import Index from "./pages/Index";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ItemGenerator from "./pages/ItemGenerator";
+import QuestionGenerator from "./pages/QuestionGenerator";
 import Reports from "./pages/Reports";
 import ManageUsers from "./pages/ManageUsers";
 import NotFound from "./pages/NotFound";
@@ -24,6 +26,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/item-generator" element={<ItemGenerator />} />
+          <Route path="/question-generator/:bookCode" element={<QuestionGenerator />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/manage-users" element={<ManageUsers />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,10 +1,10 @@
+
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { 
   ArrowLeft, 
   BarChart3, 
   BookOpen, 
-  Download,
   TrendingUp,
   Users,
   Zap,
@@ -160,36 +160,31 @@ const ItemGenerator = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {books.map((book, index) => (
-                  <Card 
-                    key={index}
-                    className="group p-4 bg-white/95 backdrop-blur-sm border border-border/30 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center text-xs font-bold text-primary border border-primary/30">
-                        {book.code}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <Badge variant="secondary" className="mb-2 text-xs">
-                          {book.year}
-                        </Badge>
-                        <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors leading-tight">
-                          {book.title}
-                        </h3>
-                        <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
-                          {book.subtitle}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-primary">
-                            {book.questions} Questions
-                          </span>
-                          <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover:scale-105 transition-transform">
-                            <Download className="h-3 w-3 mr-1" />
-                            Export
-                          </Button>
+                  <Link key={index} to={`/question-generator/${book.code.toLowerCase()}`}>
+                    <Card className="group p-4 bg-white/95 backdrop-blur-sm border border-border/30 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center text-xs font-bold text-primary border border-primary/30">
+                          {book.code}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <Badge variant="secondary" className="mb-2 text-xs">
+                            {book.year}
+                          </Badge>
+                          <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors leading-tight">
+                            {book.title}
+                          </h3>
+                          <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                            {book.subtitle}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-primary">
+                              {book.questions} Questions
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </Link>
                 ))}
               </CardContent>
             </Card>
