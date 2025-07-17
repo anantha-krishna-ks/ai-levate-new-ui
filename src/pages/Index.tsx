@@ -33,17 +33,11 @@ const Index = () => {
           <div className="max-w-md text-center space-y-8">
             {/* AI-Levate Logo */}
             <div className="flex items-center justify-center space-x-3 mb-8">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                  <Brain className="w-7 h-7 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                  AI-Levate
-                </h1>
-              </div>
+              <img 
+                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                alt="AI-Levate" 
+                className="h-12 w-auto"
+              />
             </div>
 
             {/* Abstract AI Visualization */}
@@ -95,16 +89,12 @@ const Index = () => {
         <div className="flex-1 lg:w-1/2 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
             {/* Mobile Logo */}
-            <div className="lg:hidden flex items-center justify-center space-x-3 mb-12">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-primary to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse" />
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                AI-Levate
-              </h1>
+            <div className="lg:hidden flex items-center justify-center mb-12">
+              <img 
+                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                alt="AI-Levate" 
+                className="h-8 w-auto"
+              />
             </div>
 
             <Card className="border-0 shadow-2xl bg-white/70 backdrop-blur-sm">
