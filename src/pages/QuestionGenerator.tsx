@@ -63,7 +63,7 @@ const QuestionGenerator = () => {
     <div className="min-h-screen bg-background animate-fade-in">
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border surface-elevated">
+      <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-xl border-b border-border ai-surface">
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
@@ -96,10 +96,10 @@ const QuestionGenerator = () => {
       <div className="max-w-7xl mx-auto px-8 py-8">
         
         {/* Book Info Bar */}
-        <div className="mb-8 p-6 surface-elevated rounded-xl animate-scale-in">
+        <div className="mb-8 p-6 ai-surface ai-surface-hover rounded-2xl animate-scale-in">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center">
+              <div className="h-12 w-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
                 <Book className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -107,7 +107,7 @@ const QuestionGenerator = () => {
                 <p className="text-sm text-muted-foreground">{bookData.subtitle} • {bookData.code} • {bookData.year}</p>
               </div>
             </div>
-            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+            <Badge variant="outline" className="ai-badge">
               Active
             </Badge>
           </div>
@@ -116,19 +116,19 @@ const QuestionGenerator = () => {
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="flex justify-center mb-12">
-            <TabsList className="grid w-full max-w-md grid-cols-2 surface-elevated p-1 rounded-xl">
+            <TabsList className="grid w-full max-w-2xl grid-cols-2 ai-surface p-2 rounded-2xl h-16">
               <TabsTrigger 
                 value="generate" 
-                className="data-[state=active]:button-primary data-[state=active]:text-white button-secondary rounded-lg px-8 py-3 font-medium transition-all"
+                className="data-[state=active]:ai-button-primary data-[state=active]:text-white ai-button-secondary rounded-xl px-12 py-4 text-base font-medium transition-all duration-300 micro-interaction"
               >
-                <Sparkles className="h-4 w-4 mr-2" />
+                <Sparkles className="h-5 w-5 mr-3" />
                 Generate Questions
               </TabsTrigger>
               <TabsTrigger 
                 value="repository"
-                className="data-[state=active]:button-primary data-[state=active]:text-white button-secondary rounded-lg px-8 py-3 font-medium transition-all"
+                className="data-[state=active]:ai-button-primary data-[state=active]:text-white ai-button-secondary rounded-xl px-12 py-4 text-base font-medium transition-all duration-300 micro-interaction"
               >
-                <FileText className="h-4 w-4 mr-2" />
+                <FileText className="h-5 w-5 mr-3" />
                 Repository
               </TabsTrigger>
             </TabsList>
@@ -138,10 +138,10 @@ const QuestionGenerator = () => {
           <TabsContent value="generate" className="space-y-8 animate-fade-in">
             
             {/* Token Status */}
-            <div className="surface-elevated rounded-xl p-6">
+            <div className="ai-surface ai-surface-hover rounded-2xl p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
                     <Zap className="h-5 w-5 text-white" />
                   </div>
                   <div>
@@ -153,7 +153,7 @@ const QuestionGenerator = () => {
                   <span className="text-sm font-medium text-muted-foreground">Book Based</span>
                   <div className="relative">
                     <input type="checkbox" defaultChecked className="sr-only" />
-                    <div className="w-11 h-6 bg-gradient-to-r from-primary to-blue-600 rounded-full shadow-inner"></div>
+                    <div className="w-11 h-6 bg-gradient-to-r from-primary to-primary/80 rounded-full shadow-inner"></div>
                     <div className="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition transform translate-x-5 shadow-sm"></div>
                   </div>
                   <span className="text-sm font-medium text-muted-foreground">LLM</span>
@@ -162,9 +162,9 @@ const QuestionGenerator = () => {
             </div>
 
             {/* Configuration Section */}
-            <div className="surface-elevated rounded-xl p-8">
+            <div className="ai-surface ai-surface-hover rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="h-10 w-10 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center">
+                <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
                   <Settings2 className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -177,10 +177,10 @@ const QuestionGenerator = () => {
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-foreground">Study</label>
                   <Select defaultValue="defining-risk">
-                    <SelectTrigger className="input-field h-11">
+                    <SelectTrigger className="ai-input h-11">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="surface-overlay">
+                    <SelectContent className="ai-surface">
                       <SelectItem value="defining-risk">1. Defining Risk and Cyber</SelectItem>
                     </SelectContent>
                   </Select>
@@ -261,14 +261,14 @@ const QuestionGenerator = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 border-t border-border">
                 <Button 
                   variant="outline" 
-                  className="button-secondary px-6 py-3"
+                  className="ai-button-secondary px-6 py-3 micro-interaction"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Additional Instructions
                 </Button>
                 
                 <Button 
-                  className="button-primary px-12 py-3 text-base font-medium"
+                  className="ai-button-primary px-12 py-3 text-base font-medium micro-interaction"
                 >
                   <Sparkles className="h-4 w-4 mr-2" />
                   Generate Questions
@@ -277,7 +277,7 @@ const QuestionGenerator = () => {
             </div>
 
             {/* Export Actions */}
-            <div className="surface-elevated rounded-xl p-6">
+            <div className="ai-surface ai-surface-hover rounded-2xl p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <h4 className="text-lg font-semibold text-foreground">Export Options</h4>
                 <div className="flex items-center gap-3">
