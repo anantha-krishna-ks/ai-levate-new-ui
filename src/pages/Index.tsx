@@ -2,130 +2,202 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Sparkles, Bot, ArrowRight } from "lucide-react";
+import { Brain, Sparkles, ArrowRight, Eye, EyeOff } from "lucide-react";
 
 const Index = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
-      {/* Background AI-inspired elements */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
+      {/* Animated Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-spin" style={{ animationDuration: '20s' }} />
+        <div className="absolute top-1/3 -right-20 w-64 h-64 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }} />
+        <div className="absolute -bottom-32 left-1/4 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '30s' }} />
+        
+        {/* Floating Elements */}
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/40 rounded-full animate-pulse" />
+        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-cyan-400/40 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="w-full max-w-md relative z-10">
-        {/* Logo/Brand Section */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4 shadow-lg">
-            <Bot className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Lovable.ai</h1>
-          <p className="text-muted-foreground">AI-powered development platform</p>
-        </div>
-
-        {/* Login Card */}
-        <Card className="shadow-xl border-0 bg-card/95 backdrop-blur-sm">
-          <CardHeader className="space-y-1 text-center pb-4">
-            <CardTitle className="text-2xl font-semibold">Welcome back</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Sign in to your account to continue building
-            </CardDescription>
-          </CardHeader>
-          
-          <CardContent className="space-y-6">
-            {/* Social Login */}
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full h-11 font-medium transition-all hover:bg-accent/50" size="lg">
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
-                Continue with Google
-              </Button>
-              
-              <Button variant="outline" className="w-full h-11 font-medium transition-all hover:bg-accent/50" size="lg">
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
-                </svg>
-                Continue with GitHub
-              </Button>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
+      <div className="relative z-10 min-h-screen flex">
+        {/* Left Side - AI Illustration Area */}
+        <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-12">
+          <div className="max-w-md text-center space-y-8">
+            {/* AI-Levate Logo */}
+            <div className="flex items-center justify-center space-x-3 mb-8">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <Brain className="w-7 h-7 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse" />
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with email</span>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                  AI-Levate
+                </h1>
               </div>
             </div>
 
-            {/* Email/Password Form */}
-            <form className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-11 transition-all focus:ring-primary/20"
-                />
+            {/* Abstract AI Visualization */}
+            <div className="relative mx-auto w-80 h-80">
+              {/* Central Core */}
+              <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl animate-pulse" />
+              
+              {/* Orbiting Elements */}
+              <div className="absolute inset-0 animate-spin" style={{ animationDuration: '20s' }}>
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-80" />
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-80" />
               </div>
               
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 transition-all focus:ring-primary/20"
-                />
+              <div className="absolute inset-0 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
+                <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-80" />
+                <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-red-400 to-rose-400 rounded-full opacity-80" />
               </div>
 
-              <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center space-x-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-border" />
-                  <span className="text-muted-foreground">Remember me</span>
-                </label>
-                <a href="#" className="text-primary hover:text-primary/80 font-medium transition-colors">
-                  Forgot password?
-                </a>
+              {/* Neural Network Lines */}
+              <div className="absolute inset-0">
+                <svg className="w-full h-full opacity-30" viewBox="0 0 320 320">
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#3B82F6" />
+                      <stop offset="100%" stopColor="#06B6D4" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M160,60 Q160,160 60,160" stroke="url(#lineGradient)" strokeWidth="2" fill="none" className="animate-pulse" />
+                  <path d="M160,60 Q160,160 260,160" stroke="url(#lineGradient)" strokeWidth="2" fill="none" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  <path d="M60,160 Q160,160 160,260" stroke="url(#lineGradient)" strokeWidth="2" fill="none" className="animate-pulse" style={{ animationDelay: '1s' }} />
+                  <path d="M260,160 Q160,160 160,260" stroke="url(#lineGradient)" strokeWidth="2" fill="none" className="animate-pulse" style={{ animationDelay: '1.5s' }} />
+                </svg>
               </div>
+            </div>
 
-              <Button className="w-full h-11 font-medium transition-all hover:scale-[1.02] active:scale-[0.98]" size="lg">
-                Sign In
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </form>
-
-            {/* Sign Up Link */}
-            <div className="text-center pt-4 border-t border-border/50">
-              <p className="text-sm text-muted-foreground">
-                Don't have an account?{' '}
-                <a href="#" className="font-medium text-primary hover:text-primary/80 transition-colors">
-                  Sign up for free
-                </a>
+            <div className="space-y-4">
+              <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+                Welcome to the Future of
+                <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent"> AI Intelligence</span>
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Experience seamless automation and intuitive AI interaction that elevates your workflow to unprecedented levels.
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        {/* Footer */}
-        <div className="mt-8 text-center">
-          <div className="flex items-center justify-center space-x-1 text-xs text-muted-foreground">
-            <Sparkles className="w-3 h-3" />
-            <span>Powered by AI • Secure • Professional</span>
+        {/* Right Side - Login Form */}
+        <div className="flex-1 lg:w-1/2 flex items-center justify-center p-8">
+          <div className="w-full max-w-md">
+            {/* Mobile Logo */}
+            <div className="lg:hidden flex items-center justify-center space-x-3 mb-12">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse" />
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                AI-Levate
+              </h1>
+            </div>
+
+            <Card className="border-0 shadow-2xl bg-white/70 backdrop-blur-sm">
+              <CardContent className="p-8">
+                {/* Header */}
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Sign in</h2>
+                  <p className="text-gray-600">Access your AI-powered workspace</p>
+                </div>
+
+                {/* Form */}
+                <form className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="username" className="text-sm font-semibold text-gray-700">
+                      User Name
+                    </Label>
+                    <Input
+                      id="username"
+                      type="text"
+                      placeholder="Enter Your User Name"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className="h-12 border-gray-200 bg-white/80 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200 placeholder:text-gray-400"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                      Password
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter Your Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="h-12 border-gray-200 bg-white/80 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200 placeholder:text-gray-400 pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <Button 
+                    type="submit"
+                    className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    Login
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </form>
+
+                {/* Divider */}
+                <div className="my-6">
+                  <Separator className="bg-gray-200" />
+                </div>
+
+                {/* Sign Up */}
+                <div className="text-center space-y-4">
+                  <p className="text-sm text-gray-600">
+                    If New User? Register here...
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0 hover:from-blue-700 hover:to-blue-800 font-semibold px-8 py-2 rounded-lg shadow-md transition-all duration-200 hover:scale-[1.02]"
+                  >
+                    SignUp
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Footer */}
+            <div className="mt-8 text-center space-y-2">
+              <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
+                <Sparkles className="w-3 h-3" />
+                <span>Powered By: AI-Levate</span>
+              </div>
+              <div className="text-xs text-gray-400 space-y-1">
+                <p>Copyright © 2025 | Excelsoft Technologies Ltd.</p>
+                <div className="flex items-center justify-center space-x-4">
+                  <a href="#" className="hover:text-blue-600 transition-colors">Privacy and Cookie Policy</a>
+                  <span>•</span>
+                  <a href="#" className="hover:text-blue-600 transition-colors">Help</a>
+                  <span>•</span>
+                  <span>Version: V.1.0.0</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
