@@ -3,15 +3,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Brain, Sparkles, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Brain, Sparkles, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const Index = () => {
+const Register = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    contactNumber: "",
+    organizationName: "",
+    acceptTerms: false
+  });
+
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
@@ -81,21 +92,21 @@ const Index = () => {
 
             <div className="space-y-4">
               <h2 className="text-4xl font-bold text-gray-900 leading-tight">
-                Welcome to the Future of
-                <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"> AI Intelligence</span>
+                Join the Future of
+                <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"> AI Innovation</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Experience seamless automation and intuitive AI interaction that elevates your workflow to unprecedented levels.
+                Create your account and unlock the full potential of AI-powered automation and intelligent workflows.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Login Form */}
+        {/* Right Side - Register Form */}
         <div className="flex-1 lg:w-1/2 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
             {/* Mobile Logo */}
-            <div className="lg:hidden flex items-center justify-center space-x-3 mb-12">
+            <div className="lg:hidden flex items-center justify-center space-x-3 mb-8">
               <div className="relative">
                 <div className="w-10 h-10 bg-gradient-to-r from-primary to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
                   <Brain className="w-6 h-6 text-white" />
@@ -111,74 +122,145 @@ const Index = () => {
               <CardContent className="p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Sign in</h2>
-                  <p className="text-gray-600">Access your AI-powered workspace</p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Register</h2>
+                  <p className="text-gray-600">Create your AI-powered account</p>
                 </div>
 
                 {/* Form */}
-                <form className="space-y-6">
+                <form className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-sm font-semibold text-gray-700">
+                        First Name <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="firstName"
+                        type="text"
+                        placeholder="First Name"
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-sm font-semibold text-gray-700">
+                        Last Name
+                      </Label>
+                      <Input
+                        id="lastName"
+                        type="text"
+                        placeholder="Last Name"
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange('lastName', e.target.value)}
+                        className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                      Email <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                    />
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="username" className="text-sm font-semibold text-gray-700">
-                      User Name
+                      User Name <span className="text-red-500">*</span>
                     </Label>
                     <Input
                       id="username"
                       type="text"
-                      placeholder="Enter Your User Name"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                      placeholder="User Name"
+                      value={formData.username}
+                      onChange={(e) => handleInputChange('username', e.target.value)}
+                      className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
                     />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="password" className="text-sm font-semibold text-gray-700">
-                      Password
+                      Password <span className="text-red-500">*</span>
                     </Label>
-                    <div className="relative">
-                      <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Enter Your Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400 pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Password"
+                      value={formData.password}
+                      onChange={(e) => handleInputChange('password', e.target.value)}
+                      className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="contactNumber" className="text-sm font-semibold text-gray-700">
+                      Contact Number (Optional)
+                    </Label>
+                    <Input
+                      id="contactNumber"
+                      type="tel"
+                      placeholder="91-XXXXXXXXXX"
+                      value={formData.contactNumber}
+                      onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+                      className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="organizationName" className="text-sm font-semibold text-gray-700">
+                      Organization Name <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="organizationName"
+                      type="text"
+                      placeholder="Organization Name"
+                      value={formData.organizationName}
+                      onChange={(e) => handleInputChange('organizationName', e.target.value)}
+                      className="h-10 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 placeholder:text-gray-400"
+                    />
+                  </div>
+
+                  {/* Terms Checkbox */}
+                  <div className="flex items-start space-x-2 py-2">
+                    <Checkbox
+                      id="terms"
+                      checked={formData.acceptTerms}
+                      onCheckedChange={(checked) => handleInputChange('acceptTerms', checked as boolean)}
+                      className="mt-0.5"
+                    />
+                    <Label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed cursor-pointer">
+                      I accept the{' '}
+                      <a href="#" className="text-primary hover:text-primary/80 underline transition-colors">
+                        End User License Agreement(EULA)
+                      </a>
+                    </Label>
                   </div>
 
                   <Button 
                     type="submit"
-                    className="w-full h-12 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold rounded-lg shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                    disabled={!formData.acceptTerms}
+                    className="w-full h-12 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold rounded-lg shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    Login
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    Register
                   </Button>
                 </form>
 
-                {/* Divider */}
-                <div className="my-6">
-                  <Separator className="bg-gray-200" />
-                </div>
-
-                {/* Sign Up */}
-                <div className="text-center space-y-4">
-                  <p className="text-sm text-gray-600">
-                    If New User? Register here...
-                  </p>
+                {/* Back to Login */}
+                <div className="mt-6 text-center">
                   <Button 
                     variant="outline" 
-                    onClick={() => navigate('/register')}
-                    className="bg-gradient-to-r from-primary to-primary/90 text-white border-0 hover:from-primary/90 hover:to-primary font-semibold px-8 py-2 rounded-lg shadow-md transition-all duration-200 hover:scale-[1.02]"
+                    onClick={() => navigate('/')}
+                    className="bg-gradient-to-r from-primary to-primary/90 text-white border-0 hover:from-primary/90 hover:to-primary font-semibold px-6 py-2 rounded-lg shadow-md transition-all duration-200 hover:scale-[1.02]"
                   >
-                    SignUp
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Login
                   </Button>
                 </div>
               </CardContent>
@@ -208,4 +290,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Register;
