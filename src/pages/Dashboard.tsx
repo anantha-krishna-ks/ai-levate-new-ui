@@ -6,135 +6,154 @@ import {
   GraduationCap, 
   RefreshCw, 
   Search, 
-  Camera, 
-  User, 
-  BarChart3,
-  FileCheck,
-  Scan,
+  Scan, 
   MessageSquare,
-  Sparkles,
   ArrowRight,
   Bell,
-  Settings
+  Settings,
+  Play
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
+
+import itemGenerationHero from "@/assets/item-generation-hero.jpg"
+import itemWriterHero from "@/assets/item-writer-hero.jpg"
+import itemMetadataHero from "@/assets/item-metadata-hero.jpg"
+import courseGeneratorHero from "@/assets/course-generator-hero.jpg"
+import itemRewriterHero from "@/assets/item-rewriter-hero.jpg"
+import itemSimilarityHero from "@/assets/item-similarity-hero.jpg"
+import docChatHero from "@/assets/doc-chat-hero.jpg"
+import ocrHero from "@/assets/ocr-hero.jpg"
 
 const Dashboard = () => {
   const aiTools = [
     {
       id: "item-generation",
       title: "Item Generation",
-      description: "Subjective and Objective questions are generated for the book title by AI",
-      icon: Sparkles,
+      description: "Generate subjective and objective questions for any book title using advanced AI algorithms",
+      category: "Question Creation",
+      status: "active",
       path: "/item-generator",
-      gradient: "from-blue-500 to-purple-600",
-      image: "/src/assets/item-generation.png"
+      image: itemGenerationHero,
+      color: "from-blue-500 to-blue-600"
     },
     {
       id: "item-writer",
       title: "Item Writer", 
-      description: "Objective questions are generated for the book title by AI",
-      icon: FileText,
+      description: "Create objective questions with precise formatting and educational standards compliance",
+      category: "Content Writing",
+      status: "active",
       path: "/item-writer",
-      gradient: "from-green-500 to-teal-600",
-      image: "/src/assets/item-writer.png"
+      image: itemWriterHero,
+      color: "from-emerald-500 to-emerald-600"
     },
     {
       id: "item-metadata",
       title: "Item Metadata",
-      description: "AI-powered Item Metadata Generator automates metadata creation for item banks",
-      icon: Database,
+      description: "Automate metadata creation for comprehensive item banks with intelligent tagging",
+      category: "Data Management",
+      status: "active",
       path: "/item-metadata",
-      gradient: "from-orange-500 to-red-600",
-      image: "/src/assets/item-metadata.png"
+      image: itemMetadataHero,
+      color: "from-purple-500 to-purple-600"
     },
     {
       id: "course-generator",
       title: "Course Generator",
-      description: "AI assisted course generator app will help you to generate courses for defined information of the course",
-      icon: GraduationCap,
+      description: "Design comprehensive courses with AI-assisted curriculum planning and structure",
+      category: "Course Design",
+      status: "active",
       path: "/course-generator",
-      gradient: "from-purple-500 to-pink-600",
-      image: "/src/assets/course-generator.png"
+      image: courseGeneratorHero,
+      color: "from-indigo-500 to-indigo-600"
     },
     {
       id: "item-rewriter",
       title: "Item Rewriter",
-      description: "Existing item will be rewritten having the same original essence",
-      icon: RefreshCw,
+      description: "Transform existing content while preserving original essence and educational value",
+      category: "Content Enhancement",
+      status: "active",
       path: "/item-rewriter",
-      gradient: "from-teal-500 to-blue-600",
-      image: "/src/assets/item-rewriter.png"
+      image: itemRewriterHero,
+      color: "from-teal-500 to-teal-600"
     },
     {
       id: "item-similarity",
       title: "Item Similarity",
-      description: "An AI-powered tool, helps authors instantly compare their work to existing items in the repository",
-      icon: Search,
+      description: "Compare content with existing repository items using advanced similarity algorithms",
+      category: "Content Analysis",
+      status: "active",
       path: "/item-similarity",
-      gradient: "from-indigo-500 to-purple-600",
-      image: "/src/assets/item-similarity.png"
+      image: itemSimilarityHero,
+      color: "from-cyan-500 to-cyan-600"
     },
     {
       id: "doc-chat-ncert",
       title: "Doc Chat - NCERT",
-      description: "Learning can start with interacting with NCERT textbook by asking questions and getting answers from AI",
-      icon: MessageSquare,
+      description: "Interactive learning experience with NCERT textbooks through AI-powered conversations",
+      category: "Interactive Learning",
+      status: "active",
       path: "/doc-chat-ncert",
-      gradient: "from-cyan-500 to-blue-600",
-      image: "/src/assets/doc-chat-ncert.png"
+      image: docChatHero,
+      color: "from-violet-500 to-violet-600"
     },
     {
       id: "ocr",
-      title: "OCR",
-      description: "Tool which extracts the text characters from the image and transform the image to have the text in",
-      icon: Scan,
+      title: "OCR Scanner",
+      description: "Extract and digitize text from images with high accuracy optical character recognition",
+      category: "Document Processing",
+      status: "active",
       path: "/ocr",
-      gradient: "from-pink-500 to-rose-600",
-      image: "/src/assets/ocr.png"
+      image: ocrHero,
+      color: "from-rose-500 to-rose-600"
     }
   ]
 
   return (
-    <SidebarProvider defaultOpen={false}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 relative">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-indigo-400/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+    <SidebarProvider defaultOpen={true}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
         </div>
         
         <AppSidebar />
         
         <SidebarInset>
           {/* Header */}
-          <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-white/20">
-            <div className="flex h-16 items-center gap-4 px-6">
-              <SidebarTrigger />
+          <header className="sticky top-0 z-50 apple-glass border-b border-white/10">
+            <div className="flex h-16 items-center gap-4 px-8">
+              <SidebarTrigger className="micro-scale" />
               <div className="flex-1 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dashboard</h1>
+                <div className="flex items-center gap-4">
+                  <div>
+                    <h1 className="text-2xl font-bold gradient-text">Dashboard</h1>
+                    <p className="text-sm text-muted-foreground">Welcome back, let's continue learning</p>
+                  </div>
                 </div>
                 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <span>Welcome Back,</span>
-                    <span className="font-semibold text-slate-800">Shivaraj Mi</span>
+                  <Button variant="ghost" size="icon" className="micro-scale apple-hover">
+                    <Bell className="h-5 w-5 text-muted-foreground" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="micro-scale apple-hover">
+                    <Settings className="h-5 w-5 text-muted-foreground" />
+                  </Button>
+                  <div className="flex items-center gap-3 pl-4 border-l border-border/20">
+                    <div className="text-right">
+                      <p className="text-sm font-semibold text-foreground">Shivaraj Mi</p>
+                      <p className="text-xs text-muted-foreground">Administrator</p>
+                    </div>
+                    <Avatar className="h-10 w-10 ring-2 ring-white shadow-md">
+                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">SM</AvatarFallback>
+                    </Avatar>
                   </div>
-                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
-                    <Bell className="h-5 w-5 text-slate-600" />
-                  </Button>
-                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
-                    <Settings className="h-5 w-5 text-slate-600" />
-                  </Button>
-                  <Avatar className="h-9 w-9 ring-2 ring-blue-100">
-                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">SM</AvatarFallback>
-                  </Avatar>
                 </div>
               </div>
             </div>
@@ -189,9 +208,15 @@ const Dashboard = () => {
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100" />
                   
                   <CardHeader className="relative pb-4 z-10 p-6">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${tool.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                      <tool.icon className="h-8 w-8 text-white drop-shadow-sm" />
+                    <div className="relative w-full h-40 mb-4 rounded-xl overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                      <img 
+                        src={tool.image} 
+                        alt={tool.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-r ${tool.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
                     </div>
+                    <Badge variant="secondary" className="mb-2 text-xs">{tool.category}</Badge>
                     <CardTitle className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-300">
                       {tool.title}
                     </CardTitle>
