@@ -93,7 +93,7 @@ const Dashboard = () => {
   ]
 
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-muted/10 to-background">
         <AppSidebar />
         
@@ -125,21 +125,21 @@ const Dashboard = () => {
             <div className="flex gap-4">
               <Button 
                 variant="default" 
-                className="rounded-full px-6 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/90"
+                className="rounded-full px-6 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/90 text-white font-semibold"
               >
-                All Tools
+                All
               </Button>
               <Button 
                 variant="outline" 
-                className="rounded-full px-6 glass-effect hover:bg-primary/10 hover:scale-105 transition-all duration-300"
+                className="rounded-full px-6 bg-card/80 border-2 border-primary/20 text-foreground font-semibold hover:bg-primary/10 hover:scale-105 hover:border-primary/40 transition-all duration-300"
               >
-                Active
+                Active Subscriptions
               </Button>
               <Button 
                 variant="outline" 
-                className="rounded-full px-6 glass-effect hover:bg-primary/10 hover:scale-105 transition-all duration-300"
+                className="rounded-full px-6 bg-card/80 border-2 border-primary/20 text-foreground font-semibold hover:bg-primary/10 hover:scale-105 hover:border-primary/40 transition-all duration-300"
               >
-                Beta
+                Yet to Subscribe
               </Button>
             </div>
 
@@ -159,17 +159,6 @@ const Dashboard = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Status Badge */}
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${
-                        tool.status === 'Active' 
-                          ? 'bg-green-500/90 text-white' 
-                          : 'bg-yellow-500/90 text-white'
-                      }`}>
-                        {tool.status}
-                      </span>
-                    </div>
                   </div>
                   
                   <CardHeader className="pb-3">
@@ -185,15 +174,27 @@ const Dashboard = () => {
                   </CardHeader>
                   
                   <CardContent className="pt-0 space-y-4">
-                    <Link to={tool.path}>
-                      <Button 
-                        className="w-full group/btn bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-                        size="sm"
-                      >
-                        Launch Application
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                      </Button>
-                    </Link>
+                    {tool.path === "/item-generator" ? (
+                      <a href={tool.path} target="_blank" rel="noopener noreferrer">
+                        <Button 
+                          className="w-full group/btn bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
+                          size="sm"
+                        >
+                          Launch Application
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        </Button>
+                      </a>
+                    ) : (
+                      <Link to={tool.path}>
+                        <Button 
+                          className="w-full group/btn bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
+                          size="sm"
+                        >
+                          Launch Application
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        </Button>
+                      </Link>
+                    )}
                   </CardContent>
                 </Card>
               ))}
