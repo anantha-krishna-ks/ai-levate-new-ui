@@ -12,51 +12,86 @@ import {
   Target,
   Award,
   Bell,
-  Settings
+  Settings,
+  Clock,
+  Activity,
+  BookMarked
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/AppSidebar"
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar } from 'recharts'
 
 const ItemGenerator = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("2024")
 
   const stats = [
     {
-      label: "Total Tokens used",
-      value: "46100",
+      label: "Total Tokens Used",
+      value: "46,100",
+      change: "+12%",
       icon: Zap,
-      gradient: "from-blue-500 to-purple-600"
+      gradient: "from-blue-500 to-purple-600",
+      bgColor: "bg-blue-50",
+      textColor: "text-blue-700"
     },
     {
-      label: "Today's usage",
-      value: "2238", 
-      subLabel: "Balance usage: 7762",
-      icon: TrendingUp,
-      gradient: "from-green-500 to-teal-600"
+      label: "Today's Usage", 
+      value: "2,238",
+      subLabel: "Balance: 7,762 remaining",
+      change: "+5%",
+      icon: Activity,
+      gradient: "from-green-500 to-teal-600",
+      bgColor: "bg-green-50",
+      textColor: "text-green-700"
     },
     {
-      label: "Total Questions Generated",
+      label: "Questions Generated",
       value: "65",
+      change: "+23%",
       subStats: [
-        { label: "Multiple Choice", value: "64" },
-        { label: "Written Response", value: "1" }
+        { label: "Multiple Choice", value: "64", color: "text-orange-600" },
+        { label: "Written Response", value: "1", color: "text-blue-600" }
       ],
       icon: Target,
-      gradient: "from-orange-500 to-red-600"
+      gradient: "from-orange-500 to-red-600",
+      bgColor: "bg-orange-50",
+      textColor: "text-orange-700"
     },
     {
-      label: "Total Questions Saved",
+      label: "Questions Saved",
       value: "28",
+      change: "+8%",
       subStats: [
-        { label: "Multiple Choice", value: "27" },
-        { label: "Written Response", value: "1" }
+        { label: "Multiple Choice", value: "27", color: "text-purple-600" },
+        { label: "Written Response", value: "1", color: "text-pink-600" }
       ],
-      icon: Award,
-      gradient: "from-purple-500 to-pink-600"
+      icon: BookMarked,
+      gradient: "from-purple-500 to-pink-600",
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-700"
     }
+  ]
+
+  const chartData = [
+    { name: 'Mon', usage: 1200, questions: 8 },
+    { name: 'Tue', usage: 1900, questions: 12 },
+    { name: 'Wed', usage: 1500, questions: 10 },
+    { name: 'Thu', usage: 2800, questions: 18 },
+    { name: 'Fri', usage: 2238, questions: 15 },
+    { name: 'Sat', usage: 1800, questions: 11 },
+    { name: 'Sun', usage: 2100, questions: 14 },
+  ]
+
+  const weeklyData = [
+    { day: 'Week 1', generated: 42, saved: 18 },
+    { day: 'Week 2', generated: 38, saved: 22 },
+    { day: 'Week 3', generated: 45, saved: 28 },
+    { day: 'Week 4', generated: 52, saved: 31 },
   ]
 
   const books = [
@@ -79,136 +114,148 @@ const ItemGenerator = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
-      {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/dashboard">
-                <Button variant="ghost" size="icon" className="hover-scale">
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-              </Link>
-              <div className="flex items-center gap-3">
-                <img 
-                  src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                  alt="AI-Levate" 
-                  className="h-10 w-auto"
-                />
-                <div className="h-6 w-px bg-border" />
-                <h1 className="text-xl font-semibold">Item Generator</h1>
+    <SidebarProvider defaultOpen={true}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+        <AppSidebar />
+        
+        <SidebarInset>
+          {/* Header */}
+          <header className="sticky top-0 z-50 glass-effect border-b border-border/40">
+            <div className="flex h-16 items-center gap-4 px-6">
+              <SidebarTrigger />
+              <div className="flex-1 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Link to="/dashboard">
+                    <Button variant="ghost" size="icon" className="hover-scale">
+                      <ArrowLeft className="h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <img 
+                    src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                    alt="AI-Levate" 
+                    className="h-8 w-auto"
+                  />
+                  <div className="h-6 w-px bg-border/40" />
+                  <h1 className="text-xl font-semibold text-foreground">Item Generator</h1>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span>Welcome Back,</span>
+                    <span className="font-semibold text-primary">Shivaraj Mi</span>
+                  </div>
+                  <Button variant="ghost" size="icon" className="hover-scale">
+                    <Bell className="h-5 w-5" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="hover-scale">
+                    <Settings className="h-5 w-5" />
+                  </Button>
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
+                  </Avatar>
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span>Welcome Back,</span>
-                <span className="font-semibold text-primary">Shivaraj Mi</span>
-              </div>
-              <Button variant="ghost" size="icon" className="hover-scale">
-                <Bell className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover-scale">
-                <Settings className="h-5 w-5" />
-              </Button>
-              <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
-        </div>
-      </header>
+          </header>
 
-      <main className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Books */}
-          <div className="lg:col-span-1">
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold mb-6">Generated Books</h2>
-                <div className="space-y-4">
-                  {books.map((book, index) => (
-                    <Card 
-                      key={index}
-                      className="group hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm cursor-pointer hover:-translate-y-1"
-                    >
-                      <CardContent className="p-6">
+          {/* Main Content - Bento Grid Layout */}
+          <main className="flex-1 p-6">
+            <div className="grid grid-cols-12 gap-6 h-full">
+              
+              {/* Generated Books Section */}
+              <div className="col-span-12 lg:col-span-4">
+                <Card className="h-full glass-effect border-0">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center gap-2 text-xl font-bold">
+                      <BookOpen className="h-6 w-6 text-primary" />
+                      Generated Books
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {books.map((book, index) => (
+                      <Card 
+                        key={index}
+                        className="group p-4 glass-effect border border-border/20 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1"
+                      >
                         <div className="flex items-start gap-4">
-                          <div className="w-16 h-20 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center text-xs font-medium text-primary border-2 border-primary/20">
+                          <div className="w-12 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center text-xs font-bold text-primary border border-primary/30">
                             {book.code}
                           </div>
-                          <div className="flex-1">
-                            <Badge variant="outline" className="mb-2 text-xs">
+                          <div className="flex-1 min-w-0">
+                            <Badge variant="secondary" className="mb-2 text-xs">
                               {book.year}
                             </Badge>
-                            <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
+                            <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors leading-tight">
                               {book.title}
                             </h3>
-                            <p className="text-xs text-muted-foreground mb-3">
+                            <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
                               {book.subtitle}
                             </p>
                             <div className="flex items-center justify-between">
-                              <span className="text-sm font-medium">
-                                Questions: {book.questions}
+                              <span className="text-xs font-medium text-primary">
+                                {book.questions} Questions
                               </span>
-                              <Button size="sm" variant="outline" className="h-7 px-3 text-xs hover-scale">
+                              <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover-scale">
                                 <Download className="h-3 w-3 mr-1" />
                                 Export
                               </Button>
                             </div>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                      </Card>
+                    ))}
+                  </CardContent>
+                </Card>
               </div>
-            </div>
-          </div>
 
-          {/* Right Column - Statistics */}
-          <div className="lg:col-span-2">
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold mb-6">Usage Statistics</h2>
+              {/* Statistics Grid */}
+              <div className="col-span-12 lg:col-span-8 space-y-6">
                 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {/* Key Metrics - Bento Style */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {stats.map((stat, index) => (
                     <Card 
                       key={index}
-                      className="group hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-1 animate-fade-in"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className={`group glass-effect border-0 hover:shadow-xl hover-glow transition-all duration-500 hover:-translate-y-1 ${stat.bgColor} relative overflow-hidden`}
+                      style={{ animationDelay: `${index * 150}ms` }}
                     >
-                      <CardHeader className="pb-4">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="text-sm font-medium text-muted-foreground">
-                            {stat.label}
-                          </CardTitle>
-                          <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                            <stat.icon className="h-4 w-4 text-white" />
+                      {/* Background Pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className={`w-full h-full bg-gradient-to-br ${stat.gradient}`} />
+                      </div>
+                      
+                      <CardContent className="p-4 relative z-10">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className={`w-10 h-10 rounded-xl bg-gradient-to-r ${stat.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                            <stat.icon className="h-5 w-5 text-white" />
                           </div>
+                          {stat.change && (
+                            <Badge variant="secondary" className="text-xs text-green-600 bg-green-50">
+                              {stat.change}
+                            </Badge>
+                          )}
                         </div>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="space-y-3">
-                          <div className="text-3xl font-bold text-primary group-hover:scale-105 transition-transform duration-300">
+                        
+                        <div className="space-y-2">
+                          <div className={`text-2xl font-bold ${stat.textColor} group-hover:scale-105 transition-transform duration-300`}>
                             {stat.value}
                           </div>
+                          <p className="text-xs font-medium text-muted-foreground">
+                            {stat.label}
+                          </p>
                           
                           {stat.subLabel && (
-                            <div className="text-sm text-muted-foreground">
+                            <p className="text-xs text-muted-foreground">
                               {stat.subLabel}
-                            </div>
+                            </p>
                           )}
                           
                           {stat.subStats && (
-                            <div className="space-y-2">
+                            <div className="space-y-1 mt-3">
                               {stat.subStats.map((subStat, subIndex) => (
-                                <div key={subIndex} className="flex items-center justify-between text-sm">
+                                <div key={subIndex} className="flex items-center justify-between text-xs">
                                   <span className="text-muted-foreground">{subStat.label}</span>
-                                  <span className="font-semibold">{subStat.value}</span>
+                                  <span className={`font-bold ${subStat.color}`}>{subStat.value}</span>
                                 </div>
                               ))}
                             </div>
@@ -219,40 +266,132 @@ const ItemGenerator = () => {
                   ))}
                 </div>
 
-                {/* Usage Chart Placeholder */}
-                <Card className="border-0 bg-white/80 backdrop-blur-sm">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <BarChart3 className="h-5 w-5 text-primary" />
-                      Usage Trends
+                {/* Charts Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  
+                  {/* Daily Usage Trend */}
+                  <Card className="glass-effect border-0">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <TrendingUp className="h-5 w-5 text-primary" />
+                        Daily Usage Trend
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={chartData}>
+                            <defs>
+                              <linearGradient id="usageGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="hsl(215 55% 40%)" stopOpacity={0.3}/>
+                                <stop offset="95%" stopColor="hsl(215 55% 40%)" stopOpacity={0.05}/>
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                            <XAxis 
+                              dataKey="name" 
+                              stroke="hsl(var(--muted-foreground))"
+                              fontSize={12}
+                            />
+                            <YAxis 
+                              stroke="hsl(var(--muted-foreground))"
+                              fontSize={12}
+                            />
+                            <Area
+                              type="monotone"
+                              dataKey="usage"
+                              stroke="hsl(215 55% 40%)"
+                              strokeWidth={3}
+                              fill="url(#usageGradient)"
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Weekly Progress */}
+                  <Card className="glass-effect border-0">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <BarChart3 className="h-5 w-5 text-primary" />
+                        Weekly Progress
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={weeklyData} barGap={8}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                            <XAxis 
+                              dataKey="day" 
+                              stroke="hsl(var(--muted-foreground))"
+                              fontSize={12}
+                            />
+                            <YAxis 
+                              stroke="hsl(var(--muted-foreground))"
+                              fontSize={12}
+                            />
+                            <Bar
+                              dataKey="generated"
+                              fill="hsl(215 55% 40%)"
+                              radius={[4, 4, 0, 0]}
+                              name="Generated"
+                            />
+                            <Bar
+                              dataKey="saved"
+                              fill="hsl(142 76% 36%)"
+                              radius={[4, 4, 0, 0]}
+                              name="Saved"
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Quick Actions */}
+                <Card className="glass-effect border-0">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Clock className="h-5 w-5 text-primary" />
+                      Recent Activity
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-medium">Daily Usage</span>
-                        <Progress value={68} className="flex-1" />
-                        <span className="text-sm text-muted-foreground">68%</span>
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">Generated 5 new questions for Cyber Risk</p>
+                          <p className="text-xs text-muted-foreground">2 minutes ago</p>
+                        </div>
+                        <Badge variant="secondary" className="text-xs">New</Badge>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-medium">Weekly Goal</span>
-                        <Progress value={42} className="flex-1" />
-                        <span className="text-sm text-muted-foreground">42%</span>
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                        <div className="w-2 h-2 rounded-full bg-blue-500" />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">Exported question set C20</p>
+                          <p className="text-xs text-muted-foreground">15 minutes ago</p>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-medium">Monthly Target</span>
-                        <Progress value={85} className="flex-1" />
-                        <span className="text-sm text-muted-foreground">85%</span>
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                        <div className="w-2 h-2 rounded-full bg-orange-500" />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">Saved 3 questions to collection</p>
+                          <p className="text-xs text-muted-foreground">1 hour ago</p>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
             </div>
-          </div>
-        </div>
-      </main>
-    </div>
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   )
 }
 

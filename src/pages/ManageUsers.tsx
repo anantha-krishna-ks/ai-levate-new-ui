@@ -4,14 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowLeft, RefreshCw } from "lucide-react";
 
-const NotFound = () => {
+const ManageUsers = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
+    console.log("User navigated to Manage Users page:", location.pathname);
   }, [location.pathname]);
 
   return (
@@ -31,12 +28,12 @@ const NotFound = () => {
           {/* Content */}
           <div className="space-y-6">
             <div className="space-y-3">
-              <h1 className="text-4xl font-bold text-primary mb-2">Coming Soon!</h1>
+              <h1 className="text-4xl font-bold text-primary mb-2">User Management Coming Soon!</h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                This amazing feature is currently under development and will be available soon.
+                Comprehensive user management and admin features are in development.
               </p>
               <p className="text-sm text-muted-foreground">
-                We're working hard to bring you the best AI-powered tools for your educational needs.
+                Soon you'll be able to manage user accounts, permissions, roles, and organizational settings with ease.
               </p>
             </div>
             
@@ -67,7 +64,7 @@ const NotFound = () => {
             {/* Notification Signup */}
             <div className="mt-8 p-6 rounded-lg bg-muted/30 border border-border/20">
               <p className="text-sm font-medium text-muted-foreground mb-3">
-                Want to be notified when this feature is ready?
+                Want to be notified when User Management is ready?
               </p>
               <Button variant="secondary" className="group hover:bg-secondary/80 transition-all duration-300">
                 <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
@@ -81,4 +78,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default ManageUsers;
