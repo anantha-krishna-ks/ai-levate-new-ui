@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
+
 import { AppSidebar } from "@/components/AppSidebar"
 import { ProfileDropdown } from "@/components/ProfileDropdown"
 
@@ -93,19 +93,23 @@ const Dashboard = () => {
   ]
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-background via-muted/10 to-background">
-        <AppSidebar />
-        
-        <SidebarInset className="ml-64">
-          {/* Header */}
-          <header className="sticky top-0 z-50 glass-effect border-b border-border/30">
-            <div className="flex h-16 items-center justify-between px-6">
-              <div className="flex items-center gap-4">
-                <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-                <div className="h-6 w-px bg-border/40" />
-                <span className="text-sm text-muted-foreground">Welcome back, Shivaraj Mi</span>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-background">
+      <AppSidebar />
+      
+      <div className="ml-60 min-h-screen flex flex-col">
+        {/* Header */}
+        <header className="sticky top-0 z-50 glass-effect border-b border-border/30">
+          <div className="flex h-16 items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <img 
+                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                alt="AI-Levate" 
+                className="h-8 w-8 rounded-lg object-cover shadow-md"
+              />
+              <h1 className="text-2xl font-bold text-foreground">AI-Levate Dashboard</h1>
+              <div className="h-6 w-px bg-border/40" />
+              <span className="text-sm text-muted-foreground">Welcome back, Shivaraj Mi</span>
+            </div>
               
               <div className="flex items-center gap-4">
                 <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
@@ -117,10 +121,10 @@ const Dashboard = () => {
                 <ProfileDropdown />
               </div>
             </div>
-          </header>
+        </header>
 
-          {/* Main Content */}
-          <main className="flex-1 p-6 space-y-8">
+        {/* Main Content */}
+        <main className="flex-1 p-6 space-y-8">
             {/* Filter Tabs */}
             <div className="flex gap-4">
               <Button 
@@ -217,10 +221,9 @@ const Dashboard = () => {
                 </div>
               </div>
             </footer>
-          </main>
-        </SidebarInset>
+        </main>
       </div>
-    </SidebarProvider>
+    </div>
   )
 }
 
