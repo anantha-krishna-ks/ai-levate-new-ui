@@ -146,6 +146,10 @@ const Index = () => {
 
                   <Button 
                     type="submit"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/dashboard');
+                    }}
                     className="w-full h-12 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold rounded-lg shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                   >
                     Login
