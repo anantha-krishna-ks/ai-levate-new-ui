@@ -100,39 +100,40 @@ const Dashboard = () => {
   ]
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 relative">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-indigo-400/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+        </div>
+        
         <AppSidebar />
         
         <SidebarInset>
           {/* Header */}
-          <header className="sticky top-0 z-50 glass-effect border-b border-border/40">
+          <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-white/20">
             <div className="flex h-16 items-center gap-4 px-6">
               <SidebarTrigger />
               <div className="flex-1 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <img 
-                    src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                    alt="AI-Levate" 
-                    className="h-8 w-auto"
-                  />
-                  <div className="h-6 w-px bg-border/40" />
-                  <h1 className="text-xl font-semibold text-foreground">Dashboard</h1>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dashboard</h1>
                 </div>
                 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-slate-600">
                     <span>Welcome Back,</span>
-                    <span className="font-semibold text-primary">Shivaraj Mi</span>
+                    <span className="font-semibold text-slate-800">Shivaraj Mi</span>
                   </div>
-                  <Button variant="ghost" size="icon" className="hover-scale">
-                    <Bell className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
+                    <Bell className="h-5 w-5 text-slate-600" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="hover-scale">
-                    <Settings className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
+                    <Settings className="h-5 w-5 text-slate-600" />
                   </Button>
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
+                  <Avatar className="h-9 w-9 ring-2 ring-blue-100">
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">SM</AvatarFallback>
                   </Avatar>
                 </div>
               </div>
@@ -140,24 +141,24 @@ const Dashboard = () => {
           </header>
 
           {/* Main Content */}
-          <main className="flex-1 p-6 space-y-8">
+          <main className="flex-1 p-8 space-y-8">
             {/* Filter Tabs */}
-            <div className="flex gap-4">
+            <div className="flex gap-3 mb-8">
               <Button 
                 variant="default" 
-                className="rounded-full px-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse-glow"
+                className="rounded-full px-8 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium"
               >
                 All
               </Button>
               <Button 
                 variant="outline" 
-                className="rounded-full px-6 glass-effect hover:bg-primary/10 hover-scale transition-all duration-300"
+                className="rounded-full px-8 py-2 bg-white/60 backdrop-blur-sm border-white/40 text-slate-700 hover:bg-blue-50 hover:scale-105 transition-all duration-300 font-medium"
               >
                 Active Subscriptions
               </Button>
               <Button 
                 variant="outline" 
-                className="rounded-full px-6 glass-effect hover:bg-primary/10 hover-scale transition-all duration-300"
+                className="rounded-full px-8 py-2 bg-white/60 backdrop-blur-sm border-white/40 text-slate-700 hover:bg-blue-50 hover:scale-105 transition-all duration-300 font-medium"
               >
                 Yet to Subscribe
               </Button>
@@ -168,12 +169,15 @@ const Dashboard = () => {
               {aiTools.map((tool, index) => (
                 <Card 
                   key={tool.id} 
-                  className="group relative overflow-hidden glass-effect hover:shadow-2xl hover-glow transition-all duration-500 hover:-translate-y-2 animate-fade-in border-0"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="group relative overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl"
+                  style={{ 
+                    animationDelay: `${index * 100}ms`,
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)'
+                  }}
                 >
                   {/* Background Image */}
                   <div 
-                    className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500"
+                    className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
                     style={{
                       backgroundImage: `url(${tool.image})`,
                       backgroundSize: 'cover',
@@ -182,24 +186,24 @@ const Dashboard = () => {
                   />
                   
                   {/* Shimmer Effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer opacity-0 group-hover:opacity-100" />
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100" />
                   
-                  <CardHeader className="relative pb-4 z-10">
+                  <CardHeader className="relative pb-4 z-10 p-6">
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${tool.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
                       <tool.icon className="h-8 w-8 text-white drop-shadow-sm" />
                     </div>
-                    <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors duration-300">
+                    <CardTitle className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-300">
                       {tool.title}
                     </CardTitle>
                   </CardHeader>
                   
-                  <CardContent className="relative pt-0 z-10">
-                    <p className="text-sm text-muted-foreground mb-6 line-clamp-3 leading-relaxed">
+                  <CardContent className="relative pt-0 z-10 p-6">
+                    <p className="text-sm text-slate-600 mb-6 line-clamp-3 leading-relaxed">
                       {tool.description}
                     </p>
                     <Link to={tool.path}>
                       <Button 
-                        className="w-full group/btn bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white shadow-lg hover:shadow-xl group-hover:scale-105 transition-all duration-300 font-medium"
+                        className="w-full group/btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium rounded-xl"
                         size="sm"
                       >
                         Launch App

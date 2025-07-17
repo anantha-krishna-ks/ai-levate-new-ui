@@ -114,44 +114,45 @@ const ItemGenerator = () => {
   ]
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 relative">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 right-1/2 w-60 h-60 bg-indigo-400/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+        </div>
+        
         <AppSidebar />
         
         <SidebarInset>
           {/* Header */}
-          <header className="sticky top-0 z-50 glass-effect border-b border-border/40">
+          <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-white/20">
             <div className="flex h-16 items-center gap-4 px-6">
               <SidebarTrigger />
               <div className="flex-1 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Link to="/dashboard">
-                    <Button variant="ghost" size="icon" className="hover-scale">
-                      <ArrowLeft className="h-5 w-5" />
+                    <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
+                      <ArrowLeft className="h-5 w-5 text-slate-600" />
                     </Button>
                   </Link>
-                  <img 
-                    src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                    alt="AI-Levate" 
-                    className="h-8 w-auto"
-                  />
-                  <div className="h-6 w-px bg-border/40" />
-                  <h1 className="text-xl font-semibold text-foreground">Item Generator</h1>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Item Generator</h1>
                 </div>
                 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-slate-600">
                     <span>Welcome Back,</span>
-                    <span className="font-semibold text-primary">Shivaraj Mi</span>
+                    <span className="font-semibold text-slate-800">Shivaraj Mi</span>
                   </div>
-                  <Button variant="ghost" size="icon" className="hover-scale">
-                    <Bell className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
+                    <Bell className="h-5 w-5 text-slate-600" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="hover-scale">
-                    <Settings className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="hover:bg-blue-50 hover:scale-105 transition-all duration-200">
+                    <Settings className="h-5 w-5 text-slate-600" />
                   </Button>
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
+                  <Avatar className="h-9 w-9 ring-2 ring-blue-100">
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">SM</AvatarFallback>
                   </Avatar>
                 </div>
               </div>
@@ -164,38 +165,40 @@ const ItemGenerator = () => {
               
               {/* Generated Books Section */}
               <div className="col-span-12 lg:col-span-4">
-                <Card className="h-full glass-effect border-0">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center gap-2 text-xl font-bold">
-                      <BookOpen className="h-6 w-6 text-primary" />
+                <Card className="h-full bg-white/80 backdrop-blur-sm border-0 shadow-lg rounded-2xl">
+                  <CardHeader className="pb-4 p-6">
+                    <CardTitle className="flex items-center gap-2 text-xl font-bold text-slate-800">
+                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <BookOpen className="h-5 w-5 text-white" />
+                      </div>
                       Generated Books
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 p-6">
                     {books.map((book, index) => (
                       <Card 
                         key={index}
-                        className="group p-4 glass-effect border border-border/20 hover:shadow-lg hover-glow transition-all duration-300 hover:-translate-y-1"
+                        className="group p-4 bg-white/90 backdrop-blur-sm border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-xl"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center text-xs font-bold text-primary border border-primary/30">
+                          <div className="w-12 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-xs font-bold text-white shadow-lg">
                             {book.code}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <Badge variant="secondary" className="mb-2 text-xs">
+                            <Badge variant="secondary" className="mb-2 text-xs bg-blue-50 text-blue-700">
                               {book.year}
                             </Badge>
-                            <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors leading-tight">
+                            <h3 className="font-semibold text-sm mb-1 group-hover:text-blue-600 transition-colors leading-tight text-slate-800">
                               {book.title}
                             </h3>
-                            <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                            <p className="text-xs text-slate-600 mb-3 line-clamp-2">
                               {book.subtitle}
                             </p>
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-medium text-primary">
+                              <span className="text-xs font-medium text-blue-600">
                                 {book.questions} Questions
                               </span>
-                              <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover-scale">
+                              <Button size="sm" variant="outline" className="h-6 px-2 text-xs hover:scale-105 transition-transform duration-200 border-blue-200 text-blue-600 hover:bg-blue-50">
                                 <Download className="h-3 w-3 mr-1" />
                                 Export
                               </Button>
@@ -216,7 +219,7 @@ const ItemGenerator = () => {
                   {stats.map((stat, index) => (
                     <Card 
                       key={index}
-                      className={`group glass-effect border-0 hover:shadow-xl hover-glow transition-all duration-500 hover:-translate-y-1 ${stat.bgColor} relative overflow-hidden`}
+                      className="group bg-white/90 backdrop-blur-sm border-0 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden rounded-2xl shadow-lg"
                       style={{ animationDelay: `${index * 150}ms` }}
                     >
                       {/* Background Pattern */}
@@ -240,12 +243,12 @@ const ItemGenerator = () => {
                           <div className={`text-2xl font-bold ${stat.textColor} group-hover:scale-105 transition-transform duration-300`}>
                             {stat.value}
                           </div>
-                          <p className="text-xs font-medium text-muted-foreground">
+                          <p className="text-xs font-medium text-slate-600">
                             {stat.label}
                           </p>
                           
                           {stat.subLabel && (
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-slate-500">
                               {stat.subLabel}
                             </p>
                           )}
@@ -254,7 +257,7 @@ const ItemGenerator = () => {
                             <div className="space-y-1 mt-3">
                               {stat.subStats.map((subStat, subIndex) => (
                                 <div key={subIndex} className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground">{subStat.label}</span>
+                                  <span className="text-slate-500">{subStat.label}</span>
                                   <span className={`font-bold ${subStat.color}`}>{subStat.value}</span>
                                 </div>
                               ))}
@@ -270,37 +273,39 @@ const ItemGenerator = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   
                   {/* Daily Usage Trend */}
-                  <Card className="glass-effect border-0">
-                    <CardHeader className="pb-4">
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <TrendingUp className="h-5 w-5 text-primary" />
+                  <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg rounded-2xl">
+                    <CardHeader className="pb-4 p-6">
+                      <CardTitle className="flex items-center gap-2 text-lg text-slate-800">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                          <TrendingUp className="h-4 w-4 text-white" />
+                        </div>
                         Daily Usage Trend
                       </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="p-6">
                       <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                           <AreaChart data={chartData}>
                             <defs>
                               <linearGradient id="usageGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="hsl(215 55% 40%)" stopOpacity={0.3}/>
-                                <stop offset="95%" stopColor="hsl(215 55% 40%)" stopOpacity={0.05}/>
+                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.05}/>
                               </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                             <XAxis 
                               dataKey="name" 
-                              stroke="hsl(var(--muted-foreground))"
+                              stroke="#64748b"
                               fontSize={12}
                             />
                             <YAxis 
-                              stroke="hsl(var(--muted-foreground))"
+                              stroke="#64748b"
                               fontSize={12}
                             />
                             <Area
                               type="monotone"
                               dataKey="usage"
-                              stroke="hsl(215 55% 40%)"
+                              stroke="#3b82f6"
                               strokeWidth={3}
                               fill="url(#usageGradient)"
                             />
@@ -311,36 +316,38 @@ const ItemGenerator = () => {
                   </Card>
 
                   {/* Weekly Progress */}
-                  <Card className="glass-effect border-0">
-                    <CardHeader className="pb-4">
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <BarChart3 className="h-5 w-5 text-primary" />
+                  <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg rounded-2xl">
+                    <CardHeader className="pb-4 p-6">
+                      <CardTitle className="flex items-center gap-2 text-lg text-slate-800">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                          <BarChart3 className="h-4 w-4 text-white" />
+                        </div>
                         Weekly Progress
                       </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="p-6">
                       <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                           <BarChart data={weeklyData} barGap={8}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                             <XAxis 
                               dataKey="day" 
-                              stroke="hsl(var(--muted-foreground))"
+                              stroke="#64748b"
                               fontSize={12}
                             />
                             <YAxis 
-                              stroke="hsl(var(--muted-foreground))"
+                              stroke="#64748b"
                               fontSize={12}
                             />
                             <Bar
                               dataKey="generated"
-                              fill="hsl(215 55% 40%)"
+                              fill="#3b82f6"
                               radius={[4, 4, 0, 0]}
                               name="Generated"
                             />
                             <Bar
                               dataKey="saved"
-                              fill="hsl(142 76% 36%)"
+                              fill="#8b5cf6"
                               radius={[4, 4, 0, 0]}
                               name="Saved"
                             />
@@ -351,36 +358,38 @@ const ItemGenerator = () => {
                   </Card>
                 </div>
 
-                {/* Quick Actions */}
-                <Card className="glass-effect border-0">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Clock className="h-5 w-5 text-primary" />
+                {/* Recent Activity */}
+                <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg rounded-2xl">
+                  <CardHeader className="pb-4 p-6">
+                    <CardTitle className="flex items-center gap-2 text-lg text-slate-800">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Clock className="h-4 w-4 text-white" />
+                      </div>
                       Recent Activity
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="p-6">
                     <div className="space-y-4">
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-blue-50/50 hover:bg-blue-50 transition-colors">
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         <div className="flex-1">
-                          <p className="text-sm font-medium">Generated 5 new questions for Cyber Risk</p>
-                          <p className="text-xs text-muted-foreground">2 minutes ago</p>
+                          <p className="text-sm font-medium text-slate-800">Generated 5 new questions for Cyber Risk</p>
+                          <p className="text-xs text-slate-600">2 minutes ago</p>
                         </div>
-                        <Badge variant="secondary" className="text-xs">New</Badge>
+                        <Badge variant="secondary" className="text-xs bg-green-50 text-green-700">New</Badge>
                       </div>
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-blue-50/50">
                         <div className="w-2 h-2 rounded-full bg-blue-500" />
                         <div className="flex-1">
-                          <p className="text-sm font-medium">Exported question set C20</p>
-                          <p className="text-xs text-muted-foreground">15 minutes ago</p>
+                          <p className="text-sm font-medium text-slate-800">Exported question set C20</p>
+                          <p className="text-xs text-slate-600">15 minutes ago</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-blue-50/50">
                         <div className="w-2 h-2 rounded-full bg-orange-500" />
                         <div className="flex-1">
-                          <p className="text-sm font-medium">Saved 3 questions to collection</p>
-                          <p className="text-xs text-muted-foreground">1 hour ago</p>
+                          <p className="text-sm font-medium text-slate-800">Saved 3 questions to collection</p>
+                          <p className="text-xs text-slate-600">1 hour ago</p>
                         </div>
                       </div>
                     </div>
