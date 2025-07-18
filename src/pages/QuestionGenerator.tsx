@@ -17,7 +17,13 @@ import {
   Home,
   Zap,
   MoreHorizontal,
-  CheckCircle2
+  CheckCircle2,
+  ChevronDown,
+  Brain,
+  Target,
+  Activity,
+  Cpu,
+  Globe
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -60,242 +66,289 @@ const QuestionGenerator = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background animate-fade-in">
+    <div className="min-h-screen bg-background">
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-xl border-b border-border ai-surface">
-        <div className="max-w-7xl mx-auto px-8 py-4">
+      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <img 
-                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                alt="AI-Levate" 
-                className="h-10 w-10 rounded-xl object-cover"
-              />
+            <div className="flex items-center gap-4">
+              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+                <Brain className="h-5 w-5 text-white" />
+              </div>
               <div>
-                <h1 className="text-2xl font-semibold text-foreground">AI-Levate</h1>
-                <p className="text-sm text-muted-foreground mt-0.5">Question Generator</p>
+                <h1 className="text-xl font-semibold text-foreground">AI-Levate</h1>
+                <p className="text-xs text-muted-foreground">Intelligent Assessment Platform</p>
               </div>
             </div>
             
-            <Link to="/dashboard">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="button-ghost text-muted-foreground hover:text-foreground"
-              >
-                <Home className="h-4 w-4 mr-2" />
-                Dashboard
-              </Button>
-            </Link>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm">
+                <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                <span className="text-muted-foreground">AI Online</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-lg">
+                <Zap className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">7,762 Tokens</span>
+              </div>
+              <Link to="/dashboard">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Login
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-8 py-8">
-        
-        {/* Book Info Bar */}
-        <div className="mb-8 p-6 ai-surface ai-surface-hover rounded-2xl animate-scale-in">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
-                <Book className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-foreground">{bookData.title}</h2>
-                <p className="text-sm text-muted-foreground">{bookData.subtitle} • {bookData.code} • {bookData.year}</p>
-              </div>
+      {/* Hero Section */}
+      <div className="bg-card border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-6 py-12 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Brain className="h-6 w-6 text-primary" />
+            <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+              AI-Powered Assessment Creation
+            </span>
+          </div>
+          <h1 className="text-3xl font-bold text-foreground mb-3">Create Intelligent Assessments</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            Experience the future of educational content creation with our AI-powered platform. 
+            Generate contextual questions and manage your repository efficiently.
+          </p>
+          
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-12 mb-8">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">250K+</div>
+              <div className="text-sm text-muted-foreground">Questions Generated</div>
             </div>
-            <Badge variant="outline" className="ai-badge">
-              Active
-            </Badge>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">99.9%</div>
+              <div className="text-sm text-muted-foreground">AI Accuracy</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">5K+</div>
+              <div className="text-sm text-muted-foreground">Active Users</div>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-8">
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex justify-center mb-12">
-            <TabsList className="grid w-full max-w-2xl grid-cols-2 ai-surface p-2 rounded-2xl h-16">
+          <div className="flex justify-center mb-8">
+            <TabsList className="bg-card border border-border/50 p-1 rounded-xl shadow-sm">
               <TabsTrigger 
                 value="generate" 
-                className="data-[state=active]:ai-button-primary data-[state=active]:text-white ai-button-secondary rounded-xl px-12 py-4 text-base font-medium transition-all duration-300 micro-interaction"
+                className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm px-8 py-3 rounded-lg text-sm font-medium transition-all"
               >
-                <Sparkles className="h-5 w-5 mr-3" />
+                <Brain className="h-4 w-4 mr-2" />
                 Generate Questions
               </TabsTrigger>
               <TabsTrigger 
                 value="repository"
-                className="data-[state=active]:ai-button-primary data-[state=active]:text-white ai-button-secondary rounded-xl px-12 py-4 text-base font-medium transition-all duration-300 micro-interaction"
+                className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm px-8 py-3 rounded-lg text-sm font-medium transition-all"
               >
-                <FileText className="h-5 w-5 mr-3" />
-                Repository
+                <FileText className="h-4 w-4 mr-2" />
+                Question Repository
               </TabsTrigger>
             </TabsList>
           </div>
 
           {/* Generate Questions Tab */}
-          <TabsContent value="generate" className="space-y-8 animate-fade-in">
+          <TabsContent value="generate" className="space-y-6">
             
-            {/* Token Status */}
-            <div className="ai-surface ai-surface-hover rounded-2xl p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
-                    <Zap className="h-5 w-5 text-white" />
+            {/* Status Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {/* Available Tokens */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-muted-foreground">Available Tokens</h3>
+                    <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                      <Zap className="h-5 w-5 text-green-600" />
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Available Tokens</p>
-                    <p className="text-2xl font-semibold text-foreground">7,762</p>
+                  <div className="text-2xl font-bold text-foreground mb-1">7,762</div>
+                  <div className="text-xs text-green-600 flex items-center gap-1">
+                    <span>+250 today</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-muted-foreground">Book Based</span>
-                  <div className="relative">
-                    <input type="checkbox" defaultChecked className="sr-only" />
-                    <div className="w-11 h-6 bg-gradient-to-r from-primary to-primary/80 rounded-full shadow-inner"></div>
-                    <div className="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition transform translate-x-5 shadow-sm"></div>
+                </CardContent>
+              </Card>
+
+              {/* AI Generation Mode */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-muted-foreground">AI Generation Mode</h3>
+                    <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Brain className="h-5 w-5 text-primary" />
+                    </div>
                   </div>
-                  <span className="text-sm font-medium text-muted-foreground">LLM</span>
-                </div>
-              </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-muted-foreground">Standard</span>
+                    <div className="flex items-center">
+                      <div className="w-10 h-6 bg-primary rounded-full p-1 transition-all">
+                        <div className="w-4 h-4 bg-white rounded-full translate-x-4 transition-transform"></div>
+                      </div>
+                    </div>
+                    <span className="text-sm font-medium text-primary">Premium</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* AI Engine Status */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-muted-foreground">AI Engine Status</h3>
+                    <div className="h-10 w-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                      <Cpu className="h-5 w-5 text-purple-600" />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-foreground">Ready & Optimized</span>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
-            {/* Configuration Section */}
-            <div className="ai-surface ai-surface-hover rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="h-10 w-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center animate-neural-pulse">
-                  <Settings2 className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Question Configuration</h3>
-                  <p className="text-sm text-muted-foreground">Set up your question parameters</p>
-                </div>
-              </div>
+            {/* Configuration Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              {/* Source Material */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Book className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-base">Source Material</CardTitle>
+                      <p className="text-sm text-muted-foreground">AI-enhanced content</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <Book className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                      <p className="text-sm text-muted-foreground">Upload or select content</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Study</label>
-                  <Select defaultValue="defining-risk">
-                    <SelectTrigger className="ai-input h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="ai-surface">
-                      <SelectItem value="defining-risk">1. Defining Risk and Cyber</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+              {/* AI Question Generator */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                      <Sparkles className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-base">AI Question Generator</CardTitle>
+                      <p className="text-sm text-muted-foreground">Configure your question generation settings</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Study Domain</label>
+                      <Select defaultValue="defining-risk">
+                        <SelectTrigger className="h-9 border-border/50">
+                          <SelectValue />
+                          <ChevronDown className="h-4 w-4 opacity-50" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Learning Objectives</label>
+                      <Select defaultValue="explain-pure-risk">
+                        <SelectTrigger className="h-9 border-border/50">
+                          <SelectValue />
+                          <ChevronDown className="h-4 w-4 opacity-50" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Taxonomy Framework</label>
+                      <Select>
+                        <SelectTrigger className="h-9 border-border/50">
+                          <SelectValue placeholder="Select framework" />
+                          <ChevronDown className="h-4 w-4 opacity-50" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="remember">Remember</SelectItem>
+                          <SelectItem value="understand">Understand</SelectItem>
+                          <SelectItem value="apply">Apply</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Question Format</label>
+                      <Select defaultValue="multiple-choice">
+                        <SelectTrigger className="h-9 border-border/50">
+                          <SelectValue />
+                          <ChevronDown className="h-4 w-4 opacity-50" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                          <SelectItem value="true-false">True/False</SelectItem>
+                          <SelectItem value="essay">Essay</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
 
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Learning Outcomes</label>
-                  <Select defaultValue="explain-pure-risk">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="explain-pure-risk">1. Explain why pure risk is</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Taxonomy</label>
-                  <Select>
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue placeholder="Select taxonomy" />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="remember">Remember</SelectItem>
-                      <SelectItem value="understand">Understand</SelectItem>
-                      <SelectItem value="apply">Apply</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Question Type</label>
-                  <Select defaultValue="multiple-choice">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
-                      <SelectItem value="true-false">True/False</SelectItem>
-                      <SelectItem value="essay">Essay</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Number of Questions</label>
-                  <Select defaultValue="1">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="1">1</SelectItem>
-                      <SelectItem value="5">5</SelectItem>
-                      <SelectItem value="10">10</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Marks</label>
-                  <Select defaultValue="1">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="1">1</SelectItem>
-                      <SelectItem value="2">2</SelectItem>
-                      <SelectItem value="5">5</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 border-t border-border">
-                <Button 
-                  variant="outline" 
-                  className="ai-button-secondary px-6 py-3 micro-interaction"
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Additional Instructions
-                </Button>
-                
-                <Button 
-                  className="ai-button-primary px-12 py-3 text-base font-medium micro-interaction"
-                >
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Generate Questions
-                </Button>
-              </div>
+                  <div className="pt-4 border-t border-border/50">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                      <Brain className="h-4 w-4 mr-2" />
+                      Generate Questions
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Export Actions */}
-            <div className="ai-surface ai-surface-hover rounded-2xl p-6">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <h4 className="text-lg font-semibold text-foreground">Export Options</h4>
-                <div className="flex items-center gap-3">
-                  <Button variant="outline" className="button-secondary">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Export to Word
-                  </Button>
-                  <Button variant="outline" className="button-secondary">
-                    <FileSpreadsheet className="h-4 w-4 mr-2" />
-                    Export to Excel
-                  </Button>
-                  <Button variant="outline" className="button-secondary">
-                    <Download className="h-4 w-4 mr-2" />
-                    Save Data
-                  </Button>
+            <Card className="border-0 shadow-sm bg-card">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-base font-medium text-foreground">Export Options</h4>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" className="h-9">
+                      <FileText className="h-4 w-4 mr-2" />
+                      Export to Word
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-9">
+                      <FileSpreadsheet className="h-4 w-4 mr-2" />
+                      Export to Excel
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-9">
+                      <Download className="h-4 w-4 mr-2" />
+                      Save Data
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           {/* Question Repository Tab */}
