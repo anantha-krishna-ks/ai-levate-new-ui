@@ -216,17 +216,17 @@ const QuestionGenerator = () => {
             </div>
 
             {/* Configuration Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               
               {/* Source Material - Enhanced */}
-              <Card className="border border-blue-200/50 shadow-sm bg-gradient-to-br from-blue-50/30 to-white">
+              <Card className="lg:col-span-1 border border-blue-200/50 shadow-sm bg-gradient-to-br from-blue-50/30 to-white">
                 <CardHeader className="pb-4">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 bg-blue-500/10 rounded-xl flex items-center justify-center">
                       <BookOpen className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
-                      <CardTitle className="text-base text-gray-900">Source Material</CardTitle>
+                      <CardTitle className="text-lg text-gray-900">Source Material</CardTitle>
                       <p className="text-sm text-gray-600">AI-enhanced content</p>
                     </div>
                   </div>
@@ -257,27 +257,18 @@ const QuestionGenerator = () => {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Upload Button */}
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
-                  >
-                    <Upload className="h-4 w-4 mr-2" />
-                    Upload New Document
-                  </Button>
                 </CardContent>
               </Card>
 
               {/* AI Question Generator - Enhanced */}
-              <Card className="border border-purple-200/50 shadow-sm bg-gradient-to-br from-purple-50/30 to-white">
+              <Card className="lg:col-span-2 border border-purple-200/50 shadow-sm bg-gradient-to-br from-purple-50/30 to-white">
                 <CardHeader className="pb-4">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 bg-purple-500/10 rounded-xl flex items-center justify-center">
                       <Sparkles className="h-5 w-5 text-purple-600" />
                     </div>
                     <div>
-                      <CardTitle className="text-base text-gray-900">AI Question Generator</CardTitle>
+                      <CardTitle className="text-lg text-gray-900">AI Question Generator</CardTitle>
                       <p className="text-sm text-gray-600">Configure your question generation settings</p>
                     </div>
                   </div>
