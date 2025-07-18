@@ -23,7 +23,11 @@ import {
   Target,
   Activity,
   Cpu,
-  Globe
+  Globe,
+  BookOpen,
+  Hash,
+  MessageSquare,
+  Upload
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -103,35 +107,18 @@ const QuestionGenerator = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="bg-card border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-6 py-12 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="bg-gradient-to-br from-blue-50/50 to-indigo-50/30 border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-6 py-8">
+          <div className="flex items-center gap-3 mb-2">
             <Brain className="h-6 w-6 text-primary" />
             <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
               AI-Powered Assessment Creation
             </span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-3">Create Intelligent Assessments</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Experience the future of educational content creation with our AI-powered platform. 
-            Generate contextual questions and manage your repository efficiently.
+          <h1 className="text-2xl font-bold text-foreground">Create Intelligent Assessments</h1>
+          <p className="text-muted-foreground mt-1">
+            Generate contextual questions with advanced AI technology
           </p>
-          
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-12 mb-8">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-foreground">250K+</div>
-              <div className="text-sm text-muted-foreground">Questions Generated</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-foreground">99.9%</div>
-              <div className="text-sm text-muted-foreground">AI Accuracy</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-foreground">5K+</div>
-              <div className="text-sm text-muted-foreground">Active Users</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -139,25 +126,34 @@ const QuestionGenerator = () => {
       <div className="max-w-6xl mx-auto px-6 py-8">
 
         {/* Navigation Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex justify-center mb-8">
-            <TabsList className="bg-card border border-border/50 p-1 rounded-xl shadow-sm">
-              <TabsTrigger 
-                value="generate" 
-                className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm px-8 py-3 rounded-lg text-sm font-medium transition-all"
-              >
-                <Brain className="h-4 w-4 mr-2" />
-                Generate Questions
-              </TabsTrigger>
-              <TabsTrigger 
-                value="repository"
-                className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-sm px-8 py-3 rounded-lg text-sm font-medium transition-all"
-              >
-                <FileText className="h-4 w-4 mr-2" />
-                Question Repository
-              </TabsTrigger>
-            </TabsList>
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-2 mb-8 max-w-lg mx-auto">
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => setActiveTab("generate")}
+              className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                activeTab === "generate"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              <Brain className="h-4 w-4 mr-2 inline" />
+              Generate Questions
+            </button>
+            <button
+              onClick={() => setActiveTab("repository")}
+              className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                activeTab === "repository"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              <FileText className="h-4 w-4 mr-2 inline" />
+              Question Repository
+            </button>
           </div>
+        </div>
+
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
 
           {/* Generate Questions Tab */}
           <TabsContent value="generate" className="space-y-6">
@@ -222,105 +218,193 @@ const QuestionGenerator = () => {
             {/* Configuration Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               
-              {/* Source Material */}
-              <Card className="border-0 shadow-sm bg-card">
+              {/* Source Material - Enhanced */}
+              <Card className="border border-blue-200/50 shadow-sm bg-gradient-to-br from-blue-50/30 to-white">
                 <CardHeader className="pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Book className="h-4 w-4 text-primary" />
+                    <div className="h-10 w-10 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                      <BookOpen className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
-                      <CardTitle className="text-base">Source Material</CardTitle>
-                      <p className="text-sm text-muted-foreground">AI-enhanced content</p>
+                      <CardTitle className="text-base text-gray-900">Source Material</CardTitle>
+                      <p className="text-sm text-gray-600">AI-enhanced content</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <Book className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                      <p className="text-sm text-muted-foreground">Upload or select content</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* AI Question Generator */}
-              <Card className="border-0 shadow-sm bg-card">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 bg-purple-500/10 rounded-lg flex items-center justify-center">
-                      <Sparkles className="h-4 w-4 text-purple-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-base">AI Question Generator</CardTitle>
-                      <p className="text-sm text-muted-foreground">Configure your question generation settings</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Study Domain</label>
-                      <Select defaultValue="defining-risk">
-                        <SelectTrigger className="h-9 border-border/50">
-                          <SelectValue />
-                          <ChevronDown className="h-4 w-4 opacity-50" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Learning Objectives</label>
-                      <Select defaultValue="explain-pure-risk">
-                        <SelectTrigger className="h-9 border-border/50">
-                          <SelectValue />
-                          <ChevronDown className="h-4 w-4 opacity-50" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  {/* Document Preview */}
+                  <div className="relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-3">
+                      <div className="relative flex-shrink-0">
+                        <img 
+                          src="/lovable-uploads/b401ff6b-c99f-41b0-8578-92b80ce62cd0.png" 
+                          alt="Cyber Risk Management Document"
+                          className="w-16 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
+                        />
+                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                          <CheckCircle2 className="h-3 w-3 text-white" />
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 text-sm mb-1">Cyber Risk Management</h4>
+                        <p className="text-xs text-gray-600 mb-2">Source material loaded successfully</p>
+                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <FileText className="h-3 w-3" />
+                          <span>PDF Document</span>
+                          <span>•</span>
+                          <span>24 pages</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Taxonomy Framework</label>
-                      <Select>
-                        <SelectTrigger className="h-9 border-border/50">
-                          <SelectValue placeholder="Select framework" />
-                          <ChevronDown className="h-4 w-4 opacity-50" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="remember">Remember</SelectItem>
-                          <SelectItem value="understand">Understand</SelectItem>
-                          <SelectItem value="apply">Apply</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  {/* Upload Button */}
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
+                  >
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload New Document
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* AI Question Generator - Enhanced */}
+              <Card className="border border-purple-200/50 shadow-sm bg-gradient-to-br from-purple-50/30 to-white">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 bg-purple-500/10 rounded-xl flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 text-purple-600" />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Question Format</label>
-                      <Select defaultValue="multiple-choice">
-                        <SelectTrigger className="h-9 border-border/50">
-                          <SelectValue />
-                          <ChevronDown className="h-4 w-4 opacity-50" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
-                          <SelectItem value="true-false">True/False</SelectItem>
-                          <SelectItem value="essay">Essay</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div>
+                      <CardTitle className="text-base text-gray-900">AI Question Generator</CardTitle>
+                      <p className="text-sm text-gray-600">Configure your question generation settings</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-5">
+                  {/* Study Domain & Learning Objectives */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                      <Target className="h-4 w-4 text-blue-600" />
+                      Study Configuration
+                    </div>
+                    <div className="grid grid-cols-1 gap-3">
+                      <div className="space-y-2">
+                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
+                          <Globe className="h-3 w-3" />
+                          Study Domain
+                        </label>
+                        <Select defaultValue="defining-risk">
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
+                          <Brain className="h-3 w-3" />
+                          Learning Objectives
+                        </label>
+                        <Select defaultValue="explain-pure-risk">
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Question Settings */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                      <MessageSquare className="h-4 w-4 text-purple-600" />
+                      Question Settings
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <label className="text-xs font-medium text-gray-600">Taxonomy Framework</label>
+                        <Select>
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue placeholder="Select framework" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="remember">Remember</SelectItem>
+                            <SelectItem value="understand">Understand</SelectItem>
+                            <SelectItem value="apply">Apply</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-medium text-gray-600">Question Format</label>
+                        <Select defaultValue="multiple-choice">
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                            <SelectItem value="true-false">True/False</SelectItem>
+                            <SelectItem value="essay">Essay</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    {/* Additional Settings */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
+                          <Hash className="h-3 w-3" />
+                          Question Quantity
+                        </label>
+                        <Select defaultValue="5">
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                            <SelectItem value="10">10</SelectItem>
+                            <SelectItem value="15">15</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-medium text-gray-600">Point Value</label>
+                        <Select defaultValue="1">
+                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="2">2</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border/50">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white">
-                      <Brain className="h-4 w-4 mr-2" />
-                      Generate Questions
+                  {/* Additional Instructions */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-gray-600">Additional Instructions</label>
+                    <textarea 
+                      placeholder="Provide specific instructions for AI question generation..."
+                      className="w-full h-20 px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                    />
+                  </div>
+
+                  {/* Generate Button */}
+                  <div className="pt-2">
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-11 shadow-md">
+                      <Sparkles className="h-4 w-4 mr-2" />
+                      Generate AI Questions
                     </Button>
                   </div>
                 </CardContent>
