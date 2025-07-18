@@ -273,21 +273,21 @@ const QuestionGenerator = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-5">
+                <CardContent className="space-y-6">
                   {/* Study Domain & Learning Objectives */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                  <div className="space-y-5">
+                    <div className="flex items-center gap-2 text-sm text-gray-700 font-semibold">
                       <Target className="h-4 w-4 text-blue-600" />
                       Study Configuration
                     </div>
-                    <div className="grid grid-cols-1 gap-3">
-                      <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
-                          <Globe className="h-3 w-3" />
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                          <Globe className="h-4 w-4" />
                           Study Domain
                         </label>
                         <Select defaultValue="defining-risk">
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -295,13 +295,13 @@ const QuestionGenerator = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
-                          <Brain className="h-3 w-3" />
+                      <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                          <Brain className="h-4 w-4" />
                           Learning Objectives
                         </label>
                         <Select defaultValue="explain-pure-risk">
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -313,16 +313,16 @@ const QuestionGenerator = () => {
                   </div>
                   
                   {/* Question Settings */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                  <div className="space-y-5">
+                    <div className="flex items-center gap-2 text-sm text-gray-700 font-semibold">
                       <MessageSquare className="h-4 w-4 text-purple-600" />
                       Question Settings
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium text-gray-600">Taxonomy Framework</label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <label className="text-sm font-semibold text-gray-700">Taxonomy Framework</label>
                         <Select>
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue placeholder="Select framework" />
                           </SelectTrigger>
                           <SelectContent>
@@ -332,10 +332,10 @@ const QuestionGenerator = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium text-gray-600">Question Format</label>
+                      <div className="space-y-3">
+                        <label className="text-sm font-semibold text-gray-700">Question Format</label>
                         <Select defaultValue="multiple-choice">
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -348,14 +348,14 @@ const QuestionGenerator = () => {
                     </div>
                     
                     {/* Additional Settings */}
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
-                          <Hash className="h-3 w-3" />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                          <Hash className="h-4 w-4" />
                           Question Quantity
                         </label>
                         <Select defaultValue="5">
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -366,10 +366,10 @@ const QuestionGenerator = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium text-gray-600">Point Value</label>
+                      <div className="space-y-3">
+                        <label className="text-sm font-semibold text-gray-700">Point Value</label>
                         <Select defaultValue="1">
-                          <SelectTrigger className="h-10 border-gray-200 bg-white hover:border-gray-300">
+                          <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -383,17 +383,17 @@ const QuestionGenerator = () => {
                   </div>
 
                   {/* Additional Instructions */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-medium text-gray-600">Additional Instructions</label>
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-700">Additional Instructions</label>
                     <textarea 
                       placeholder="Provide specific instructions for AI question generation..."
-                      className="w-full h-20 px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                      className="w-full h-24 px-4 py-3 text-sm border border-gray-200 rounded-xl bg-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
                     />
                   </div>
 
                   {/* Generate Button */}
-                  <div className="pt-2">
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-11 shadow-md">
+                  <div className="pt-4">
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-12 shadow-md rounded-xl">
                       <Sparkles className="h-4 w-4 mr-2" />
                       Generate AI Questions
                     </Button>
@@ -429,179 +429,256 @@ const QuestionGenerator = () => {
           {/* Question Repository Tab */}
           <TabsContent value="repository" className="space-y-8 animate-fade-in">
             
-            {/* Search & Filters */}
-            <div className="surface-elevated rounded-xl p-6">
-              <div className="flex flex-col lg:flex-row gap-6">
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input 
-                      placeholder="Search questions..." 
-                      className="input-field pl-10 h-11 text-base"
-                    />
+            {/* Search Section */}
+            <Card className="border border-green-200/50 shadow-sm bg-gradient-to-br from-green-50/30 to-white">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 bg-green-500/10 rounded-xl flex items-center justify-center">
+                    <Search className="h-5 w-5 text-green-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-gray-900">Search & Discovery</CardTitle>
+                    <p className="text-sm text-gray-600">Find and manage your question repository</p>
                   </div>
                 </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex flex-col lg:flex-row gap-4">
+                  <div className="flex-1">
+                    <label className="text-sm font-semibold text-gray-700 mb-3 block">
+                      Search Questions
+                    </label>
+                    <div className="relative">
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input 
+                        placeholder="Search questions by content, ID, or keywords..." 
+                        className="pl-11 h-12 border-gray-200 bg-white hover:border-gray-300 text-sm rounded-xl"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-end gap-3">
+                    <Button variant="outline" className="h-12 px-6 border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300 rounded-xl">
+                      <Filter className="h-4 w-4 mr-2" />
+                      Advanced Filters
+                    </Button>
+                    <Button className="h-12 px-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white rounded-xl">
+                      <Search className="h-4 w-4 mr-2" />
+                      Search Repository
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Filter Controls */}
+            <Card className="border border-orange-200/50 shadow-sm bg-gradient-to-br from-orange-50/30 to-white">
+              <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" className="button-secondary">
-                    <Filter className="h-4 w-4 mr-2" />
-                    Filters
-                  </Button>
-                  <Button className="button-primary">
-                    <Search className="h-4 w-4 mr-2" />
-                    Search
-                  </Button>
+                  <div className="h-10 w-10 bg-orange-500/10 rounded-xl flex items-center justify-center">
+                    <Filter className="h-5 w-5 text-orange-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-gray-900">Filter Controls</CardTitle>
+                    <p className="text-sm text-gray-600">Refine your question search criteria</p>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                      <BookOpen className="h-4 w-4" />
+                      Source Material
+                    </label>
+                    <Select defaultValue="all">
+                      <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Sources</SelectItem>
+                        <SelectItem value="cyber-risk">Cyber Risk Management</SelectItem>
+                        <SelectItem value="insurance">Insurance Principles</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            {/* Quick Filters */}
-            <div className="surface-elevated rounded-xl p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Source</label>
-                  <Select defaultValue="all">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="all">All Sources</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                      <Globe className="h-4 w-4" />
+                      Study Domain
+                    </label>
+                    <Select defaultValue="all">
+                      <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Domains</SelectItem>
+                        <SelectItem value="risk-management">Risk Management</SelectItem>
+                        <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Study</label>
-                  <Select defaultValue="all">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="all">All Studies</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                      <Target className="h-4 w-4" />
+                      Learning Outcomes
+                    </label>
+                    <Select defaultValue="all">
+                      <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Learning Outcomes</SelectItem>
+                        <SelectItem value="lo1">Risk Assessment</SelectItem>
+                        <SelectItem value="lo2">Security Principles</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Learning Outcomes</label>
-                  <Select defaultValue="all">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="all">All LOs</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                      <MessageSquare className="h-4 w-4" />
+                      Question Type
+                    </label>
+                    <Select defaultValue="all">
+                      <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Types</SelectItem>
+                        <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                        <SelectItem value="true-false">True/False</SelectItem>
+                        <SelectItem value="essay">Essay</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-foreground">Question Type</label>
-                  <Select defaultValue="all">
-                    <SelectTrigger className="input-field h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="surface-overlay">
-                      <SelectItem value="all">All Types</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
             {/* Action Bar */}
-            <div className="surface-elevated rounded-xl p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <p className="text-sm text-muted-foreground">
-                    {selectedQuestions.length} of {questions.length} selected
-                  </p>
+            <Card className="border border-purple-200/50 shadow-sm bg-gradient-to-br from-purple-50/30 to-white">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-purple-600" />
+                      <p className="text-sm font-semibold text-gray-700">
+                        {selectedQuestions.length} of {questions.length} questions selected
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="h-10 px-4 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300 rounded-xl"
+                      disabled={selectedQuestions.length === 0}
+                    >
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete Selected
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="h-10 px-4 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 rounded-xl"
+                      disabled={selectedQuestions.length === 0}
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Export Selected
+                    </Button>
+                    <Button 
+                      className="h-10 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add New Question
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Button 
-                    variant="outline" 
-                    className="button-secondary"
-                    disabled={selectedQuestions.length === 0}
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete Selected
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="button-secondary"
-                    disabled={selectedQuestions.length === 0}
-                  >
-                    <FileText className="h-4 w-4 mr-2" />
-                    Export Selected
-                  </Button>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Questions Table */}
-            <div className="surface-elevated rounded-xl overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-b border-border">
-                    <TableHead className="w-12">
-                      <Checkbox />
-                    </TableHead>
-                    <TableHead className="font-medium text-foreground">Question</TableHead>
-                    <TableHead className="font-medium text-foreground">Type</TableHead>
-                    <TableHead className="font-medium text-foreground">Created By</TableHead>
-                    <TableHead className="font-medium text-foreground">Status</TableHead>
-                    <TableHead className="w-24"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {questions.map((question) => (
-                    <TableRow key={question.id} className="border-b border-border hover:bg-secondary/10">
-                      <TableCell>
-                        <Checkbox
-                          checked={selectedQuestions.includes(question.id)}
-                          onCheckedChange={() => handleQuestionSelect(question.id)}
-                        />
-                      </TableCell>
-                      <TableCell className="max-w-96">
-                        <div className="space-y-1">
-                          <p className="text-sm font-medium text-foreground line-clamp-2">
-                            {question.question}
-                          </p>
-                          <p className="text-xs text-muted-foreground font-mono">
-                            {question.id}
-                          </p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                          {question.type}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        {question.user}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-green-600" />
-                          <span className="text-sm text-green-600">Active</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Button variant="ghost" size="sm" className="button-ghost h-8 w-8 p-0">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="button-ghost h-8 w-8 p-0">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="button-ghost h-8 w-8 p-0">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+            {/* Questions Repository Table */}
+            <Card className="border border-gray-200/50 shadow-sm bg-white">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 bg-gray-500/10 rounded-xl flex items-center justify-center">
+                    <FileText className="h-5 w-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-gray-900">Question Repository</CardTitle>
+                    <p className="text-sm text-gray-600">Browse and manage your question database</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="overflow-hidden rounded-xl">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-b border-gray-200 bg-gray-50/50">
+                        <TableHead className="w-12 pl-6">
+                          <Checkbox />
+                        </TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-sm">Question Content</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-sm">Type</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-sm">Created By</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-sm">Status</TableHead>
+                        <TableHead className="w-32 text-center font-semibold text-gray-700 text-sm">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {questions.map((question) => (
+                        <TableRow key={question.id} className="border-b border-gray-100 hover:bg-blue-50/30 transition-colors">
+                          <TableCell className="pl-6">
+                            <Checkbox
+                              checked={selectedQuestions.includes(question.id)}
+                              onCheckedChange={() => handleQuestionSelect(question.id)}
+                            />
+                          </TableCell>
+                          <TableCell className="max-w-96 py-4">
+                            <div className="space-y-2">
+                              <p className="text-sm font-medium text-gray-900 line-clamp-2 leading-relaxed">
+                                {question.question}
+                              </p>
+                              <p className="text-xs text-gray-500 font-mono bg-gray-100 px-2 py-1 rounded inline-block">
+                                {question.id}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 border-blue-200 font-medium">
+                              <MessageSquare className="h-3 w-3 mr-1" />
+                              {question.type}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-sm text-gray-600 py-4 font-medium">
+                            {question.user}
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                              <span className="text-sm text-green-700 font-medium">Active</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <div className="flex items-center justify-center gap-1">
+                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-blue-100 rounded-lg">
+                                <Eye className="h-4 w-4 text-blue-600" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-orange-100 rounded-lg">
+                                <Edit className="h-4 w-4 text-orange-600" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-gray-100 rounded-lg">
+                                <MoreHorizontal className="h-4 w-4 text-gray-600" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
