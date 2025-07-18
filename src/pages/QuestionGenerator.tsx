@@ -427,7 +427,76 @@ const QuestionGenerator = () => {
           </TabsContent>
 
           {/* Question Repository Tab */}
-          <TabsContent value="repository" className="space-y-8 animate-fade-in">
+          <TabsContent value="repository" className="space-y-6">
+            
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              
+              {/* Total Questions */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-base font-medium text-muted-foreground">Total Questions</h3>
+                    <div className="h-10 w-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                      <FileText className="h-5 w-5 text-blue-600" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-foreground mb-1">1,247</div>
+                  <div className="text-sm text-blue-600 flex items-center gap-1">
+                    <Activity className="h-3 w-3" />
+                    <span>+15% this month</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* AI Generated */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-base font-medium text-muted-foreground">AI Generated</h3>
+                    <div className="h-10 w-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                      <Brain className="h-5 w-5 text-purple-600" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-foreground mb-1">892</div>
+                  <div className="text-sm text-purple-600">
+                    <span>High quality</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* This Week */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-base font-medium text-muted-foreground">This Week</h3>
+                    <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                      <CheckCircle2 className="h-5 w-5 text-green-600" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-foreground mb-1">47</div>
+                  <div className="text-sm text-green-600">
+                    <span>New questions</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contributors */}
+              <Card className="border-0 shadow-sm bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-base font-medium text-muted-foreground">Contributors</h3>
+                    <div className="h-10 w-10 bg-orange-500/10 rounded-lg flex items-center justify-center">
+                      <Globe className="h-5 w-5 text-orange-600" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-foreground mb-1">12</div>
+                  <div className="text-sm text-orange-600">
+                    <span>Active authors</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
             
             {/* Search Section */}
             <Card className="border border-green-200/50 shadow-sm bg-gradient-to-br from-green-50/30 to-white">
@@ -457,11 +526,7 @@ const QuestionGenerator = () => {
                     </div>
                   </div>
                   <div className="flex items-end gap-3">
-                    <Button variant="outline" className="h-12 px-6 border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300 rounded-xl">
-                      <Filter className="h-4 w-4 mr-2" />
-                      Advanced Filters
-                    </Button>
-                    <Button className="h-12 px-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white rounded-xl">
+                    <Button className="h-12 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl">
                       <Search className="h-4 w-4 mr-2" />
                       Search Repository
                     </Button>
