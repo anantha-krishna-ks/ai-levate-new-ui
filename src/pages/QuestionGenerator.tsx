@@ -276,13 +276,13 @@ const QuestionGenerator = () => {
                 <CardContent className="space-y-6">
                   {/* Study Domain & Learning Objectives */}
                   <div className="space-y-5">
-                    <div className="flex items-center gap-2 text-sm text-gray-700 font-semibold">
+                    <div className="flex items-center gap-2 text-base text-gray-700 font-semibold">
                       <Target className="h-4 w-4 text-blue-600" />
                       Study Configuration
                     </div>
                     <div className="grid grid-cols-1 gap-4">
-                      <div className="space-y-3">
-                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                    <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-base font-semibold text-gray-700">
                           <Globe className="h-4 w-4" />
                           Study Domain
                         </label>
@@ -296,7 +296,7 @@ const QuestionGenerator = () => {
                         </Select>
                       </div>
                       <div className="space-y-3">
-                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <label className="flex items-center gap-2 text-base font-semibold text-gray-700">
                           <Brain className="h-4 w-4" />
                           Learning Objectives
                         </label>
@@ -314,13 +314,13 @@ const QuestionGenerator = () => {
                   
                   {/* Question Settings */}
                   <div className="space-y-5">
-                    <div className="flex items-center gap-2 text-sm text-gray-700 font-semibold">
+                    <div className="flex items-center gap-2 text-base text-gray-700 font-semibold">
                       <MessageSquare className="h-4 w-4 text-purple-600" />
                       Question Settings
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-3">
-                        <label className="text-sm font-semibold text-gray-700">Taxonomy Framework</label>
+                        <label className="text-base font-semibold text-gray-700">Taxonomy Framework</label>
                         <Select>
                           <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue placeholder="Select framework" />
@@ -333,7 +333,7 @@ const QuestionGenerator = () => {
                         </Select>
                       </div>
                       <div className="space-y-3">
-                        <label className="text-sm font-semibold text-gray-700">Question Format</label>
+                        <label className="text-base font-semibold text-gray-700">Question Format</label>
                         <Select defaultValue="multiple-choice">
                           <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
@@ -350,7 +350,7 @@ const QuestionGenerator = () => {
                     {/* Additional Settings */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-3">
-                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <label className="flex items-center gap-2 text-base font-semibold text-gray-700">
                           <Hash className="h-4 w-4" />
                           Question Quantity
                         </label>
@@ -367,7 +367,7 @@ const QuestionGenerator = () => {
                         </Select>
                       </div>
                       <div className="space-y-3">
-                        <label className="text-sm font-semibold text-gray-700">Point Value</label>
+                        <label className="text-base font-semibold text-gray-700">Point Value</label>
                         <Select defaultValue="1">
                           <SelectTrigger className="h-11 border-gray-200 bg-white hover:border-gray-300 text-sm">
                             <SelectValue />
@@ -384,7 +384,7 @@ const QuestionGenerator = () => {
 
                   {/* Additional Instructions */}
                   <div className="space-y-3">
-                    <label className="text-sm font-semibold text-gray-700">Additional Instructions</label>
+                    <label className="text-base font-semibold text-gray-700">Additional Instructions</label>
                     <textarea 
                       placeholder="Provide specific instructions for AI question generation..."
                       className="w-full h-24 px-4 py-3 text-sm border border-gray-200 rounded-xl bg-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
