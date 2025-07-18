@@ -587,7 +587,7 @@ const QuestionGenerator = () => {
                       Export Selected
                     </Button>
                     <Button 
-                      className="h-10 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl"
+                      className="h-10 px-4 bg-primary hover:bg-primary/90 text-white rounded-xl"
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Add New Question
