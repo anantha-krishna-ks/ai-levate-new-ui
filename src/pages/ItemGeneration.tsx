@@ -203,11 +203,13 @@ const ItemGeneration = () => {
                   </div>
                 </div>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  <Zap className="w-4 h-4 mr-2" />
-                  Start Generating
-                  <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
+                <Link to="/question-generator/cyber-risk">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                    <Zap className="w-4 h-4 mr-2" />
+                    Start Generating
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </Card>
           ))}
