@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 98%;
     --popover-foreground: 215 25% 15%;
     
-    --primary: 258 89% 66%; /* Modern purple for AI/education */
+    --primary: 217 81% 62%; /* #2563eb */
     --primary-foreground: 0 0% 100%;
     
     --secondary: 220 8% 94%;
@@ -27,7 +27,7 @@ All colors MUST be HSL.
     --muted: 220 8% 94%;
     --muted-foreground: 215 10% 50%;
     
-    --accent: 258 89% 66%; /* Updated to match primary */
+    --accent: 217 81% 62%; /* Updated to match primary */
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
@@ -35,28 +35,40 @@ All colors MUST be HSL.
     
     --border: 220 8% 90%;
     --input: 220 8% 90%;
-    --ring: 258 89% 66%;
+    --ring: 217 81% 62%;
     
     --radius: 1rem;
     
     /* AI-themed gradients */
-    --gradient-ai-primary: linear-gradient(135deg, hsl(258 89% 66%), hsl(258 89% 76%));
-    --gradient-ai-accent: linear-gradient(135deg, hsl(190 100% 50%), hsl(200 100% 60%));
-    --gradient-neural: linear-gradient(135deg, hsl(258 89% 66%) 0%, hsl(190 100% 50%) 50%, hsl(270 100% 60%) 100%);
-    --gradient-glow: radial-gradient(circle at center, hsl(258 89% 66% / 0.15) 0%, transparent 70%);
+    --gradient-ai-primary: linear-gradient(135deg, hsl(217 81% 62%), hsl(217 81% 72%));
+    --gradient-ai-accent: linear-gradient(135deg, hsl(217 81% 52%), hsl(217 81% 72%));
+    --gradient-neural: linear-gradient(135deg, hsl(217 81% 62%) 0%, hsl(217 81% 52%) 50%, hsl(217 81% 72%) 100%);
+    --gradient-glow: radial-gradient(circle at center, hsl(217 81% 62% / 0.15) 0%, transparent 70%);
     
     /* Premium shadows */
-    --shadow-neural: 0 0 30px hsl(258 89% 66% / 0.3), 0 0 60px hsl(190 100% 50% / 0.2);
-    --shadow-ai-glow: 0 0 40px hsl(258 89% 66% / 0.4);
-    --shadow-premium: 0 25px 50px -12px hsl(215 25% 15% / 0.25);
-    --shadow-floating: 0 32px 64px -12px hsl(215 25% 15% / 0.4);
+    --shadow-neural: 0 0 30px hsl(217 81% 62% / 0.3), 0 0 60px hsl(217 81% 72% / 0.2);
+    --shadow-ai-glow: 0 0 40px hsl(217 81% 62% / 0.4);
+    --shadow-premium: 0 25px 50px -12px hsl(217 25% 15% / 0.25);
+    --shadow-floating: 0 32px 64px -12px hsl(217 25% 15% / 0.4);
     
     /* AI-specific colors */
-    --ai-primary: 258 89% 66%;
-    --ai-secondary: 190 100% 50%;
-    --ai-tertiary: 270 100% 60%;
-    --ai-neural: 258 89% 56%;
-    --ai-glow: 190 100% 70%;
+    --ai-primary: 217 81% 62%;
+    --ai-secondary: 217 81% 72%;
+    --ai-tertiary: 217 81% 52%;
+    --ai-neural: 217 81% 42%;
+    --ai-glow: 217 81% 82%;
+    
+    /* Primary color shades for hover effects */
+    --primary-50: 217 81% 95%;
+    --primary-100: 217 81% 90%;
+    --primary-200: 217 81% 82%;
+    --primary-300: 217 81% 72%;
+    --primary-400: 217 81% 62%;
+    --primary-500: 217 81% 52%;
+    --primary-600: 217 81% 42%;
+    --primary-700: 217 81% 32%;
+    --primary-800: 217 81% 22%;
+    --primary-900: 217 81% 12%;
     
     /* Enhanced grays */
     --gray-50: 215 15% 98%;
@@ -344,5 +356,49 @@ All colors MUST be HSL.
   
   .animate-neural-pulse {
     animation: neural-pulse 2s ease-in-out infinite;
+  }
+
+  /* Universal hover effects using primary color */
+  .hover-primary {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-primary:hover {
+    color: hsl(var(--primary));
+    transform: translateY(-1px);
+  }
+  
+  .hover-bg-primary {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-bg-primary:hover {
+    background-color: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+  
+  .hover-scale {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 4px 20px hsl(var(--primary) / 0.2);
+  }
+  
+  .hover-border-primary {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-border-primary:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.2);
   }
 }
