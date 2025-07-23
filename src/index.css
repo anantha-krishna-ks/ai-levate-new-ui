@@ -8,34 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Minimalistic AI App with subtle grey background */
-    --background: 220 8% 96%;
-    --foreground: 215 25% 15%;
+    /* Clean, elegant design matching ItemGeneration */
+    --background: 210 20% 98%; /* Clean light gray background */
+    --foreground: 224 17% 15%; /* Dark text for good contrast */
     
-    --card: 0 0% 98%;
-    --card-foreground: 215 25% 15%;
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 224 17% 15%;
     
-    --popover: 0 0% 98%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 17% 15%;
     
-    --primary: 217 81% 62%; /* #2563eb */
+    --primary: 217 91% 60%; /* Blue-600 #2563eb */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 220 8% 94%;
-    --secondary-foreground: 215 25% 15%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 224 17% 15%;
     
-    --muted: 220 8% 94%;
-    --muted-foreground: 215 10% 50%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
     
-    --accent: 217 81% 62%; /* Updated to match primary */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
+    
+    /* Colorful accent colors for stats cards */
+    --orange-50: 33 100% 96%;
+    --orange-100: 34 100% 92%;
+    --orange-600: 21 90% 48%;
+    
+    --blue-50: 214 100% 97%;
+    --blue-100: 214 95% 93%;
+    --blue-600: 217 91% 60%;
+    
+    --green-50: 138 76% 97%;
+    --green-100: 141 84% 93%;
+    --green-600: 142 76% 36%;
+    
+    --purple-50: 270 100% 98%;
+    --purple-100: 268 100% 95%;
+    --purple-600: 262 83% 58%;
+    
+    --yellow-50: 55 92% 95%;
+    --yellow-100: 55 97% 88%;
+    --yellow-600: 45 93% 47%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 220 8% 90%;
-    --input: 220 8% 90%;
-    --ring: 217 81% 62%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
     
     --radius: 1rem;
     

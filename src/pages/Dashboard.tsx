@@ -213,19 +213,36 @@ const Dashboard = () => {
       
       <div className="ml-0 lg:ml-60 min-h-screen flex flex-col">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white border-b">
-          <div className="flex h-16 items-center justify-between px-4 lg:px-6">
-            <div className="flex items-center gap-4 lg:gap-6">
-              <h1 className="text-lg lg:text-xl font-semibold text-gray-900">Welcome Back, Shivaraj M!</h1>
-              <p className="hidden md:block text-sm text-gray-600">Explore AI-powered tools to enhance your educational content creation</p>
+        <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+          <div className="flex h-16 items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <img 
+                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                alt="AI-Levate" 
+                className="h-6 w-auto"
+              />
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">Welcome Back, Shivaraj M!</h1>
+                <p className="text-sm text-gray-600">Explore AI-powered tools to enhance your educational content creation</p>
+              </div>
             </div>
             
             <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">AI Online</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-blue-600 rounded flex items-center justify-center">
+                  <span className="text-white text-xs">✦</span>
+                </div>
+                <span className="text-sm text-blue-600 font-medium">4,651 Tokens</span>
+              </div>
               <div className="relative hidden md:block">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input 
                   placeholder="Search AI tools..." 
-                  className="pl-10 w-60 lg:w-80"
+                  className="pl-10 w-60 lg:w-80 border-gray-200"
                 />
               </div>
               <ProfileDropdown />
@@ -233,71 +250,63 @@ const Dashboard = () => {
           </div>
         </header>
 
+        {/* Page Title */}
+        <div className="p-6 pb-4">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">AI Tools Dashboard</h1>
+          <p className="text-gray-600">Explore our comprehensive suite of AI-powered educational tools</p>
+        </div>
+
         {/* Stats Cards */}
-        <div className="p-4 lg:p-6 pb-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            <Card className="p-4 lg:p-6 bg-white border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">All</p>
-                  <p className="text-xl lg:text-2xl font-bold text-gray-900">16</p>
-                  <p className="text-xs text-blue-600">Available Tools</p>
+        <div className="px-6 pb-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="p-6 bg-blue-50 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <Sparkles className="h-4 w-4 text-blue-600" />
                 </div>
-                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 lg:h-5 lg:w-5 text-blue-600" />
-                </div>
+                <span className="font-medium text-gray-700">Available Tools</span>
               </div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">16</div>
+              <div className="text-sm font-medium text-blue-600">AI-Powered Solutions</div>
             </Card>
 
-            <Card className="p-4 lg:p-6 bg-white border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Active Subscriptions</p>
-                  <p className="text-xl lg:text-2xl font-bold text-gray-900">12</p>
-                  <p className="text-xs text-green-600 flex items-center gap-1">
-                    <Star className="h-3 w-3" />
-                    Active Access
-                  </p>
+            <Card className="p-6 bg-green-50 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <Star className="h-4 w-4 text-green-600" />
                 </div>
-                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <Star className="h-4 w-4 lg:h-5 lg:w-5 text-green-600" />
-                </div>
+                <span className="font-medium text-gray-700">Active Access</span>
               </div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">12</div>
+              <div className="text-sm font-medium text-green-600">Tools Subscribed</div>
             </Card>
 
-            <Card className="p-4 lg:p-6 bg-white border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Yet to Subscribe</p>
-                  <p className="text-xl lg:text-2xl font-bold text-gray-900">4</p>
-                  <p className="text-xs text-purple-600">Advanced Features</p>
+            <Card className="p-6 bg-purple-50 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <ArrowRight className="h-4 w-4 text-purple-600" />
                 </div>
-                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5 text-purple-600" />
-                </div>
+                <span className="font-medium text-gray-700">Explore More</span>
               </div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">4</div>
+              <div className="text-sm font-medium text-purple-600">Advanced Features</div>
             </Card>
 
-            <Card className="p-4 lg:p-6 bg-white border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Usage Today</p>
-                  <p className="text-xl lg:text-2xl font-bold text-gray-900">847</p>
-                  <p className="text-xs text-orange-600 flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    Tokens Generated
-                  </p>
+            <Card className="p-6 bg-orange-50 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <Clock className="h-4 w-4 text-orange-600" />
                 </div>
-                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                  <Clock className="h-4 w-4 lg:h-5 lg:w-5 text-orange-600" />
-                </div>
+                <span className="font-medium text-gray-700">Today's Usage</span>
               </div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">847</div>
+              <div className="text-sm font-medium text-orange-600">Tokens Generated</div>
             </Card>
           </div>
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 px-4 lg:px-6 pb-6">
+        <main className="flex-1 px-6 pb-6">
           {/* Filter Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto">
             {tabs.map((tab) => (
@@ -305,10 +314,10 @@ const Dashboard = () => {
                 key={tab}
                 variant={activeTab === tab ? "default" : "outline"}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 lg:px-4 py-2 rounded-lg whitespace-nowrap text-sm ${
+                className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm transition-all ${
                   activeTab === tab 
-                    ? "bg-blue-600 text-white" 
-                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                    ? "bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
+                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-blue-300"
                 }`}
               >
                 {tab}
@@ -317,38 +326,38 @@ const Dashboard = () => {
           </div>
 
           {/* AI Tools Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredTools.map((tool) => {
               const IconComponent = tool.icon
               return (
-                <Card key={tool.id} className="group bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <Card key={tool.id} className="group bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
                   <div className="relative">
                     <img 
                       src={tool.image} 
                       alt={tool.title}
-                      className="w-full h-32 lg:h-40 object-cover rounded-t-lg"
+                      className="w-full h-40 object-cover rounded-t-lg"
                     />
                     {/* Tool Icon Overlay */}
                     <div className="absolute top-3 left-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
                       <IconComponent className="h-4 w-4 text-gray-700" />
                     </div>
                     {tool.badge && (
-                      <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs text-white font-medium ${tool.badgeColor}`}>
+                      <div className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs text-white font-medium ${tool.badgeColor} shadow-sm`}>
                         {tool.badge}
                       </div>
                     )}
-                    <div className={`absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-medium text-gray-700 bg-white/90 backdrop-blur-sm`}>
+                    <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md text-xs font-medium text-gray-700 bg-white/90 backdrop-blur-sm shadow-sm">
                       {tool.category}
                     </div>
                   </div>
                   
-                  <CardContent className="p-4">
+                  <CardContent className="p-6">
                     <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">{tool.title}</h3>
                     <p className="text-sm text-gray-600 mb-4 line-clamp-2">{tool.description}</p>
                     
                     <Link to={tool.path}>
                       <Button 
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 hover:scale-[1.02]"
                         size="sm"
                       >
                         <Sparkles className="h-4 w-4 mr-2" />
