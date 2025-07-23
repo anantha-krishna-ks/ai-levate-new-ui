@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import { 
   ArrowLeft, 
   Sparkles,
@@ -23,8 +23,13 @@ import { Switch } from "@/components/ui/switch"
 
 const QuestionGenerator = () => {
   const { bookCode } = useParams()
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("generate")
   const [generationMode, setGenerationMode] = useState(true) // true for LLM, false for Knowledge Base
+
+  const handleGenerateQuestions = () => {
+    navigate("/question-generation-loading")
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -302,7 +307,10 @@ const QuestionGenerator = () => {
 
                   {/* Generate Button */}
                   <div className="flex justify-center mt-8">
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg">
+                    <Button 
+                      onClick={handleGenerateQuestions}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg"
+                    >
                       <Sparkles className="w-4 h-4 mr-2" />
                       Generate Questions
                     </Button>
