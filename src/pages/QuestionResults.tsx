@@ -40,7 +40,8 @@ const QuestionResults = () => {
   const [activeTab, setActiveTab] = useState("generate")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
-  const [questionType, setQuestionType] = useState("multiple-choice")
+  const [questionType, setQuestionType] = useState("all")
+  const [selectedQuestion, setSelectedQuestion] = useState(null)
 
   const stats = [
     { title: "Total Questions", value: "2", bgColor: "bg-blue-50", borderColor: "border-blue-200", icon: <Database className="w-4 h-4 text-blue-600" /> },
@@ -74,6 +75,11 @@ const QuestionResults = () => {
       ]
     }
   ]
+
+  // Filter questions based on selected type
+  const filteredQuestions = questionType === "all" 
+    ? questions 
+    : questions.filter(q => q.type === questionType)
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -245,14 +251,14 @@ const QuestionResults = () => {
                 
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-2">Question Type</label>
-                  <Select defaultValue="multiple-choice">
+                  <Select value={questionType} onValueChange={setQuestionType}>
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="multiple-choice">1. Multiple Choice</SelectItem>
-                      <SelectItem value="written">Written Response</SelectItem>
-                      <SelectItem value="true-false">True/False</SelectItem>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                      <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="Multiple Choice">Multiple Choice</SelectItem>
+                      <SelectItem value="Written Response">Written Response</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -271,7 +277,7 @@ const QuestionResults = () => {
 
             {/* Generated Questions */}
             <div className="space-y-6">
-              {questions.map((question, index) => (
+              {filteredQuestions.map((question, index) => (
                 <Card key={question.id} className="p-6 bg-white border border-gray-200 shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -295,7 +301,10 @@ const QuestionResults = () => {
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => setIsPreviewDialogOpen(true)}
+                        onClick={() => {
+                          setSelectedQuestion(question)
+                          setIsPreviewDialogOpen(true)
+                        }}
                         className="text-blue-600 hover:text-blue-700"
                       >
                         <Eye className="w-4 h-4 mr-1" />
@@ -304,7 +313,10 @@ const QuestionResults = () => {
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => setIsEditDialogOpen(true)}
+                        onClick={() => {
+                          setSelectedQuestion(question)
+                          setIsEditDialogOpen(true)
+                        }}
                         className="text-gray-600 hover:text-gray-700"
                       >
                         <Edit3 className="w-4 h-4 mr-1" />
@@ -823,21 +835,101 @@ const QuestionResults = () => {
           </DialogHeader>
           
           <div className="space-y-8 py-6">
-            {/* Question Stem */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                  <FileText className="w-4 h-4 text-blue-600" />
+            {selectedQuestion && (
+              <>
+                {/* Question Stem */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">Question:</h3>
+                  </div>
+                  
+                  <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                    <p className="text-gray-900 leading-relaxed">
+                      {selectedQuestion.text}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Question Stem:</h3>
-              </div>
-              
-              <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-gray-900 leading-relaxed">
-                  Why are speculative risks generally excluded from insurance coverage, and how does this differ from the treatment of pure risks?
-                </p>
-              </div>
-            </div>
+
+                {/* Question Options or Sample Answer */}
+                {selectedQuestion.type === "Multiple Choice" && selectedQuestion.options ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+                        <AlignLeft className="w-4 h-4 text-green-600" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900">Options:</h3>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {selectedQuestion.options.map((option) => (
+                        <div 
+                          key={option.letter}
+                          className={`flex items-center gap-3 p-3 rounded-lg ${
+                            option.correct 
+                              ? "bg-green-50 border border-green-200" 
+                              : "border border-gray-200"
+                          }`}
+                        >
+                          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium ${
+                            option.correct 
+                              ? "bg-green-600 text-white" 
+                              : "bg-gray-100 text-gray-700"
+                          }`}>
+                            {option.letter}
+                          </span>
+                          <span className={option.correct ? "text-gray-900 font-medium" : "text-gray-700"}>
+                            {option.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+                        <MessageSquare className="w-4 h-4 text-green-600" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900">Sample Answer:</h3>
+                    </div>
+                    
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-green-800 leading-relaxed">
+                        {selectedQuestion.sample}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Question Metadata */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center">
+                      <Settings2 className="w-4 h-4 text-purple-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">Question Details:</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <p className="text-xs text-gray-500 mb-1">Type</p>
+                      <p className="text-sm font-medium text-gray-900">{selectedQuestion.type}</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <p className="text-xs text-gray-500 mb-1">Difficulty</p>
+                      <p className="text-sm font-medium text-gray-900">{selectedQuestion.difficulty}</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <p className="text-xs text-gray-500 mb-1">Max Marks</p>
+                      <p className="text-sm font-medium text-gray-900">{selectedQuestion.maxMarks}</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           
           <div className="flex justify-end gap-3 pt-6 border-t">
