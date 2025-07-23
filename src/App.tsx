@@ -12,6 +12,7 @@ import ItemGeneration from "./pages/ItemGeneration";
 import QuestionGenerator from "./pages/QuestionGenerator";
 import QuestionGenerationLoading from "./pages/QuestionGenerationLoading";
 import QuestionResults from "./pages/QuestionResults";
+import QuestionRepository from "./pages/QuestionRepository";
 import Reports from "./pages/Reports";
 import ManageUsers from "./pages/ManageUsers";
 import NotFound from "./pages/NotFound";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/question-generator/:bookCode" element={<QuestionGenerator />} />
           <Route path="/question-generation-loading" element={<QuestionGenerationLoading />} />
           <Route path="/question-results" element={<QuestionResults />} />
+          <Route path="/question-repository" element={<QuestionRepository />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/manage-users" element={<ManageUsers />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
