@@ -127,9 +127,9 @@ const ItemGeneration = () => {
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, index) => (
-            <Card key={index} className="p-6 bg-white border border-gray-200 shadow-sm">
+            <Card key={index} className={`p-6 ${stat.bgColor} border border-gray-200 shadow-sm`}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
                   {stat.icon}
                 </div>
                 <span className="font-medium text-gray-700">{stat.title}</span>
@@ -137,14 +137,14 @@ const ItemGeneration = () => {
               
               <div className="mb-4">
                 <div className="text-3xl font-bold text-gray-900 mb-2">{stat.total}</div>
-                <div className="text-sm font-medium text-blue-600">{stat.subtitle}</div>
+                <div className="text-sm font-medium text-gray-600">{stat.subtitle}</div>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 {stat.items.map((item, idx) => (
                   <div key={idx} className="text-left">
-                    <div className="text-sm text-blue-600 font-medium">{item.label}</div>
-                    <div className="text-lg font-semibold text-gray-900">{item.value}</div>
+                    <div className="text-sm text-gray-600 font-medium">{item.label}</div>
+                    <div className={`text-lg font-semibold ${item.color}`}>{item.value}</div>
                   </div>
                 ))}
               </div>
