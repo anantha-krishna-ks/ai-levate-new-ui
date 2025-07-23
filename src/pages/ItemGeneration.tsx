@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, FileText, Bookmark, ChevronRight } from "lucide-react";
+import { ArrowLeft, Users, FileText, Bookmark, ChevronRight, Zap, CheckCircle, Clock, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,36 +7,33 @@ import { Badge } from "@/components/ui/badge";
 const ItemGeneration = () => {
   const stats = [
     {
-      icon: <div className="w-4 h-4 bg-orange-500 rounded-sm flex items-center justify-center">
-        <div className="w-2 h-2 bg-white rounded-sm"></div>
-      </div>,
+      icon: <Zap className="w-5 h-5 text-orange-600" />,
       title: "Token Usage",
       total: "51,449",
       subtitle: "Total Tokens used",
+      bgColor: "bg-orange-50",
       items: [
         { label: "Today's usage", value: "5,349", color: "text-orange-600" },
         { label: "Balance usage", value: "4,651", color: "text-orange-600" }
       ]
     },
     {
-      icon: <div className="w-4 h-4 bg-blue-500 rounded-sm flex items-center justify-center">
-        <div className="w-2 h-2 bg-white rounded-sm"></div>
-      </div>,
+      icon: <FileText className="w-5 h-5 text-blue-600" />,
       title: "Questions Generated",
       total: "72",
       subtitle: "Total Questions Generated",
+      bgColor: "bg-blue-50",
       items: [
         { label: "Multiple Choice", value: "65", color: "text-blue-600" },
         { label: "Written Response", value: "7", color: "text-blue-600" }
       ]
     },
     {
-      icon: <div className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center">
-        <div className="w-2 h-2 bg-white rounded-sm"></div>
-      </div>,
+      icon: <Bookmark className="w-5 h-5 text-green-600" />,
       title: "Questions Saved",
       total: "28",
       subtitle: "Total Questions Saved",
+      bgColor: "bg-green-50",
       items: [
         { label: "Multiple Choice", value: "27", color: "text-green-600" },
         { label: "Written Response", value: "1", color: "text-green-600" }
@@ -130,9 +127,11 @@ const ItemGeneration = () => {
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, index) => (
-            <Card key={index} className="p-6 bg-white border border-gray-200">
+            <Card key={index} className={`p-6 ${stat.bgColor} border border-gray-200`}>
               <div className="flex items-center gap-3 mb-4">
-                {stat.icon}
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  {stat.icon}
+                </div>
                 <span className="font-medium text-gray-700">{stat.title}</span>
               </div>
               
@@ -195,19 +194,17 @@ const ItemGeneration = () => {
 
                 <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+                    <Clock className="w-3 h-3 text-gray-400" />
                     <span>{base.lastUpdated}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                    <CheckCircle className="w-3 h-3 text-green-500" />
                     <span>{base.status}</span>
                   </div>
                 </div>
 
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  <div className="w-4 h-4 mr-2 flex items-center justify-center">
-                    <div className="w-2 h-2 border border-white rounded-sm"></div>
-                  </div>
+                  <Zap className="w-4 h-4 mr-2" />
                   Start Generating
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
