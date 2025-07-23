@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { AppSidebar } from "@/components/AppSidebar"
 import { ProfileDropdown } from "@/components/ProfileDropdown"
+import { Link } from "react-router-dom"
 
 // Import tool images
 import itemGenerationImage from "@/assets/item-generation.png"
@@ -345,13 +346,15 @@ const Dashboard = () => {
                     <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">{tool.title}</h3>
                     <p className="text-sm text-gray-600 mb-4 line-clamp-2">{tool.description}</p>
                     
-                    <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                      size="sm"
-                    >
-                      <Sparkles className="h-4 w-4 mr-2" />
-                      Launch App
-                    </Button>
+                    <Link to={tool.path}>
+                      <Button 
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                        size="sm"
+                      >
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        Launch App
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               )
