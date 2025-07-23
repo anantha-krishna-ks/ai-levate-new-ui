@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { OverlayLoader } from "@/components/ui/page-loader";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: ""
@@ -19,9 +21,13 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSigningIn(true);
     // Add login logic here
     console.log("Logging in...", formData);
-    navigate("/dashboard");
+    setTimeout(() => {
+      setIsSigningIn(false);
+      navigate("/dashboard");
+    }, 2000);
   };
 
   const canSubmit = () => {
@@ -203,6 +209,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {isSigningIn && <OverlayLoader text="Signing you in..." />}
     </div>
   );
 };

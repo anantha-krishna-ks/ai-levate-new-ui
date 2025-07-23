@@ -71,6 +71,21 @@ export const FullPageLoader = ({ text = "Loading..." }: { text?: string }) => {
   )
 }
 
+export const OverlayLoader = ({ text = "Loading..." }: { text?: string }) => {
+  return (
+    <div className="fixed inset-0 bg-black/20 backdrop-blur-[1px] z-50 flex items-center justify-center">
+      <div className="bg-white/95 backdrop-blur-md rounded-lg p-8 shadow-2xl border border-white/20 max-w-sm mx-4">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative">
+            <div className="w-12 h-12 border-4 border-gray-200 rounded-full animate-spin border-t-primary"></div>
+          </div>
+          <p className="text-gray-700 font-medium text-center">{text}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export const InlineLoader = ({ text = "Loading..." }: { text?: string }) => {
   return (
     <div className="flex items-center justify-center py-8">
