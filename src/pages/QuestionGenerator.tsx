@@ -44,7 +44,10 @@ const QuestionGenerator = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <img
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AL</span>
+              </div>
+              <img 
                 src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
                 alt="AI-Levate" 
                 className="h-5 w-auto"
