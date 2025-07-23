@@ -167,66 +167,70 @@ const QuestionResults = () => {
             {/* Question Generation Parameters */}
             <Card className="p-6 bg-white border border-gray-200 shadow-sm mb-8">
               <div className="flex items-center gap-2 mb-6">
-                <span className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm">?</span>
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                  <Settings2 className="w-4 h-4 text-white" />
+                </div>
                 <h3 className="text-lg font-semibold text-gray-900">Question Generation Parameters</h3>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Study</label>
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Study</label>
                   <Select defaultValue="defining-risk">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="defining-risk">1. Defining Risk and C...</SelectItem>
+                      <SelectItem value="defining-risk">1. Defining Risk and C</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Learning Objective</label>
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Learning Outcomes</label>
                   <Select defaultValue="pure-risk">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pure-risk">1. Explain why pure ri...</SelectItem>
+                      <SelectItem value="pure-risk">1. Explain why pure ris</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Question Type</label>
-                  <Select defaultValue="both">
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Taxonomy</label>
+                  <Select defaultValue="understand">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="both">Both</SelectItem>
-                      <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
-                      <SelectItem value="written">Written Response</SelectItem>
+                      <SelectItem value="understand">Understand</SelectItem>
+                      <SelectItem value="remember">Remember</SelectItem>
+                      <SelectItem value="apply">Apply</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Difficulty</label>
-                  <Select defaultValue="medium">
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Number of Questions</label>
+                  <Select defaultValue="5">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="easy">Easy</SelectItem>
-                      <SelectItem value="medium">Medium</SelectItem>
-                      <SelectItem value="hard">Hard</SelectItem>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                      <SelectItem value="10">10</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Quantity</label>
-                  <Select defaultValue="2">
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Marks</label>
+                  <Select defaultValue="1">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
@@ -240,27 +244,28 @@ const QuestionResults = () => {
                 </div>
                 
                 <div>
-                  <label className="text-sm text-gray-600 block mb-2">Format</label>
-                  <Select defaultValue="exam">
+                  <label className="text-sm font-medium text-gray-700 block mb-2">Question Type</label>
+                  <Select defaultValue="multiple-choice">
                     <SelectTrigger className="text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="exam">Exam</SelectItem>
-                      <SelectItem value="practice">Practice</SelectItem>
+                      <SelectItem value="multiple-choice">1. Multiple Choice</SelectItem>
+                      <SelectItem value="written">Written Response</SelectItem>
+                      <SelectItem value="true-false">True/False</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div className="flex items-center gap-2 mb-2">
-                  <MessageSquare className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-700">Additional Instructions</span>
-                </div>
-                <p className="text-sm text-gray-600">
-                  Focus on practical applications and real-world scenarios in cybersecurity. Include current industry standards and best practices.
-                </p>
+              <div className="flex items-center gap-3">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 px-6">
+                  <RotateCcw className="w-4 h-4" />
+                  Regenerate
+                </Button>
+                <Button variant="outline" className="border-gray-200 text-gray-700 hover:bg-gray-50 px-6">
+                  Back to Setup
+                </Button>
               </div>
             </Card>
 
