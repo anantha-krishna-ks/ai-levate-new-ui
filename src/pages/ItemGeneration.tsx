@@ -1,8 +1,10 @@
-import { ArrowLeft, Users, FileText, Bookmark, ChevronRight, Zap, CheckCircle, Clock, Shield } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { ArrowLeft, Users, FileText, Bookmark, ChevronRight, Zap, CheckCircle, Clock, Shield, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { PageLoader, InlineLoader } from "@/components/ui/page-loader";
 
 const ItemGeneration = () => {
   const stats = [

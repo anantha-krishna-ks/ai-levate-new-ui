@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Search, Sparkles, ArrowRight, BarChart, Clock, Star, Users, FileText, Brain, Database, BookOpen, RefreshCw, GitCompare, Image, MessageSquare, ScanLine, PenTool, BarChart3, Bot } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { AppSidebar } from "@/components/AppSidebar"
 import { ProfileDropdown } from "@/components/ProfileDropdown"
+import { PageLoader } from "@/components/ui/page-loader"
 import { Link } from "react-router-dom"
 
 // Import tool images
@@ -20,6 +21,16 @@ import comingSoonImage from "@/assets/coming-soon.png"
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("All")
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading time for dashboard initialization
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const tabs = [
     "All", "AI Generation", "Content Creation", "Education", 
@@ -206,6 +217,10 @@ const Dashboard = () => {
   ]
 
   const filteredTools = activeTab === "All" ? aiTools : aiTools.filter(tool => tool.category === activeTab)
+
+  if (isLoading) {
+    return <PageLoader variant="ai" text="Loading your dashboard..." className="min-h-screen" />
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
