@@ -45,13 +45,59 @@ const QuestionResults = () => {
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
   const [questionType, setQuestionType] = useState("multiple-choice")
   const [selectedQuestionType, setSelectedQuestionType] = useState("Multiple Choice")
-  const [keyPoints, setKeyPoints] = useState([
-    "Speculative risks - Include the potential for financial gain, which is incompatible with insurance principles.",
-    "Pure risks - Only involve loss or no loss, making them insurable and predictable.",
-    "Risk predictability - Insurance relies on statistical data to assess and cover pure risks.",
-    "Profit exclusion - Insurance excludes risks with potential profit to avoid gambling",
-    "Actuarial basis - Insurers use pure risks for accurate premium calculations and risk management."
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null)
+  const [editingQuestion, setEditingQuestion] = useState("")
+  const [questions, setQuestions] = useState([
+    {
+      id: 1,
+      question: "Why are speculative risks generally excluded from insurance coverage, and how does this differ from the treatment of pure risks?",
+      type: "multiple-choice",
+      marks: 5,
+      options: [
+        { id: "A", text: "Pure risk involves only the possibility of loss or no loss, making it insurable.", correct: true },
+        { id: "B", text: "Speculative risk involves the possibility of gain, making it insurable.", correct: false },
+        { id: "C", text: "Pure risk involves both gain and loss, making it uninsurable.", correct: false },
+        { id: "D", text: "Speculative risk involves only loss, making it insurable.", correct: false }
+      ],
+      answer: "Pure risk involves only the possibility of loss or no loss, making it insurable, while speculative risks involve the possibility of gain or loss, making them unsuitable for insurance coverage."
+    },
+    {
+      id: 2,
+      question: "What factors make pure risks suitable for insurance coverage compared to speculative risks?",
+      type: "written-response",
+      marks: 5,
+      answer: "Pure risks are suitable for insurance because they involve only loss or no loss scenarios, making them predictable and measurable. Insurance companies can use statistical data to calculate premiums and assess risk accurately. Speculative risks, which involve potential gains, are excluded because they resemble gambling and cannot be accurately predicted using traditional actuarial methods."
+    }
   ])
+  
+  const handleEditQuestion = (index: number) => {
+    setSelectedQuestionIndex(index)
+    setEditingQuestion(questions[index].question)
+    setIsEditDialogOpen(true)
+  }
+  
+  const handleSaveEdit = () => {
+    if (selectedQuestionIndex !== null) {
+      const updatedQuestions = [...questions]
+      updatedQuestions[selectedQuestionIndex].question = editingQuestion
+      setQuestions(updatedQuestions)
+      setIsEditDialogOpen(false)
+      setSelectedQuestionIndex(null)
+      setEditingQuestion("")
+    }
+  }
+  
+  const handlePreviewQuestion = (index: number) => {
+    setSelectedQuestionIndex(index)
+    setIsPreviewDialogOpen(true)
+  }
+  
+  const handleDeleteQuestion = (index: number) => {
+    if (confirm("Are you sure you want to delete this question?")) {
+      const updatedQuestions = questions.filter((_, i) => i !== index)
+      setQuestions(updatedQuestions)
+    }
+  }
 
   const stats = [
     {
@@ -289,7 +335,7 @@ const QuestionResults = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-lg font-semibold text-gray-900">Generated Questions</h3>
-              <p className="text-sm text-gray-500">Review and manage your generated questions</p>
+              <p className="text-sm text-gray-500">Review and manage your generated questions ({questions.length} questions)</p>
             </div>
             <div className="flex gap-3">
               <Button variant="outline" className="text-gray-600">
@@ -307,109 +353,99 @@ const QuestionResults = () => {
             </div>
           </div>
 
-          {/* Question 1 */}
-          <Card className="mb-6 border border-gray-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question 1</span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">5 Marks</span>
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">{selectedQuestionType}</span>
-                </div>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-gray-600"
-                    onClick={() => setIsEditDialogOpen(true)}
-                  >
-                    <Edit3 className="w-4 h-4 mr-1" />
-                    Edit
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-purple-600"
-                    onClick={() => setIsPreviewDialogOpen(true)}
-                  >
-                    <Eye className="w-4 h-4 mr-1" />
-                    Preview
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-red-600"
-                    onClick={() => {
-                      if (confirm("Are you sure you want to delete this question?")) {
-                        console.log("Question 1 deleted")
-                        // Remove question from state/list
-                      }
-                    }}
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Delete
-                  </Button>
-                </div>
-              </div>
-              
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
-                1. Why are speculative risks generally excluded from insurance coverage, and how does this differ from the treatment of pure risks?
-              </h4>
-              
-              {questionType === "multiple-choice" ? (
-                <>
-                  <div className="space-y-3 mb-4">
-                    <div className="flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <span className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">A</span>
-                      <span className="text-gray-900">Pure risk involves only the possibility of loss or no loss, making it insurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">B</span>
-                      <span className="text-gray-700">Speculative risk involves the possibility of gain, making it insurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">C</span>
-                      <span className="text-gray-700">Pure risk involves both gain and loss, making it uninsurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">D</span>
-                      <span className="text-gray-700">Speculative risk involves only loss, making it insurable.</span>
-                    </div>
+          {/* Dynamic Questions List */}
+          {questions.map((question, index) => (
+            <Card key={question.id} className="mb-6 border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question {index + 1}</span>
+                    <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">{question.marks} Marks</span>
+                    <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">
+                      {question.type === "multiple-choice" ? "Multiple Choice" : "Written Response"}
+                    </span>
                   </div>
-                  
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-sm text-blue-900">
-                      <strong>Correct Answer:</strong> A. Pure risk involves only the possibility of loss or no loss, making it insurable.
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-gray-600 hover:bg-gray-100 transition-colors"
+                      onClick={() => handleEditQuestion(index)}
+                    >
+                      <Edit3 className="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-purple-600 hover:bg-purple-50 transition-colors"
+                      onClick={() => handlePreviewQuestion(index)}
+                    >
+                      <Eye className="w-4 h-4 mr-1" />
+                      Preview
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-red-600 hover:bg-red-50 transition-colors"
+                      onClick={() => handleDeleteQuestion(index)}
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+                
+                <h4 className="text-lg font-medium text-gray-900 mb-4">
+                  {index + 1}. {question.question}
+                </h4>
+                
+                {question.type === "multiple-choice" ? (
+                  <>
+                    <div className="space-y-3 mb-4">
+                      {question.options?.map((option) => (
+                        <div 
+                          key={option.id}
+                          className={`flex items-center gap-3 p-3 rounded-lg ${
+                            option.correct 
+                              ? 'bg-green-50 border border-green-200' 
+                              : 'border border-gray-200'
+                          }`}
+                        >
+                          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium ${
+                            option.correct 
+                              ? 'bg-green-600 text-white' 
+                              : 'bg-gray-100 text-gray-700'
+                          }`}>
+                            {option.id}
+                          </span>
+                          <span className={option.correct ? 'text-gray-900' : 'text-gray-700'}>
+                            {option.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <p className="text-sm text-blue-900">
+                        <strong>Correct Answer:</strong> {question.options?.find(opt => opt.correct)?.id}. {question.options?.find(opt => opt.correct)?.text}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="flex items-start gap-3 mb-3">
+                      <MessageSquare className="w-5 h-5 text-green-600 mt-0.5" />
+                      <h5 className="font-medium text-green-900">Sample Answer:</h5>
+                    </div>
+                    <p className="text-green-800 leading-relaxed">
+                      {question.answer}
                     </p>
                   </div>
-                </>
-              ) : (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <MessageSquare className="w-5 h-5 text-green-600 mt-0.5" />
-                    <h5 className="font-medium text-green-900">Sample Answer:</h5>
-                  </div>
-                  <p className="text-green-800 leading-relaxed">
-                    Speculative risks involve the possibility of gain or loss, making them unsuitable for insurance coverage, which is designed for predictable and measurable risks like pure risks. Pure risks only involve the chance of loss or no loss, allowing insurers to calculate premiums and manage claims effectively.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
-
-          {/* Question 2 */}
-          <Card className="mb-6 border border-gray-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question 2</span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">5 Marks</span>
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">{selectedQuestionType}</span>
-                </div>
-                <div className="flex gap-2">
+                )}
+              </div>
+            </Card>
+          ))}
                   <Button variant="ghost" size="sm" className="text-gray-600">
                     <Edit3 className="w-4 h-4 mr-1" />
                     Edit
