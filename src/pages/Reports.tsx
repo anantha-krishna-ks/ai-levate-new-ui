@@ -85,22 +85,8 @@ const Reports = () => {
                   </Button>
                 </Link>
                 
-                <Button variant="outline" className="w-full sm:w-auto glass-effect hover:bg-green-500/10 border-green-200 transition-all duration-300 group hover:shadow-lg">
-                  <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
-                  Notify Me
-                </Button>
               </div>
               
-              {/* Enhanced Notification Section */}
-              <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-green-50 to-blue-50 border border-green-200/50 transform hover:scale-105 transition-all duration-300">
-                <p className="text-sm font-medium text-gray-700 mb-3">
-                  Want to be notified when Reports are ready?
-                </p>
-                <Button variant="secondary" className="bg-white/80 hover:bg-white group transition-all duration-300 hover:shadow-lg">
-                  <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
-                  Get Preview Access
-                </Button>
-              </div>
             </div>
           </CardContent>
         </Card>

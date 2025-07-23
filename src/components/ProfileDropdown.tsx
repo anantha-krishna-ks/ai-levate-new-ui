@@ -15,8 +15,11 @@ export function ProfileDropdown() {
   const navigate = useNavigate()
   
   const handleLogout = () => {
-    // Add logout logic here
-    console.log("Logging out...")
+    // Clear any stored authentication data
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('userSession')
+    sessionStorage.clear()
+    console.log("User logged out successfully")
     navigate("/")
   }
 

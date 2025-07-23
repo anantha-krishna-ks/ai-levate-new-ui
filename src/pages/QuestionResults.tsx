@@ -126,7 +126,17 @@ const QuestionResults = () => {
                 Back to Knowledge Base
               </Button>
             </Link>
-            <Button variant="ghost" size="sm" className="text-gray-600">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-gray-600"
+              onClick={() => {
+                localStorage.removeItem('authToken')
+                localStorage.removeItem('userSession')
+                sessionStorage.clear()
+                window.location.href = "/"
+              }}
+            >
               Sign Out
             </Button>
           </div>
@@ -325,7 +335,17 @@ const QuestionResults = () => {
                     <Eye className="w-4 h-4 mr-1" />
                     Preview
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-red-600">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-red-600"
+                    onClick={() => {
+                      if (confirm("Are you sure you want to delete this question?")) {
+                        console.log("Question 1 deleted")
+                        // Remove question from state/list
+                      }
+                    }}
+                  >
                     <Trash2 className="w-4 h-4 mr-1" />
                     Delete
                   </Button>
@@ -398,7 +418,17 @@ const QuestionResults = () => {
                     <Eye className="w-4 h-4 mr-1" />
                     Preview
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-red-600">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-red-600"
+                    onClick={() => {
+                      if (confirm("Are you sure you want to delete this question?")) {
+                        console.log("Question 2 deleted")
+                        // Remove question from state/list
+                      }
+                    }}
+                  >
                     <Trash2 className="w-4 h-4 mr-1" />
                     Delete
                   </Button>

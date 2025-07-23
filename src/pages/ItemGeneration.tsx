@@ -207,7 +207,7 @@ const ItemGeneration = () => {
                   </div>
                 </div>
 
-                <Link to="/question-generator/cyber-risk">
+                <Link to={`/question-generator/${base.title.toLowerCase().replace(/\s+/g, '-')}`}>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                     <Zap className="w-4 h-4 mr-2" />
                     Start Generating

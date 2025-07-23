@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowLeft, RefreshCw, Sparkles, Brain, Code, Zap } from "lucide-react";
-import comingSoonHero from "@/assets/coming-soon-hero.jpg";
+import comingSoonHero from "@/assets/coming-soon-new.jpg";
 
 const NotFound = () => {
   const location = useLocation();
@@ -90,10 +90,6 @@ const NotFound = () => {
                   </Button>
                 </Link>
                 
-                <Button variant="outline" className="w-full sm:w-auto glass-effect hover:bg-blue-500/10 border-blue-200 transition-all duration-300 group hover:shadow-lg">
-                  <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
-                  Notify Me
-                </Button>
               </div>
             </div>
           </CardContent>

@@ -79,7 +79,17 @@ const QuestionGenerator = () => {
                 Back to Knowledge Base
               </Button>
             </Link>
-            <Button variant="ghost" size="sm" className="text-gray-600">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-gray-600"
+              onClick={() => {
+                localStorage.removeItem('authToken')
+                localStorage.removeItem('userSession')
+                sessionStorage.clear()
+                window.location.href = "/"
+              }}
+            >
               Sign Out
             </Button>
           </div>
@@ -276,9 +286,8 @@ const QuestionGenerator = () => {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="multiple-choice">1. Multiple Choice</SelectItem>
-                            <SelectItem value="true-false">True/False</SelectItem>
-                            <SelectItem value="essay">Essay</SelectItem>
+                            <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                            <SelectItem value="written-response">Written Response</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
