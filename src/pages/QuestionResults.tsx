@@ -15,7 +15,13 @@ import {
   RotateCcw,
   Sparkles,
   ChevronDown,
-  Target
+  Target,
+  User,
+  Hash,
+  AlignLeft,
+  X,
+  XCircle,
+  AlertCircle
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -27,6 +33,7 @@ import { Label } from "@/components/ui/label"
 const QuestionResults = () => {
   const [activeTab, setActiveTab] = useState("generate")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
 
   const stats = [
     {
@@ -283,7 +290,12 @@ const QuestionResults = () => {
                     <Edit3 className="w-4 h-4 mr-1" />
                     Edit
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-purple-600">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-purple-600"
+                    onClick={() => setIsPreviewDialogOpen(true)}
+                  >
                     <Eye className="w-4 h-4 mr-1" />
                     Preview
                   </Button>
@@ -413,212 +425,494 @@ const QuestionResults = () => {
 
       {/* Edit Question Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-xl font-semibold">
-              <Edit3 className="w-5 h-5 text-blue-600" />
+        <DialogContent className="max-w-5xl max-h-[95vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-purple-50">
+          <DialogHeader className="border-b border-gray-200 pb-4">
+            <DialogTitle className="flex items-center gap-3 text-2xl font-bold text-gray-800">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <Edit3 className="w-5 h-5 text-white" />
+              </div>
               Edit Multiple Choice
             </DialogTitle>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 mt-2 ml-11">
               Modify the question content, options, feedback, and metadata below.
             </p>
           </DialogHeader>
 
-          <div className="space-y-6 mt-6">
+          <div className="space-y-8 mt-6 px-1">
             {/* Question Stem */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <FileText className="w-5 h-5 text-blue-600" />
-                <Label className="text-base font-semibold">Question Stem</Label>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <Label className="text-lg font-semibold text-gray-800">Question Stem</Label>
+                  <p className="text-sm text-gray-500">Enter the main question text</p>
+                </div>
               </div>
               <Textarea 
                 defaultValue="What distinguishes pure risk from speculative risk in terms of insurability?"
-                className="min-h-[100px] resize-none"
+                className="min-h-[120px] resize-none border-gray-200 focus:border-blue-400 focus:ring-blue-100"
               />
             </div>
 
             {/* Options */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <CheckCircle2 className="w-5 h-5 text-green-600" />
-                <Label className="text-base font-semibold">Options</Label>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <Label className="text-lg font-semibold text-gray-800">Options</Label>
+                  <p className="text-sm text-gray-500">Configure answer choices</p>
+                </div>
               </div>
               
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 mt-1">
-                    A
+                {['A', 'B', 'C', 'D'].map((option, index) => (
+                  <div key={option} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
+                    <div className="w-10 h-10 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center text-sm font-bold text-gray-700 mt-1 shadow-sm">
+                      {option}
+                    </div>
+                    <Textarea 
+                      defaultValue={[
+                        "Pure risk involves only the possibility of loss or no loss, making it insurable.",
+                        "Speculative risk involves the possibility of gain, making it insurable.",
+                        "Pure risk involves both gain and loss, making it uninsurable.",
+                        "Speculative risk involves only loss, making it insurable."
+                      ][index]}
+                      className="flex-1 min-h-[80px] resize-none border-gray-200 focus:border-blue-400 focus:ring-blue-100"
+                    />
                   </div>
-                  <Textarea 
-                    defaultValue="Pure risk involves only the possibility of loss or no loss, making it insurable."
-                    className="flex-1 min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 mt-1">
-                    B
-                  </div>
-                  <Textarea 
-                    defaultValue="Speculative risk involves the possibility of gain, making it insurable."
-                    className="flex-1 min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 mt-1">
-                    C
-                  </div>
-                  <Textarea 
-                    defaultValue="Pure risk involves both gain and loss, making it uninsurable."
-                    className="flex-1 min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 mt-1">
-                    D
-                  </div>
-                  <Textarea 
-                    defaultValue="Speculative risk involves only loss, making it insurable."
-                    className="flex-1 min-h-[60px] resize-none"
-                  />
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Correct Answer */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Target className="w-5 h-5 text-purple-600" />
-                <Label className="text-base font-semibold">Correct Answer</Label>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Target className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <Label className="text-lg font-semibold text-gray-800">Correct Answer</Label>
+                  <p className="text-sm text-gray-500">Select the correct option</p>
+                </div>
               </div>
               
-              <Select defaultValue="A">
-                <SelectTrigger className="w-20">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="A">A</SelectItem>
-                  <SelectItem value="B">B</SelectItem>
-                  <SelectItem value="C">C</SelectItem>
-                  <SelectItem value="D">D</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-sm text-blue-900">
-                  <strong>Selected Answer:</strong> A. Pure risk involves only the possibility of loss or no loss, making it insurable.
-                </p>
+              <div className="flex items-center gap-4">
+                <Select defaultValue="A">
+                  <SelectTrigger className="w-24 h-12 border-gray-200 focus:border-purple-400">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="A">A</SelectItem>
+                    <SelectItem value="B">B</SelectItem>
+                    <SelectItem value="C">C</SelectItem>
+                    <SelectItem value="D">D</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <div className="flex-1 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-900">
+                    <strong>Selected Answer:</strong> A. Pure risk involves only the possibility of loss or no loss, making it insurable.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Feedback */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center">
-                  <span className="text-orange-600 text-xs font-bold">!</span>
-                </span>
-                <Label className="text-base font-semibold">Feedback</Label>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-orange-600" />
+                </div>
+                <div>
+                  <Label className="text-lg font-semibold text-gray-800">Feedback</Label>
+                  <p className="text-sm text-gray-500">Provide explanations for each option</p>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Option A Feedback</Label>
-                  <Textarea 
-                    defaultValue="Correct. Pure risk is insurable because it does not include the possibility of gain."
-                    className="min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Option B Feedback</Label>
-                  <Textarea 
-                    defaultValue="Incorrect. Speculative risk includes the possibility of gain, which makes it uninsurable."
-                    className="min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Option C Feedback</Label>
-                  <Textarea 
-                    defaultValue="Incorrect. Pure risk does not involve gain, only the possibility of loss or no loss."
-                    className="min-h-[60px] resize-none"
-                  />
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium text-gray-700 mb-2 block">Option D Feedback</Label>
-                  <Textarea 
-                    defaultValue="Incorrect. Speculative risk involves both loss and gain, making it uninsurable."
-                    className="min-h-[60px] resize-none"
-                  />
-                </div>
+              <div className="space-y-6">
+                {[
+                  {option: 'A', feedback: 'Correct. Pure risk is insurable because it does not include the possibility of gain.', bg: 'bg-gray-50'},
+                  {option: 'B', feedback: 'Incorrect. Speculative risk includes the possibility of gain, which makes it uninsurable.', bg: 'bg-gray-50'},
+                  {option: 'C', feedback: 'Incorrect. Pure risk does not involve gain, only the possibility of loss or no loss.', bg: 'bg-gray-50'},
+                  {option: 'D', feedback: 'Incorrect. Speculative risk involves both loss and gain, making it uninsurable.', bg: 'bg-gray-50'}
+                ].map((item, index) => (
+                  <div key={item.option} className={`p-4 ${item.bg} rounded-lg border border-gray-200`}>
+                    <Label className="text-sm font-semibold text-gray-800 mb-3 block flex items-center gap-2">
+                      <span className="w-6 h-6 bg-white border border-gray-300 rounded-full flex items-center justify-center text-xs font-bold">
+                        {item.option}
+                      </span>
+                      Option {item.option} Feedback
+                    </Label>
+                    <Textarea 
+                      defaultValue={item.feedback}
+                      className="min-h-[80px] resize-none border-gray-200 focus:border-orange-400 focus:ring-orange-100 bg-white"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Question Details */}
-            <div>
-              <Label className="text-base font-semibold mb-4 block">Question Details</Label>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
+                  <AlignLeft className="w-5 h-5 text-gray-600" />
+                </div>
+                <div>
+                  <Label className="text-lg font-semibold text-gray-800">Question Details</Label>
+                  <p className="text-sm text-gray-500">Metadata and categorization</p>
+                </div>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg">
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Marks</Label>
-                  <div className="text-sm font-medium">1</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Hash className="w-4 h-4 text-blue-600" />
+                    <Label className="text-sm font-medium text-gray-700">Type</Label>
+                  </div>
+                  <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <span className="text-sm font-medium text-blue-800">Multiple Choice</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Question Type</Label>
-                  <div className="text-sm font-medium">Multiple Choice</div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-purple-600" />
+                    <Label className="text-sm font-medium text-gray-700">Marks</Label>
+                  </div>
+                  <div className="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                    <span className="text-sm font-medium text-purple-800">1</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Knowledge Base</Label>
-                  <div className="text-sm font-medium">Cyber Risk</div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-green-600" />
+                    <Label className="text-sm font-medium text-gray-700">Source</Label>
+                  </div>
+                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                    <span className="text-sm font-medium text-green-800">Book Based</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Study</Label>
-                  <div className="text-sm font-medium">Defining Risk and Cyber Risk</div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-orange-600" />
+                    <Label className="text-sm font-medium text-gray-700">Book Name</Label>
+                  </div>
+                  <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                    <span className="text-sm font-medium text-orange-800">Cyber Risk</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Taxonomy</Label>
-                  <div className="text-sm font-medium">Understand</div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-blue-600" />
+                    <Label className="text-sm font-medium text-gray-700">Taxonomy</Label>
+                  </div>
+                  <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <span className="text-sm font-medium text-blue-800">Understand</span>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label className="text-sm text-gray-600 mb-1 block">Learning Objective</Label>
-                  <div className="text-sm font-medium">Explain why pure risk is insurable but speculative risk is not</div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">User Name</Label>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <span className="text-sm font-medium text-gray-800">Shivaraj M</span>
+                  </div>
                 </div>
-                
-                <div className="md:col-span-3">
-                  <Label className="text-sm text-gray-600 mb-1 block">Reference</Label>
-                  <div className="text-sm font-medium">Study 1, Learning Objective 1, Page 1.</div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Study</Label>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <span className="text-sm font-medium text-gray-800">Defining Risk and Cyber Risk</span>
+                  </div>
                 </div>
-                
-                <div className="md:col-span-3">
-                  <Label className="text-sm text-gray-600 mb-1 block">Author</Label>
-                  <div className="text-sm font-medium">Shivaraj M</div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Learning Objective</Label>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <span className="text-sm font-medium text-gray-800">Explain why pure risk is insurable but speculative risk is not</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Reference Info</Label>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <span className="text-sm font-medium text-gray-800">Study 1, Learning Objective 1, Page 1.</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Dialog Footer */}
-          <div className="flex justify-end gap-3 mt-8 pt-6 border-t">
+          <div className="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 bg-white rounded-b-xl">
             <Button 
               variant="outline" 
               onClick={() => setIsEditDialogOpen(false)}
-              className="text-gray-600"
+              className="px-6 py-2 border-gray-300 text-gray-700 hover:bg-gray-50"
             >
               Cancel
             </Button>
             <Button 
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white shadow-md"
               onClick={() => setIsEditDialogOpen(false)}
             >
               Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Preview Question Dialog */}
+      <Dialog open={isPreviewDialogOpen} onOpenChange={setIsPreviewDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto">
+          <DialogHeader className="border-b border-gray-200 pb-4">
+            <DialogTitle className="flex items-center gap-3 text-xl font-bold text-gray-800">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <Eye className="w-5 h-5 text-white" />
+              </div>
+              Preview Multiple Choice
+            </DialogTitle>
+            <p className="text-sm text-gray-600 mt-2 ml-11">
+              Review the complete question with all options, feedback, and metadata details.
+            </p>
+          </DialogHeader>
+
+          <div className="space-y-6 mt-6">
+            {/* Question Stem */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800">Question Stem:</h3>
+              </div>
+              <p className="text-gray-900 text-base leading-relaxed pl-11">
+                What distinguishes pure risk from speculative risk in terms of insurability?
+              </p>
+            </div>
+
+            {/* Answer Options */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Answer Options:</h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 p-4 bg-green-50 border-2 border-green-300 rounded-lg">
+                  <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-900">A.</span>
+                    <span className="text-gray-900 ml-2">Pure risk involves only the possibility of loss or no loss, making it insurable.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-sm font-medium text-gray-700 flex-shrink-0">
+                    B
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-900">B.</span>
+                    <span className="text-gray-700 ml-2">Speculative risk involves the possibility of gain, making it insurable.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-sm font-medium text-gray-700 flex-shrink-0">
+                    C
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-900">C.</span>
+                    <span className="text-gray-700 ml-2">Pure risk involves both gain and loss, making it uninsurable.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-sm font-medium text-gray-700 flex-shrink-0">
+                    D
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-900">D.</span>
+                    <span className="text-gray-700 ml-2">Speculative risk involves only loss, making it insurable.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Correct Answer */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <p className="text-blue-900 font-medium">
+                <strong>Correct Answer:</strong> A. Pure risk involves only the possibility of loss or no loss, making it insurable.
+              </p>
+            </div>
+
+            {/* Detailed Feedback */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-orange-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800">Detailed Feedback:</h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-gray-600 text-sm">Option A:</span>
+                    <span className="text-green-800 font-medium ml-2">Correct. Pure risk is insurable because it does not include the possibility of gain.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <XCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-gray-600 text-sm">Option B:</span>
+                    <span className="text-red-800 font-medium ml-2">Incorrect. Speculative risk includes the possibility of gain, which makes it uninsurable.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <XCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-gray-600 text-sm">Option C:</span>
+                    <span className="text-red-800 font-medium ml-2">Incorrect. Pure risk does not involve gain, only the possibility of loss or no loss.</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <XCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-gray-600 text-sm">Option D:</span>
+                    <span className="text-red-800 font-medium ml-2">Incorrect. Speculative risk involves both loss and gain, making it uninsurable.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Question Details */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-6">Question Details:</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Hash className="w-4 h-4 text-blue-600" />
+                    <Label className="text-sm font-medium text-gray-700">Type</Label>
+                  </div>
+                  <div className="text-blue-600 font-medium">Multiple Choice</div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-orange-600" />
+                    <Label className="text-sm font-medium text-gray-700">Book Name</Label>
+                  </div>
+                  <div className="text-orange-600 font-medium">Cyber Risk</div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-purple-600" />
+                    <Label className="text-sm font-medium text-gray-700">Marks</Label>
+                  </div>
+                  <div className="text-purple-600 font-medium">1</div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-blue-600" />
+                    <Label className="text-sm font-medium text-gray-700">Taxonomy</Label>
+                  </div>
+                  <div className="text-blue-600 font-medium">Understand</div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    <Label className="text-sm font-medium text-gray-700">Source</Label>
+                  </div>
+                  <div className="text-green-600 font-medium">Book Based</div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">User Name</Label>
+                  </div>
+                  <div className="text-gray-800 font-medium">Shivaraj M</div>
+                </div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Study</Label>
+                  </div>
+                  <div className="text-gray-800 font-medium">Defining Risk and Cyber Risk</div>
+                </div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Learning Objective</Label>
+                  </div>
+                  <div className="text-gray-800 font-medium">Explain why pure risk is insurable but speculative risk is not</div>
+                </div>
+
+                <div className="space-y-2 md:col-span-2 lg:col-span-3">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-gray-600" />
+                    <Label className="text-sm font-medium text-gray-700">Reference Info</Label>
+                  </div>
+                  <div className="text-gray-800 font-medium">Study 1, Learning Objective 1, Page 1.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dialog Footer */}
+          <div className="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
+            <Button 
+              variant="outline" 
+              onClick={() => setIsPreviewDialogOpen(false)}
+              className="text-gray-600"
+            >
+              Close Preview
+            </Button>
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              onClick={() => {
+                setIsPreviewDialogOpen(false)
+                setIsEditDialogOpen(true)
+              }}
+            >
+              Edit Question
             </Button>
           </div>
         </DialogContent>
