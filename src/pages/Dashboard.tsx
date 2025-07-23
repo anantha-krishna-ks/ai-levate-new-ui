@@ -369,7 +369,13 @@ const Dashboard = () => {
               <span className="ml-2">Privacy Policy</span> | 
               <span className="ml-2">Terms of Service</span> | 
               <span className="ml-4">Version 1.0.0</span> | 
-              <span className="ml-2">Powered by AI-Levate</span>
+              <span className="ml-2 flex items-center gap-1">Powered by 
+                <img 
+                  src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                  alt="AI-Levate" 
+                  className="h-4 w-auto"
+                />
+              </span>
             </p>
           </footer>
         </main>

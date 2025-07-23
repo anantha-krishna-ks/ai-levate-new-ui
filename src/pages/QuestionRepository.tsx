@@ -32,14 +32,14 @@ const QuestionRepository = () => {
       value: "47", 
       change: "New questions",
       icon: TrendingUp,
-      valueColor: "#1c398e"
+      valueColor: "#59168b"
     },
     {
       title: "Contributors",
       value: "12",
       change: "Active authors", 
       icon: Users,
-      valueColor: "#0d542b"
+      valueColor: "#7e2a0c"
     }
   ];
 
@@ -112,7 +112,7 @@ const QuestionRepository = () => {
                     <div className="flex items-center justify-between">
                       <div className="space-y-2">
                         <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
-                        <p className="text-2xl font-bold" style={{ color: stat.valueColor, fontSize: '1.5rem' }}>
+                        <p className="text-2xl font-bold" style={{ color: stat.valueColor, fontSize: '1.25rem' }}>
                           {stat.value}
                         </p>
                         <p className="text-xs text-muted-foreground">{stat.change}</p>

@@ -247,7 +247,13 @@ const Register = () => {
             <div className="mt-8 text-center space-y-2">
               <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
                 <Sparkles className="w-3 h-3" />
-                <span>Powered By: AI-Levate</span>
+                <span className="flex items-center gap-1">Powered By: 
+                  <img 
+                    src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                    alt="AI-Levate" 
+                    className="h-3 w-auto"
+                  />
+                </span>
               </div>
               <div className="text-xs text-gray-400 space-y-1">
                 <p>Copyright © 2025 | Excelsoft Technologies Ltd.</p>

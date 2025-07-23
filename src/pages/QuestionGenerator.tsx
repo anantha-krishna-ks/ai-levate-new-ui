@@ -41,7 +41,11 @@ const QuestionGenerator = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">AL</span>
               </div>
-              <span className="font-semibold text-gray-900">AI-Levate</span>
+              <img 
+                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
+                alt="AI-Levate" 
+                className="h-5 w-auto"
+              />
               <span className="text-sm text-gray-500">Cyber Risk</span>
             </div>
           </div>
