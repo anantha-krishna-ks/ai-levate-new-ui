@@ -39,7 +39,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
 const QuestionResults = () => {
-  const [activeTab, setActiveTab] = useState("generate")
+  const [activeTab, setActiveTab] = useState("repository")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
   const [questionType, setQuestionType] = useState("multiple-choice")
