@@ -119,31 +119,33 @@ const QuestionResults = () => {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 p-2 bg-white rounded-xl border border-gray-200 shadow-sm w-fit">
-            <button
-              onClick={() => setActiveTab("generate")}
-              className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                activeTab === "generate"
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              <Sparkles className="h-4 w-4" />
-              Generate Questions
-            </button>
-            <button
-              onClick={() => setActiveTab("repository")}
-              className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                activeTab === "repository"
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              <FileText className="h-4 w-4" />
-              Question Repository
-            </button>
+        {/* Navigation Tabs */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-2 max-w-lg">
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setActiveTab("generate")}
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+                  activeTab === "generate"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                }`}
+              >
+                <Sparkles className="h-4 w-4" />
+                Generate Questions
+              </button>
+              <button
+                onClick={() => setActiveTab("repository")}
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+                  activeTab === "repository"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                }`}
+              >
+                <FileText className="h-4 w-4" />
+                Question Repository
+              </button>
+            </div>
           </div>
         </div>
 
