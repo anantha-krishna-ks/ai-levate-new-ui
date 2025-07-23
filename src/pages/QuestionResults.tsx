@@ -279,19 +279,20 @@ const QuestionResults = () => {
                 <Card key={question.id} className="p-6 bg-white border border-gray-200 shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-sm font-medium">
-                        {question.id}
-                      </span>
-                      <div>
-                        <Badge variant="outline" className="text-xs font-medium">
-                          {question.type}
+                      {/* Question Labels */}
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-gray-100 text-gray-900 hover:bg-gray-100 border-gray-200 text-sm font-medium px-3 py-1">
+                          Question {question.id}
                         </Badge>
-                        <Badge variant="outline" className={`ml-2 text-xs font-medium ${
-                          question.difficulty === 'Easy' ? 'bg-green-50 text-green-700 border-green-200' :
-                          question.difficulty === 'Medium' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
-                          'bg-red-50 text-red-700 border-red-200'
+                        <Badge className="bg-black text-white hover:bg-black border-black text-sm font-medium px-3 py-1">
+                          {question.maxMarks} Mark{question.maxMarks > 1 ? 's' : ''}
+                        </Badge>
+                        <Badge className={`text-sm font-medium px-3 py-1 ${
+                          question.type === 'Multiple Choice' 
+                            ? 'bg-purple-100 text-purple-700 hover:bg-purple-100 border-purple-200' 
+                            : 'bg-blue-100 text-blue-700 hover:bg-blue-100 border-blue-200'
                         }`}>
-                          {question.difficulty}
+                          {question.type}
                         </Badge>
                       </div>
                     </div>
