@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Brain, Check, Zap, Target, Shield } from "lucide-react"
+import { Brain, Check, Zap, Target, Shield, Sparkles, Cpu, Database, Lightbulb } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 
 const QuestionGenerationLoading = () => {
@@ -38,22 +38,28 @@ const QuestionGenerationLoading = () => {
 
   const features = [
     {
-      icon: <Brain className="w-6 h-6 text-blue-600" />,
+      icon: <Brain className="w-6 h-6" />,
       title: "Neural Analysis",
       subtitle: "Advanced NLP processing",
-      bgColor: "bg-blue-50"
+      bgColor: "from-blue-500 to-blue-600"
     },
     {
-      icon: <Zap className="w-6 h-6 text-purple-600" />,
+      icon: <Cpu className="w-6 h-6" />,
       title: "AI Processing",
       subtitle: "Real-time generation",
-      bgColor: "bg-purple-50"
+      bgColor: "from-purple-500 to-purple-600"
     },
     {
-      icon: <Shield className="w-6 h-6 text-green-600" />,
+      icon: <Shield className="w-6 h-6" />,
       title: "Quality Assurance",
       subtitle: "Accuracy validation",
-      bgColor: "bg-green-50"
+      bgColor: "from-green-500 to-green-600"
+    },
+    {
+      icon: <Database className="w-6 h-6" />,
+      title: "Data Processing",
+      subtitle: "Content optimization",
+      bgColor: "from-orange-500 to-orange-600"
     }
   ]
 
@@ -91,108 +97,147 @@ const QuestionGenerationLoading = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header */}
-      <div className="bg-white border-b px-6 py-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-40 h-40 bg-blue-500/10 rounded-full animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-56 h-56 bg-purple-500/10 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-10 w-32 h-32 bg-indigo-500/10 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Floating Particles */}
+        <div className="absolute top-1/4 right-1/3 w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-3/4 left-1/4 w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '2.5s' }} />
+      </div>
+
+      {/* Enhanced Header */}
+      <div className="bg-white/80 backdrop-blur-sm border-b border-white/20 px-6 py-4 relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-sm">AL</span>
           </div>
           <img 
             src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
             alt="AI-Levate" 
-            className="h-5 w-auto"
+            className="h-6 w-auto"
           />
-          <span className="text-sm text-gray-500 ml-2">Processing your request...</span>
+          <div className="flex items-center gap-2 ml-4">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-sm text-gray-600 font-medium">AI Online</span>
+            </div>
+            <span className="text-sm text-gray-400">•</span>
+            <span className="text-sm text-blue-600 font-medium">Processing your request...</span>
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="max-w-4xl w-full space-y-8">
-          {/* AI Brain Icon */}
+      <div className="flex-1 flex items-center justify-center p-6 relative z-10">
+        <div className="max-w-5xl w-full space-y-8">
+          {/* Enhanced AI Brain Section */}
           <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg">
-                <Brain className="w-16 h-16 text-white animate-pulse" />
+            <div className="relative group">
+              {/* Outer glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-full blur-2xl animate-pulse" />
+              
+              {/* Main brain container */}
+              <div className="relative w-40 h-40 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-2xl transform group-hover:scale-105 transition-all duration-500">
+                <Brain className="w-20 h-20 text-white animate-pulse" />
+                
+                {/* Orbiting elements */}
+                <div className="absolute inset-0 animate-spin" style={{ animationDuration: '8s' }}>
+                  <Sparkles className="absolute top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 text-yellow-400" />
+                </div>
+                <div className="absolute inset-0 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }}>
+                  <Lightbulb className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 text-orange-400" />
+                </div>
               </div>
-              <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-600 rounded-full border-4 border-white animate-bounce"></div>
+              
+              {/* Status indicator */}
+              <div className="absolute -bottom-3 -right-3 w-8 h-8 bg-green-500 rounded-full border-4 border-white flex items-center justify-center animate-bounce shadow-lg">
+                <Check className="w-4 h-4 text-white" />
+              </div>
             </div>
           </div>
 
-          {/* Title and Description */}
-          <div className="text-center space-y-4">
-            <h1 className="text-3xl font-bold text-gray-900">AI is generating your questions</h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our advanced AI is analyzing your content and creating high-quality, contextually
-              relevant assessment questions.
+          {/* Enhanced Title and Description */}
+          <div className="text-center space-y-6">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-fade-in">
+              AI is Generating Your Questions
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              Our advanced AI is analyzing your content and creating high-quality, contextually relevant assessment questions with precision and intelligence.
             </p>
           </div>
 
-          {/* Progress Section */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-            <div className="space-y-6">
+          {/* Enhanced Progress Section */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 transform hover:scale-[1.02] transition-all duration-500">
+            <div className="space-y-8">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">Processing Progress</span>
-                <span className="text-sm font-medium text-blue-600">{progress}%</span>
+                <span className="text-lg font-semibold text-gray-800">Processing Progress</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{progress}%</span>
+                  <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                </div>
               </div>
               
-              <Progress value={progress} className="h-3" />
+              <Progress value={progress} className="h-4 bg-gray-200" />
 
-              {/* Processing Steps */}
+              {/* Enhanced Processing Steps */}
               <div className="space-y-4 mt-8">
                 {steps.map((step, index) => {
                   const status = getStepStatus(index)
                   return (
                     <div
                       key={index}
-                      className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${
+                      className={`flex items-center gap-6 p-6 rounded-2xl transition-all duration-500 transform hover:scale-[1.02] ${
                         status === "complete" 
-                          ? "bg-green-50 border border-green-200" 
+                          ? "bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 shadow-lg" 
                           : status === "processing"
-                          ? "bg-blue-50 border border-blue-200"
-                          : "bg-gray-50 border border-gray-200"
+                          ? "bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 shadow-lg"
+                          : "bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200"
                       }`}
                     >
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transform transition-all duration-300 ${
                         status === "complete" 
-                          ? "bg-green-500" 
+                          ? "bg-gradient-to-br from-green-500 to-emerald-600 scale-110" 
                           : status === "processing"
-                          ? "bg-blue-500"
-                          : "bg-gray-400"
+                          ? "bg-gradient-to-br from-blue-500 to-indigo-600 scale-110"
+                          : "bg-gradient-to-br from-gray-400 to-slate-500"
                       }`}>
                         {status === "complete" ? (
-                          <Check className="w-6 h-6 text-white" />
+                          <Check className="w-8 h-8 text-white" />
                         ) : status === "processing" ? (
-                          <Target className="w-6 h-6 text-white animate-spin" />
+                          <Target className="w-8 h-8 text-white animate-spin" />
                         ) : (
-                          <Check className="w-6 h-6 text-white opacity-50" />
+                          <Check className="w-8 h-8 text-white opacity-50" />
                         )}
                       </div>
                       
                       <div className="flex-1">
-                        <h3 className={`font-medium ${
+                        <h3 className={`text-lg font-semibold mb-1 ${
                           status === "complete" ? "text-green-900" :
                           status === "processing" ? "text-blue-900" : "text-gray-500"
                         }`}>
                           {step.title}
                         </h3>
                         <p className={`text-sm ${
-                          status === "complete" ? "text-green-600" :
-                          status === "processing" ? "text-blue-600" : "text-gray-400"
+                          status === "complete" ? "text-green-700" :
+                          status === "processing" ? "text-blue-700" : "text-gray-400"
                         }`}>
                           {step.subtitle}
                         </p>
                       </div>
                       
                       {status === "complete" && (
-                        <div className="text-sm font-medium text-green-600 flex items-center gap-1">
+                        <div className="text-sm font-semibold text-green-600 flex items-center gap-2 bg-green-100 px-3 py-1 rounded-full">
                           <Check className="w-4 h-4" />
                           Complete
                         </div>
                       )}
                       {status === "processing" && (
-                        <div className="text-sm font-medium text-blue-600 flex items-center gap-1">
+                        <div className="text-sm font-semibold text-blue-600 flex items-center gap-2 bg-blue-100 px-3 py-1 rounded-full">
                           <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                           Processing...
                         </div>
@@ -204,24 +249,34 @@ const QuestionGenerationLoading = () => {
             </div>
           </div>
 
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Enhanced Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <div key={index} className={`${feature.bgColor} rounded-2xl p-6 text-center`}>
+              <div 
+                key={index} 
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group"
+              >
                 <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                    {feature.icon}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.bgColor} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                    <div className="text-white">
+                      {feature.icon}
+                    </div>
                   </div>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <h3 className="font-semibold text-gray-900 mb-2 text-lg">{feature.title}</h3>
                 <p className="text-sm text-gray-600">{feature.subtitle}</p>
               </div>
             ))}
           </div>
 
-          {/* Footer Message */}
-          <div className="text-center">
-            <p className="text-sm text-gray-500">
+          {/* Enhanced Footer Message */}
+          <div className="text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+              <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+            </div>
+            <p className="text-gray-600 font-medium">
               Please wait while our AI processes your request. This may take a few moments...
             </p>
           </div>
