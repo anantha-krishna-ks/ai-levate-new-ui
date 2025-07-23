@@ -2,7 +2,10 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, ArrowLeft, RefreshCw, Users, Shield, Settings, Sparkles } from "lucide-react";
+import { Home, Users, UserPlus, Settings, Sparkles, ArrowRight, Clock, Shield } from "lucide-react";
+import { AppSidebar } from "@/components/AppSidebar";
+import { ProfileDropdown } from "@/components/ProfileDropdown";
+import comingSoonHero from "@/assets/coming-soon-hero.jpg";
 
 const ManageUsers = () => {
   const location = useLocation();

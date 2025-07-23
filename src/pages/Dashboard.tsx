@@ -216,7 +216,7 @@ const Dashboard = () => {
         <header className="sticky top-0 z-50 bg-white border-b">
           <div className="flex h-16 items-center justify-between px-4 lg:px-6">
             <div className="flex items-center gap-4 lg:gap-6">
-              <h1 className="text-lg lg:text-xl font-semibold text-gray-900">Welcome Back, Shivaraj M!</h1>
+              <h1 className="text-base lg:text-lg font-semibold text-gray-900">Welcome Back, Shivaraj M!</h1>
               <p className="hidden md:block text-sm text-gray-600">Explore AI-powered tools to enhance your educational content creation</p>
             </div>
             
