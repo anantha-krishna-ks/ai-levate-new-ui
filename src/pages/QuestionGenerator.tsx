@@ -104,9 +104,9 @@ const QuestionGenerator = () => {
         </div>
 
         {activeTab === "generate" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Left Column - Tokens and Source Material */}
-            <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6">
+            {/* Top Row - Tokens and AI Mode */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Available Tokens */}
               <Card className="p-6 bg-white border border-gray-200">
                 <div className="flex items-center justify-between mb-4">
@@ -139,164 +139,176 @@ const QuestionGenerator = () => {
                   <span className="text-sm font-medium text-blue-600">LLM</span>
                 </div>
               </Card>
-
-              {/* Source Material */}
-              <Card className="p-6 bg-white border border-gray-200">
-                <h3 className="text-sm font-medium text-gray-700 mb-4">Source Material</h3>
-                <p className="text-xs text-gray-500 mb-4">AI enhanced content</p>
-                <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center">
-                  <img 
-                    src="/lovable-uploads/a13547e7-af5f-49b0-bb15-9b344d6cd72e.png" 
-                    alt="Cyber Risk Management"
-                    className="w-full h-32 object-cover rounded-lg mb-3"
-                  />
-                  <h4 className="font-medium text-gray-900 text-sm mb-1">Cyber Risk Management</h4>
-                  <p className="text-xs text-gray-500">Source material loaded successfully</p>
-                </div>
-              </Card>
             </div>
 
-            {/* Right Column - AI Question Generator */}
-            <div className="lg:col-span-3">
-              <Card className="p-6 bg-white border border-gray-200">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-purple-600" />
+            {/* Main Content Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Left Column - Source Material */}
+              <div className="lg:col-span-1 space-y-6">
+                {/* Source Material */}
+                <Card className="p-6 bg-white border border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-700 mb-4">Source Material</h3>
+                  <p className="text-xs text-gray-500 mb-4">AI enhanced content</p>
+                  <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center">
+                    <img 
+                      src="/lovable-uploads/a13547e7-af5f-49b0-bb15-9b344d6cd72e.png" 
+                      alt="Cyber Risk Management"
+                      className="w-full h-32 object-cover rounded-lg mb-3"
+                    />
+                    <h4 className="font-medium text-gray-900 text-sm mb-1">Cyber Risk Management</h4>
+                    <p className="text-xs text-gray-500">Source material loaded successfully</p>
                   </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">AI Question Generator</h3>
-                    <p className="text-sm text-gray-500">Configure your question generation settings</p>
-                  </div>
-                </div>
+                </Card>
+              </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Left side form */}
-                  <div className="space-y-6">
-                    {/* Study Domain */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Target className="w-4 h-4 text-blue-600" />
-                        <label className="text-sm font-medium text-gray-700">Study Domain</label>
-                      </div>
-                      <Select defaultValue="defining-risk">
-                        <SelectTrigger className="w-full bg-white border-gray-200">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
-                        </SelectContent>
-                      </Select>
+              {/* Right Column - AI Question Generator */}
+              <div className="lg:col-span-3">
+                <Card className="p-6 bg-white border border-gray-200">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-purple-600" />
                     </div>
-
-                    {/* Taxonomy Framework */}
                     <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Globe className="w-4 h-4 text-blue-600" />
-                        <label className="text-sm font-medium text-gray-700">Taxonomy Framework</label>
-                      </div>
-                      <Select>
-                        <SelectTrigger className="w-full bg-white border-gray-200">
-                          <SelectValue placeholder="Select framework" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="remember">Remember</SelectItem>
-                          <SelectItem value="understand">Understand</SelectItem>
-                          <SelectItem value="apply">Apply</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Question Quantity */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Hash className="w-4 h-4 text-orange-600" />
-                        <label className="text-sm font-medium text-gray-700">Question Quantity</label>
-                      </div>
-                      <Select defaultValue="1">
-                        <SelectTrigger className="w-full bg-white border-gray-200">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="10">10</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Additional Instructions */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <MessageSquare className="w-4 h-4 text-purple-600" />
-                        <label className="text-sm font-medium text-gray-700">Additional Instructions</label>
-                      </div>
-                      <Textarea 
-                        placeholder="Provide specific instructions for AI question generation..."
-                        className="min-h-[100px] bg-white border-gray-200"
-                      />
+                      <h3 className="font-medium text-gray-900">AI Question Generator</h3>
+                      <p className="text-sm text-gray-500">Configure your question generation settings</p>
                     </div>
                   </div>
 
-                  {/* Right side form */}
-                  <div className="space-y-6">
-                    {/* Learning Objectives */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Brain className="w-4 h-4 text-purple-600" />
-                        <label className="text-sm font-medium text-gray-700">Learning Objectives</label>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Left side form */}
+                    <div className="space-y-6">
+                      {/* Study Domain */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Target className="w-4 h-4 text-blue-600" />
+                          <label className="text-sm font-medium text-gray-700">Study Domain</label>
+                        </div>
+                        <Select defaultValue="defining-risk">
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                      <Textarea 
-                        defaultValue="Explain why pure risk is"
-                        className="min-h-[60px] bg-white border-gray-200"
-                      />
+
+                      {/* Taxonomy Framework */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Globe className="w-4 h-4 text-blue-600" />
+                          <label className="text-sm font-medium text-gray-700">Taxonomy Framework</label>
+                        </div>
+                        <Select>
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue placeholder="Select framework" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="remember">Remember</SelectItem>
+                            <SelectItem value="understand">Understand</SelectItem>
+                            <SelectItem value="apply">Apply</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {/* Question Quantity */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Hash className="w-4 h-4 text-orange-600" />
+                          <label className="text-sm font-medium text-gray-700">Question Quantity</label>
+                        </div>
+                        <Select defaultValue="1">
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                            <SelectItem value="10">10</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
 
-                    {/* Question Format */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <FileText className="w-4 h-4 text-green-600" />
-                        <label className="text-sm font-medium text-gray-700">Question Format</label>
+                    {/* Right side form */}
+                    <div className="space-y-6">
+                      {/* Learning Objectives */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Brain className="w-4 h-4 text-purple-600" />
+                          <label className="text-sm font-medium text-gray-700">Learning Objectives</label>
+                        </div>
+                        <Select defaultValue="explain-pure-risk">
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
+                            <SelectItem value="define-cyber-risk">Define cyber risk fundamentals</SelectItem>
+                            <SelectItem value="analyze-threats">Analyze security threats</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                      <Select defaultValue="multiple-choice">
-                        <SelectTrigger className="w-full bg-white border-gray-200">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="multiple-choice">1. Multiple Choice</SelectItem>
-                          <SelectItem value="true-false">True/False</SelectItem>
-                          <SelectItem value="essay">Essay</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
 
-                    {/* Point Value */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="w-4 h-4 text-pink-600 text-sm font-bold">★</span>
-                        <label className="text-sm font-medium text-gray-700">Point Value</label>
+                      {/* Question Format */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <FileText className="w-4 h-4 text-green-600" />
+                          <label className="text-sm font-medium text-gray-700">Question Format</label>
+                        </div>
+                        <Select defaultValue="multiple-choice">
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="multiple-choice">1. Multiple Choice</SelectItem>
+                            <SelectItem value="true-false">True/False</SelectItem>
+                            <SelectItem value="essay">Essay</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                      <Select defaultValue="1">
-                        <SelectTrigger className="w-full bg-white border-gray-200">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                        </SelectContent>
-                      </Select>
+
+                      {/* Point Value */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="w-4 h-4 text-pink-600 text-sm font-bold">★</span>
+                          <label className="text-sm font-medium text-gray-700">Point Value</label>
+                        </div>
+                        <Select defaultValue="1">
+                          <SelectTrigger className="w-full bg-white border-gray-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="2">2</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Generate Button */}
-                <div className="flex justify-center mt-8">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg">
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Generate Questions
-                  </Button>
-                </div>
-              </Card>
+                  {/* Additional Instructions - Full Width */}
+                  <div className="mt-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <MessageSquare className="w-4 h-4 text-purple-600" />
+                      <label className="text-sm font-medium text-gray-700">Additional Instructions</label>
+                    </div>
+                    <Textarea 
+                      placeholder="Provide specific instructions for AI question generation..."
+                      className="min-h-[100px] bg-white border-gray-200"
+                    />
+                  </div>
+
+                  {/* Generate Button */}
+                  <div className="flex justify-center mt-8">
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg">
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Generate Questions
+                    </Button>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
         )}
