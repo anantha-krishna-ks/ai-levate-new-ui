@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileBarChart, Users, LogOut, Menu } from "lucide-react"
+import { LayoutDashboard, Sparkles, BookOpen, BarChart3, Users, LogOut, Menu } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -7,17 +7,27 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: "Reports",
-    url: "/reports",
-    icon: FileBarChart,
+    title: "AI Tools",
+    url: "/ai-tools",
+    icon: Sparkles,
   },
   {
-    title: "Manage Users",
-    url: "/manage-users",
+    title: "Knowledge Base",
+    url: "/knowledge-base",
+    icon: BookOpen,
+  },
+  {
+    title: "Analytics",
+    url: "/analytics",
+    icon: BarChart3,
+  },
+  {
+    title: "Collaboration",
+    url: "/collaboration",
     icon: Users,
   },
 ]
@@ -36,7 +46,13 @@ export function AppSidebar() {
   return (
     <div className="fixed left-0 top-0 h-full w-60 bg-white/95 backdrop-blur-xl border-r border-border/20 shadow-xl z-40">
       <div className="p-6 border-b border-border/20">
-        <h2 className="font-bold text-lg text-foreground">Navigation</h2>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-sm">AL</span>
+          </div>
+          <h2 className="font-bold text-lg text-foreground">AI-Levate</h2>
+        </div>
+        <p className="text-sm text-muted-foreground mt-1">Dashboard</p>
       </div>
       
       <div className="px-4 py-6">
