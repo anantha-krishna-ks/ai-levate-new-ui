@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 98%;
     --popover-foreground: 215 25% 15%;
     
-    --primary: 215 100% 25%; /* #044081 */
+    --primary: 258 89% 66%; /* Modern purple for AI/education */
     --primary-foreground: 0 0% 100%;
     
     --secondary: 220 8% 94%;
@@ -27,7 +27,7 @@ All colors MUST be HSL.
     --muted: 220 8% 94%;
     --muted-foreground: 215 10% 50%;
     
-    --accent: 215 100% 25%; /* Only use the primary blue */
+    --accent: 258 89% 66%; /* Updated to match primary */
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
@@ -35,27 +35,27 @@ All colors MUST be HSL.
     
     --border: 220 8% 90%;
     --input: 220 8% 90%;
-    --ring: 215 100% 25%;
+    --ring: 258 89% 66%;
     
     --radius: 1rem;
     
     /* AI-themed gradients */
-    --gradient-ai-primary: linear-gradient(135deg, hsl(215 100% 25%), hsl(215 100% 35%));
+    --gradient-ai-primary: linear-gradient(135deg, hsl(258 89% 66%), hsl(258 89% 76%));
     --gradient-ai-accent: linear-gradient(135deg, hsl(190 100% 50%), hsl(200 100% 60%));
-    --gradient-neural: linear-gradient(135deg, hsl(215 100% 25%) 0%, hsl(190 100% 50%) 50%, hsl(270 100% 60%) 100%);
-    --gradient-glow: radial-gradient(circle at center, hsl(215 100% 25% / 0.15) 0%, transparent 70%);
+    --gradient-neural: linear-gradient(135deg, hsl(258 89% 66%) 0%, hsl(190 100% 50%) 50%, hsl(270 100% 60%) 100%);
+    --gradient-glow: radial-gradient(circle at center, hsl(258 89% 66% / 0.15) 0%, transparent 70%);
     
     /* Premium shadows */
-    --shadow-neural: 0 0 30px hsl(215 100% 25% / 0.3), 0 0 60px hsl(190 100% 50% / 0.2);
-    --shadow-ai-glow: 0 0 40px hsl(215 100% 25% / 0.4);
+    --shadow-neural: 0 0 30px hsl(258 89% 66% / 0.3), 0 0 60px hsl(190 100% 50% / 0.2);
+    --shadow-ai-glow: 0 0 40px hsl(258 89% 66% / 0.4);
     --shadow-premium: 0 25px 50px -12px hsl(215 25% 15% / 0.25);
     --shadow-floating: 0 32px 64px -12px hsl(215 25% 15% / 0.4);
     
     /* AI-specific colors */
-    --ai-primary: 215 100% 25%;
+    --ai-primary: 258 89% 66%;
     --ai-secondary: 190 100% 50%;
     --ai-tertiary: 270 100% 60%;
-    --ai-neural: 215 100% 15%;
+    --ai-neural: 258 89% 56%;
     --ai-glow: 190 100% 70%;
     
     /* Enhanced grays */
