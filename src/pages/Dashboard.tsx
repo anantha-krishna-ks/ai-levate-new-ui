@@ -270,7 +270,7 @@ const Dashboard = () => {
         {/* Page Title */}
         <div className="p-6 pb-4">
           
-          <p className="text-gray-600">Explore our comprehensive suite of AI-powered educational tools</p>
+          
         </div>
 
         {/* Stats Cards */}
