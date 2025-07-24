@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Eye, EyeOff } from "lucide-react";
+import { Sparkles, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    general: ""
+  });
   const [formData, setFormData] = useState({
     username: "",
     password: ""
@@ -15,13 +20,46 @@ const Login = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear errors when user starts typing
+    if (errors[field as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [field]: "", general: "" }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add login logic here
-    console.log("Logging in...", formData);
-    navigate("/dashboard");
+    
+    // Reset errors
+    setErrors({ username: "", password: "", general: "" });
+    
+    // Validation
+    let hasErrors = false;
+    const newErrors = { username: "", password: "", general: "" };
+    
+    if (!formData.username.trim()) {
+      newErrors.username = "Username or email is required";
+      hasErrors = true;
+    }
+    
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+      hasErrors = true;
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      hasErrors = true;
+    }
+    
+    if (hasErrors) {
+      setErrors(newErrors);
+      return;
+    }
+    
+    // Simulate login validation
+    if (formData.username === "demo@example.com" && formData.password === "password123") {
+      navigate("/dashboard");
+    } else {
+      setErrors({ ...newErrors, general: "Invalid username or password. Please try again." });
+    }
   };
 
   const canSubmit = () => {
@@ -122,13 +160,31 @@ const Login = () => {
 
                 {/* Login Form */}
                 <form className="space-y-6" onSubmit={handleSubmit}>
+                  {/* General Error Message */}
+                  {errors.general && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
+                      <div className="flex items-center">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-2 flex-shrink-0" />
+                        <p className="text-sm text-red-700">{errors.general}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div>
                     <Input
                       placeholder="Username or Email"
                       value={formData.username}
                       onChange={(e) => handleInputChange('username', e.target.value)}
-                      className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                        errors.username ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : ''
+                      }`}
                     />
+                    {errors.username && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.username}</p>
+                      </div>
+                    )}
                   </div>
 
                   <div className="relative">
@@ -137,7 +193,9 @@ const Login = () => {
                       placeholder="Password"
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 pr-12"
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 pr-12 ${
+                        errors.password ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : ''
+                      }`}
                     />
                     <button
                       type="button"
@@ -146,6 +204,12 @@ const Login = () => {
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
+                    {errors.password && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.password}</p>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -155,6 +219,9 @@ const Login = () => {
                     >
                       Forgot password?
                     </button>
+                    <div className="text-xs text-gray-500">
+                      Demo: demo@example.com / password123
+                    </div>
                   </div>
 
                   <Button 

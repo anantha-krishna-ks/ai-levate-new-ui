@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { Brain, Sparkles, ArrowRight, ArrowLeft, Check, Mail, User, Building, Shield, Eye, EyeOff } from "lucide-react";
+import { Brain, Sparkles, ArrowRight, ArrowLeft, Check, Mail, User, Building, Shield, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -29,9 +29,22 @@ const Register = () => {
     password: false,
     organizationName: false
   });
+  const [errors, setErrors] = useState({
+    firstName: "",
+    email: "",
+    username: "",
+    password: "",
+    organizationName: "",
+    general: ""
+  });
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Clear errors when user starts typing
+    if (errors[field as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [field]: "", general: "" }));
+    }
     
     // Real-time validation
     if (typeof value === 'string' && value.length > 0) {
@@ -60,6 +73,71 @@ const Register = () => {
 
   const canSubmit = () => {
     return formData.organizationName.trim() && formData.acceptTerms;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Reset errors
+    const newErrors = {
+      firstName: "",
+      email: "",
+      username: "",
+      password: "",
+      organizationName: "",
+      general: ""
+    };
+    
+    // Validation
+    let hasErrors = false;
+    
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+      hasErrors = true;
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      hasErrors = true;
+    } else if (!fieldValidation.email) {
+      newErrors.email = "Please enter a valid email address";
+      hasErrors = true;
+    }
+    
+    if (!formData.username.trim()) {
+      newErrors.username = "Username is required";
+      hasErrors = true;
+    } else if (formData.username.length < 3) {
+      newErrors.username = "Username must be at least 3 characters";
+      hasErrors = true;
+    }
+    
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+      hasErrors = true;
+    } else if (!fieldValidation.password) {
+      newErrors.password = "Password must be at least 6 characters";
+      hasErrors = true;
+    }
+    
+    if (!formData.organizationName.trim()) {
+      newErrors.organizationName = "Organization name is required";
+      hasErrors = true;
+    }
+    
+    if (!formData.acceptTerms) {
+      newErrors.general = "Please accept the End User License Agreement to continue";
+      hasErrors = true;
+    }
+    
+    if (hasErrors) {
+      setErrors(newErrors);
+      return;
+    }
+    
+    // Simulate successful registration
+    console.log("Registration successful:", formData);
+    navigate("/dashboard");
   };
 
   const nextStep = () => {
@@ -172,14 +250,35 @@ const Register = () => {
                 </div>
 
                 {/* Simple Registration Form */}
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                  {/* General Error Message */}
+                  {errors.general && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
+                      <div className="flex items-center">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-2 flex-shrink-0" />
+                        <p className="text-sm text-red-700">{errors.general}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      placeholder="First Name *"
-                      value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value)}
-                      className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                    />
+                    <div>
+                      <Input
+                        placeholder="First Name *"
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                          errors.firstName ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                          fieldValidation.firstName ? 'border-green-300 focus:border-green-500' : ''
+                        }`}
+                      />
+                      {errors.firstName && (
+                        <div className="flex items-center mt-1 animate-fade-in">
+                          <AlertCircle className="w-3 h-3 text-red-500 mr-1 flex-shrink-0" />
+                          <p className="text-xs text-red-600">{errors.firstName}</p>
+                        </div>
+                      )}
+                    </div>
                     <Input
                       placeholder="Last Name"
                       value={formData.lastName}
@@ -188,35 +287,98 @@ const Register = () => {
                     />
                   </div>
 
-                  <Input
-                    type="email"
-                    placeholder="Email Address *"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                  />
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Email Address *"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                        errors.email ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.email && formData.email ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    {errors.email && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.email}</p>
+                      </div>
+                    )}
+                    {!errors.email && fieldValidation.email && formData.email && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <CheckCircle2 className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-green-600">Valid email format</p>
+                      </div>
+                    )}
+                  </div>
 
-                  <Input
-                    placeholder="Username *"
-                    value={formData.username}
-                    onChange={(e) => handleInputChange('username', e.target.value)}
-                    className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                  />
+                  <div>
+                    <Input
+                      placeholder="Username *"
+                      value={formData.username}
+                      onChange={(e) => handleInputChange('username', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                        errors.username ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.username && formData.username ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    {errors.username && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.username}</p>
+                      </div>
+                    )}
+                  </div>
 
-                  <Input
-                    type="password"
-                    placeholder="Password *"
-                    value={formData.password}
-                    onChange={(e) => handleInputChange('password', e.target.value)}
-                    className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                  />
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password *"
+                      value={formData.password}
+                      onChange={(e) => handleInputChange('password', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 pr-12 ${
+                        errors.password ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.password && formData.password ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                    {errors.password && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.password}</p>
+                      </div>
+                    )}
+                    {!errors.password && fieldValidation.password && formData.password && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <CheckCircle2 className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-green-600">Strong password</p>
+                      </div>
+                    )}
+                  </div>
 
-                  <Input
-                    placeholder="Organization Name *"
-                    value={formData.organizationName}
-                    onChange={(e) => handleInputChange('organizationName', e.target.value)}
-                    className="h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                  />
+                  <div>
+                    <Input
+                      placeholder="Organization Name *"
+                      value={formData.organizationName}
+                      onChange={(e) => handleInputChange('organizationName', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                        errors.organizationName ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.organizationName && formData.organizationName ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    {errors.organizationName && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.organizationName}</p>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex items-start space-x-2 py-2">
                     <Checkbox
@@ -234,8 +396,7 @@ const Register = () => {
 
                   <Button 
                     type="submit"
-                    disabled={!formData.acceptTerms}
-                    className="w-full h-12 bg-[#2563eb] hover:bg-[#2563eb]/90 text-white font-semibold rounded-lg transform transition-all duration-200 hover:scale-[1.02] disabled:opacity-50"
+                    className="w-full h-12 bg-[#2563eb] hover:bg-[#2563eb]/90 text-white font-semibold rounded-lg transform transition-all duration-200 hover:scale-[1.02]"
                   >
                     Create Account
                   </Button>
