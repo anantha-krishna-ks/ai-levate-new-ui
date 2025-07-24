@@ -216,14 +216,9 @@ const Dashboard = () => {
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
           <div className="flex h-16 items-center justify-between px-6">
             <div className="flex items-center gap-4">
-              <img 
-                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                alt="AI-Levate" 
-                className="h-8 w-auto"
-              />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Welcome Back, Shivaraj M!</h1>
-                <p className="text-sm text-gray-600">Explore AI-powered tools to enhance your educational content creation</p>
+                <h1 className="text-lg font-bold text-gray-900">Welcome Back, Shivaraj M!</h1>
+                <p className="text-xs text-gray-600">Explore AI-powered tools to enhance your educational content creation</p>
               </div>
             </div>
             
