@@ -269,7 +269,7 @@ const Dashboard = () => {
 
         {/* Page Title */}
         <div className="p-6 pb-4">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">AI Tools Dashboard</h1>
+          
           <p className="text-gray-600">Explore our comprehensive suite of AI-powered educational tools</p>
         </div>
 
