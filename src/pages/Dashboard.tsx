@@ -211,7 +211,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gray-50">
       <AppSidebar />
       
-      <div className="ml-0 lg:ml-60 min-h-screen flex flex-col">
+      <div className="ml-0 lg:ml-52 min-h-screen flex flex-col">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
           <div className="flex h-16 items-center justify-between px-6">
