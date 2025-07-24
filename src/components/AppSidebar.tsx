@@ -57,7 +57,7 @@ export function AppSidebar() {
           <img 
             src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
             alt="AI-Levate" 
-            className="h-6 w-auto"
+            className="h-8 w-auto"
           />
         </div>
         <p className="text-sm text-muted-foreground mt-1">Dashboard</p>

@@ -219,7 +219,7 @@ const Dashboard = () => {
               <img 
                 src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
                 alt="AI-Levate" 
-                className="h-6 w-auto"
+                className="h-8 w-auto"
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Welcome Back, Shivaraj M!</h1>

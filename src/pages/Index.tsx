@@ -24,7 +24,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
             alt="AI-Levate" 
-            className="h-8 w-auto"
+            className="h-10 w-auto"
           />
         </div>
 
