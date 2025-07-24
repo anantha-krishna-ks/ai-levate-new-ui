@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { 
   ArrowLeft, 
   Zap, 
@@ -40,6 +40,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
 const QuestionResults = () => {
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("generate")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
@@ -364,7 +365,11 @@ const QuestionResults = () => {
               <RotateCcw className={`w-4 h-4 mr-2 ${isRegenerating ? 'animate-spin' : ''}`} />
               {isRegenerating ? 'Generating...' : 'Regenerate'}
             </Button>
-            <Button variant="outline" className="text-gray-600">
+            <Button 
+              variant="outline" 
+              className="text-gray-600"
+              onClick={() => navigate(-1)}
+            >
               Back to Setup
             </Button>
           </div>
