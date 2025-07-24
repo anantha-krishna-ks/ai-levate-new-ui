@@ -46,6 +46,7 @@ const QuestionResults = () => {
   const [activeTab, setActiveTab] = useState("generate")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false)
   const [questionType, setQuestionType] = useState("multiple-choice")
   const [selectedQuestionType, setSelectedQuestionType] = useState("Multiple Choice")
   const [isRegenerating, setIsRegenerating] = useState(false)
@@ -395,13 +396,7 @@ const QuestionResults = () => {
               </Button>
               <Button 
                 className="bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => {
-                  toast({
-                    title: "Data Saved Successfully!",
-                    description: `${questions.length} questions have been saved to your repository.`,
-                    duration: 4000,
-                  });
-                }}
+                onClick={() => setIsSuccessDialogOpen(true)}
               >
                 <Database className="w-4 h-4 mr-2" />
                 Save Data
@@ -1432,6 +1427,38 @@ const QuestionResults = () => {
             >
               <X className="w-4 h-4" />
               Close Preview
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Success Dialog */}
+      <Dialog open={isSuccessDialogOpen} onOpenChange={setIsSuccessDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <div className="flex flex-col items-center text-center p-6">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+              <CheckCircle2 className="w-8 h-8 text-green-600" />
+            </div>
+            <DialogHeader>
+              <DialogTitle className="text-xl font-semibold text-gray-900 mb-2">
+                Data Saved Successfully!
+              </DialogTitle>
+            </DialogHeader>
+            <p className="text-gray-600 mb-6">
+              {questions.length} questions have been successfully saved to your repository.
+            </p>
+            <div className="flex items-center gap-4 p-4 bg-green-50 rounded-lg w-full mb-6">
+              <Database className="w-5 h-5 text-green-600" />
+              <div className="text-left">
+                <p className="text-sm font-medium text-green-800">Repository Updated</p>
+                <p className="text-xs text-green-600">Questions are now available in your collection</p>
+              </div>
+            </div>
+            <Button 
+              onClick={() => setIsSuccessDialogOpen(false)}
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+            >
+              Continue
             </Button>
           </div>
         </DialogContent>
