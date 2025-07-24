@@ -36,16 +36,14 @@ const Login = () => {
     let hasErrors = false;
     const newErrors = { username: "", password: "", general: "" };
     
+    // Check if fields are empty
     if (!formData.username.trim()) {
-      newErrors.username = "Username or email is required";
+      newErrors.username = "Please enter your username or email address";
       hasErrors = true;
     }
     
     if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-      hasErrors = true;
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+      newErrors.password = "Please enter your password";
       hasErrors = true;
     }
     
@@ -54,17 +52,43 @@ const Login = () => {
       return;
     }
     
-    // Simulate login validation
-    if (formData.username === "demo@example.com" && formData.password === "password123") {
-      navigate("/dashboard");
-    } else {
-      // Check which field is invalid for more specific error
-      if (formData.username !== "demo@example.com") {
-        setErrors({ ...newErrors, general: "Invalid username or email. Please check your credentials." });
+    // Email format validation for username field
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmail = emailRegex.test(formData.username);
+    
+    // Simulate login validation with multiple demo accounts
+    const validAccounts = [
+      { username: "demo@example.com", password: "password123", type: "email" },
+      { username: "admin", password: "admin123", type: "username" },
+      { username: "user1", password: "user123", type: "username" }
+    ];
+    
+    const matchedAccount = validAccounts.find(account => 
+      account.username.toLowerCase() === formData.username.toLowerCase()
+    );
+    
+    if (!matchedAccount) {
+      if (isEmail) {
+        newErrors.username = `No account found with email "${formData.username}". Please check the spelling or create a new account.`;
       } else {
-        setErrors({ ...newErrors, general: "Invalid password. Please check your password." });
+        newErrors.username = `Username "${formData.username}" doesn't exist. Try: admin, user1, or demo@example.com`;
       }
+      setErrors(newErrors);
+      return;
     }
+    
+    if (matchedAccount.password !== formData.password) {
+      if (formData.password.length < 6) {
+        newErrors.password = "Password is too short. Please enter at least 6 characters.";
+      } else {
+        newErrors.password = `Incorrect password for ${matchedAccount.type === 'email' ? 'this email' : 'username "' + matchedAccount.username + '"'}. Please try again.`;
+      }
+      setErrors(newErrors);
+      return;
+    }
+    
+    // Successful login
+    navigate("/dashboard");
   };
 
   const canSubmit = () => {
@@ -224,6 +248,16 @@ const Login = () => {
                     >
                       Forgot password?
                     </button>
+                  </div>
+
+                  {/* Help section with demo credentials */}
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs font-medium text-blue-800 mb-2">Demo Accounts (for testing):</p>
+                    <div className="text-xs text-blue-700 space-y-1">
+                      <div><strong>Email:</strong> demo@example.com / password123</div>
+                      <div><strong>Admin:</strong> admin / admin123</div>
+                      <div><strong>User:</strong> user1 / user123</div>
+                    </div>
                   </div>
 
                   <Button 
