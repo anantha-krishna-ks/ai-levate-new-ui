@@ -53,7 +53,7 @@ const QuestionGenerator = () => {
       studyDomain: "defining-risk",
       taxonomyFramework: "",
       questionQuantity: "1",
-      learningObjectives: "explain-pure-risk",
+      learningObjectives: "explain-pure-risk", 
       questionFormat: "multiple-choice",
       pointValue: "1",
       additionalInstructions: "",
@@ -61,7 +61,8 @@ const QuestionGenerator = () => {
   })
 
   const handleGenerateQuestions = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    // This function only runs if validation passes
+    console.log("Form submitted with values:", values)
     navigate("/question-generation-loading")
   }
 
