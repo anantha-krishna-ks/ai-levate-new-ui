@@ -122,10 +122,6 @@ const QuestionGenerationLoading = () => {
             className="h-6 w-auto"
           />
           <div className="flex items-center gap-2 ml-4">
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-sm text-gray-600 font-medium">AI Online</span>
-            </div>
             <span className="text-sm text-gray-400">•</span>
             <span className="text-sm text-blue-600 font-medium">Processing your request...</span>
           </div>

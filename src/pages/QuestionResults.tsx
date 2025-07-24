@@ -105,10 +105,6 @@ const QuestionResults = () => {
           
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">AI Online</span>
-            </div>
-            <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-purple-600 rounded flex items-center justify-center">
                 <span className="text-white text-xs">✦</span>
               </div>
