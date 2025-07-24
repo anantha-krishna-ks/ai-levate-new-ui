@@ -31,13 +31,37 @@ import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 
+const formSchema = z.object({
+  studyDomain: z.string().min(1, "Study domain is required"),
+  taxonomyFramework: z.string().min(1, "Taxonomy framework is required"),
+  questionQuantity: z.string().min(1, "Question quantity is required"),
+  learningObjectives: z.string().min(1, "Learning objectives is required"),
+  questionFormat: z.string().min(1, "Question format is required"),
+  pointValue: z.string().min(1, "Point value is required"),
+  additionalInstructions: z.string().min(1, "Additional instructions are required"),
+})
+
 const QuestionGenerator = () => {
   const { bookCode } = useParams()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("generate")
   const [generationMode, setGenerationMode] = useState(true) // true for LLM, false for Knowledge Base
 
-  const handleGenerateQuestions = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      studyDomain: "defining-risk",
+      taxonomyFramework: "",
+      questionQuantity: "1",
+      learningObjectives: "explain-pure-risk",
+      questionFormat: "multiple-choice",
+      pointValue: "1",
+      additionalInstructions: "",
+    },
+  })
+
+  const handleGenerateQuestions = (values: z.infer<typeof formSchema>) => {
+    console.log(values)
     navigate("/question-generation-loading")
   }
 
@@ -199,141 +223,209 @@ const QuestionGenerator = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Left side form */}
-                    <div className="space-y-6">
-                      {/* Study Domain */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Target className="w-4 h-4 text-blue-600" />
-                          <label className="text-sm font-medium text-gray-700">Study Domain</label>
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(handleGenerateQuestions)} className="space-y-6">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Left side form */}
+                        <div className="space-y-6">
+                          {/* Study Domain */}
+                          <FormField
+                            control={form.control}
+                            name="studyDomain"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <Target className="w-4 h-4 text-blue-600" />
+                                  Study Domain
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          {/* Taxonomy Framework */}
+                          <FormField
+                            control={form.control}
+                            name="taxonomyFramework"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <Globe className="w-4 h-4 text-blue-600" />
+                                  Taxonomy Framework
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue placeholder="Select framework" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="remember">Remember</SelectItem>
+                                      <SelectItem value="understand">Understand</SelectItem>
+                                      <SelectItem value="apply">Apply</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          {/* Question Quantity */}
+                          <FormField
+                            control={form.control}
+                            name="questionQuantity"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <Hash className="w-4 h-4 text-orange-600" />
+                                  Question Quantity
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="1">1</SelectItem>
+                                      <SelectItem value="5">5</SelectItem>
+                                      <SelectItem value="10">10</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
                         </div>
-                        <Select defaultValue="defining-risk">
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="defining-risk">Defining Risk and Cyber</SelectItem>
-                          </SelectContent>
-                        </Select>
+
+                        {/* Right side form */}
+                        <div className="space-y-6">
+                          {/* Learning Objectives */}
+                          <FormField
+                            control={form.control}
+                            name="learningObjectives"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <Brain className="w-4 h-4 text-purple-600" />
+                                  Learning Objectives
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
+                                      <SelectItem value="define-cyber-risk">Define cyber risk fundamentals</SelectItem>
+                                      <SelectItem value="analyze-threats">Analyze security threats</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          {/* Question Format */}
+                          <FormField
+                            control={form.control}
+                            name="questionFormat"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <FileText className="w-4 h-4 text-green-600" />
+                                  Question Format
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                                      <SelectItem value="written-response">Written Response</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          {/* Point Value */}
+                          <FormField
+                            control={form.control}
+                            name="pointValue"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="flex items-center gap-2">
+                                  <span className="w-4 h-4 text-pink-600 text-sm font-bold">★</span>
+                                  Point Value
+                                </FormLabel>
+                                <FormControl>
+                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger className="w-full bg-white border-gray-200">
+                                      <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="1">1</SelectItem>
+                                      <SelectItem value="2">2</SelectItem>
+                                      <SelectItem value="5">5</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
                       </div>
 
-                      {/* Taxonomy Framework */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Globe className="w-4 h-4 text-blue-600" />
-                          <label className="text-sm font-medium text-gray-700">Taxonomy Framework</label>
-                        </div>
-                        <Select>
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue placeholder="Select framework" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="remember">Remember</SelectItem>
-                            <SelectItem value="understand">Understand</SelectItem>
-                            <SelectItem value="apply">Apply</SelectItem>
-                          </SelectContent>
-                        </Select>
+                      {/* Additional Instructions - Full Width */}
+                      <FormField
+                        control={form.control}
+                        name="additionalInstructions"
+                        render={({ field }) => (
+                          <FormItem className="mt-6">
+                            <FormLabel className="flex items-center gap-2">
+                              <MessageSquare className="w-4 h-4 text-purple-600" />
+                              Additional Instructions
+                            </FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="Provide specific instructions for AI question generation..."
+                                className="min-h-[100px] bg-white border-gray-200"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Generate Button */}
+                      <div className="flex justify-center mt-8">
+                        <Button 
+                          type="submit"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg"
+                        >
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          Generate Questions
+                        </Button>
                       </div>
-
-                      {/* Question Quantity */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Hash className="w-4 h-4 text-orange-600" />
-                          <label className="text-sm font-medium text-gray-700">Question Quantity</label>
-                        </div>
-                        <Select defaultValue="1">
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="1">1</SelectItem>
-                            <SelectItem value="5">5</SelectItem>
-                            <SelectItem value="10">10</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    {/* Right side form */}
-                    <div className="space-y-6">
-                      {/* Learning Objectives */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Brain className="w-4 h-4 text-purple-600" />
-                          <label className="text-sm font-medium text-gray-700">Learning Objectives</label>
-                        </div>
-                        <Select defaultValue="explain-pure-risk">
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="explain-pure-risk">Explain why pure risk is</SelectItem>
-                            <SelectItem value="define-cyber-risk">Define cyber risk fundamentals</SelectItem>
-                            <SelectItem value="analyze-threats">Analyze security threats</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      {/* Question Format */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <FileText className="w-4 h-4 text-green-600" />
-                          <label className="text-sm font-medium text-gray-700">Question Format</label>
-                        </div>
-                        <Select defaultValue="multiple-choice">
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
-                            <SelectItem value="written-response">Written Response</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      {/* Point Value */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="w-4 h-4 text-pink-600 text-sm font-bold">★</span>
-                          <label className="text-sm font-medium text-gray-700">Point Value</label>
-                        </div>
-                        <Select defaultValue="1">
-                          <SelectTrigger className="w-full bg-white border-gray-200">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="1">1</SelectItem>
-                            <SelectItem value="2">2</SelectItem>
-                            <SelectItem value="5">5</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Instructions - Full Width */}
-                  <div className="mt-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <MessageSquare className="w-4 h-4 text-purple-600" />
-                      <label className="text-sm font-medium text-gray-700">Additional Instructions</label>
-                    </div>
-                    <Textarea 
-                      placeholder="Provide specific instructions for AI question generation..."
-                      className="min-h-[100px] bg-white border-gray-200"
-                    />
-                  </div>
-
-                  {/* Generate Button */}
-                  <div className="flex justify-center mt-8">
-                    <Button 
-                      onClick={handleGenerateQuestions}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg"
-                    >
-                      <Sparkles className="w-4 h-4 mr-2" />
-                      Generate Questions
-                    </Button>
-                  </div>
+                    </form>
+                  </Form>
                 </Card>
               </div>
             </div>
