@@ -20,11 +20,14 @@ import comingSoonImage from "@/assets/coming-soon.png"
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("All")
+  const [subscriptionFilter, setSubscriptionFilter] = useState("All")
 
   const tabs = [
     "All", "AI Generation", "Content Creation", "Education", 
     "Assessment", "Analytics", "AI Tools", "AI Interaction"
   ]
+
+  const subscriptionCategories = ["All", "Active Subscriptions", "Yet to Subscribe"]
 
   const getIconForTool = (toolId: string) => {
     const iconMap = {
@@ -58,7 +61,8 @@ const Dashboard = () => {
       category: "AI Generation",
       badge: "New",
       badgeColor: "bg-blue-500",
-      icon: Brain
+      icon: Brain,
+      subscriptionStatus: "active"
     },
     {
       id: "item-writer",
@@ -67,7 +71,8 @@ const Dashboard = () => {
       path: "/item-writer",
       image: itemWriterImage,
       category: "Content Creation",
-      icon: PenTool
+      icon: PenTool,
+      subscriptionStatus: "active"
     },
     {
       id: "item-metadata",
@@ -76,7 +81,8 @@ const Dashboard = () => {
       path: "/item-metadata",
       image: itemMetadataImage,
       category: "Analytics",
-      icon: Database
+      icon: Database,
+      subscriptionStatus: "pending"
     },
     {
       id: "course-generator",
@@ -87,7 +93,8 @@ const Dashboard = () => {
       category: "Education",
       badge: "Popular",
       badgeColor: "bg-green-500",
-      icon: BookOpen
+      icon: BookOpen,
+      subscriptionStatus: "active"
     },
     {
       id: "item-rewriter",
@@ -96,7 +103,8 @@ const Dashboard = () => {
       path: "/item-rewriter",
       image: itemRewriterImage,
       category: "Content Creation",
-      icon: RefreshCw
+      icon: RefreshCw,
+      subscriptionStatus: "active"
     },
     {
       id: "item-similarity",
@@ -105,7 +113,8 @@ const Dashboard = () => {
       path: "/item-similarity",
       image: itemSimilarityImage,
       category: "Analytics",
-      icon: GitCompare
+      icon: GitCompare,
+      subscriptionStatus: "pending"
     },
     {
       id: "course-generator-2",
@@ -116,7 +125,8 @@ const Dashboard = () => {
       category: "Content Creation",
       badge: "Popular",
       badgeColor: "bg-green-500",
-      icon: BookOpen
+      icon: BookOpen,
+      subscriptionStatus: "active"
     },
     {
       id: "scenario-and",
@@ -125,7 +135,8 @@ const Dashboard = () => {
       path: "/scenario",
       image: comingSoonImage,
       category: "Content Creation",
-      icon: FileText
+      icon: FileText,
+      subscriptionStatus: "pending"
     },
     {
       id: "doc-chat-ncert",
@@ -134,7 +145,8 @@ const Dashboard = () => {
       path: "/doc-chat-ncert",
       image: docChatImage,
       category: "Education",
-      icon: MessageSquare
+      icon: MessageSquare,
+      subscriptionStatus: "active"
     },
     {
       id: "doc-chat-moby",
@@ -143,7 +155,8 @@ const Dashboard = () => {
       path: "/doc-chat-moby",
       image: docChatImage,
       category: "Education",
-      icon: MessageSquare
+      icon: MessageSquare,
+      subscriptionStatus: "active"
     },
     {
       id: "ocr",
@@ -154,7 +167,8 @@ const Dashboard = () => {
       category: "AI Tools",
       badge: "New",
       badgeColor: "bg-blue-500",
-      icon: ScanLine
+      icon: ScanLine,
+      subscriptionStatus: "active"
     },
     {
       id: "essay-evaluation",
@@ -163,7 +177,8 @@ const Dashboard = () => {
       path: "/essay-evaluation",
       image: comingSoonImage,
       category: "Assessment",
-      icon: BarChart3
+      icon: BarChart3,
+      subscriptionStatus: "pending"
     },
     {
       id: "essay-evaluation-zero",
@@ -172,7 +187,8 @@ const Dashboard = () => {
       path: "/essay-evaluation-zero",
       image: comingSoonImage,
       category: "Assessment",
-      icon: BarChart3
+      icon: BarChart3,
+      subscriptionStatus: "pending"
     },
     {
       id: "test-forensics",
@@ -181,7 +197,8 @@ const Dashboard = () => {
       path: "/test-forensics",
       image: comingSoonImage,
       category: "Analytics",
-      icon: BarChart
+      icon: BarChart,
+      subscriptionStatus: "pending"
     },
     {
       id: "image-generator",
@@ -192,7 +209,8 @@ const Dashboard = () => {
       category: "AI Generation",
       badge: "Popular",
       badgeColor: "bg-green-500",
-      icon: Image
+      icon: Image,
+      subscriptionStatus: "active"
     },
     {
       id: "ai-persona",
@@ -201,11 +219,19 @@ const Dashboard = () => {
       path: "/ai-persona",
       image: comingSoonImage,
       category: "AI Interaction",
-      icon: Bot
+      icon: Bot,
+      subscriptionStatus: "pending"
     }
   ]
 
-  const filteredTools = activeTab === "All" ? aiTools : aiTools.filter(tool => tool.category === activeTab)
+  const filteredTools = aiTools.filter(tool => {
+    const matchesCategory = activeTab === "All" || tool.category === activeTab
+    const matchesSubscription = 
+      subscriptionFilter === "All" || 
+      (subscriptionFilter === "Active Subscriptions" && tool.subscriptionStatus === "active") ||
+      (subscriptionFilter === "Yet to Subscribe" && tool.subscriptionStatus === "pending")
+    return matchesCategory && matchesSubscription
+  })
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -298,6 +324,25 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 px-6 pb-6">
+          {/* Subscription Filter */}
+          <div className="mb-4">
+            <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-lg w-fit">
+              {subscriptionCategories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSubscriptionFilter(category)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    subscriptionFilter === category
+                      ? "bg-white text-blue-600 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Filter Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto">
             {tabs.map((tab) => (
