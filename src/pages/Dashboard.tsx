@@ -268,7 +268,7 @@ const Dashboard = () => {
         </header>
 
         {/* Page Title */}
-        <div className="p-6 pb-4">
+        <div className="p-2">
           
           
         </div>
