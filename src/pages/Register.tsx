@@ -18,6 +18,7 @@ const Register = () => {
     email: "",
     username: "",
     password: "",
+    confirmPassword: "",
     contactNumber: "",
     organizationName: "",
     acceptTerms: false
@@ -27,6 +28,8 @@ const Register = () => {
     email: false,
     username: false,
     password: false,
+    confirmPassword: false,
+    contactNumber: false,
     organizationName: false
   });
   const [errors, setErrors] = useState({
@@ -34,6 +37,8 @@ const Register = () => {
     email: "",
     username: "",
     password: "",
+    confirmPassword: "",
+    contactNumber: "",
     organizationName: "",
     general: ""
   });
@@ -53,6 +58,11 @@ const Register = () => {
         setFieldValidation(prev => ({ ...prev, [field]: emailRegex.test(value) }));
       } else if (field === 'password') {
         setFieldValidation(prev => ({ ...prev, [field]: value.length >= 6 }));
+      } else if (field === 'confirmPassword') {
+        setFieldValidation(prev => ({ ...prev, [field]: value === formData.password && value.length >= 6 }));
+      } else if (field === 'contactNumber') {
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        setFieldValidation(prev => ({ ...prev, [field]: phoneRegex.test(value.replace(/\s/g, '')) }));
       } else {
         setFieldValidation(prev => ({ ...prev, [field]: value.trim().length > 0 }));
       }
@@ -84,6 +94,8 @@ const Register = () => {
       email: "",
       username: "",
       password: "",
+      confirmPassword: "",
+      contactNumber: "",
       organizationName: "",
       general: ""
     };
@@ -117,6 +129,19 @@ const Register = () => {
       hasErrors = true;
     } else if (!fieldValidation.password) {
       newErrors.password = "Password must be at least 6 characters";
+      hasErrors = true;
+    }
+    
+    if (!formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = "Please confirm your password";
+      hasErrors = true;
+    } else if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = "Passwords do not match";
+      hasErrors = true;
+    }
+    
+    if (formData.contactNumber.trim() && !fieldValidation.contactNumber) {
+      newErrors.contactNumber = "Please enter a valid contact number";
       hasErrors = true;
     }
     
@@ -358,6 +383,63 @@ const Register = () => {
                       <div className="flex items-center mt-2 animate-fade-in">
                         <CheckCircle2 className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
                         <p className="text-sm text-green-600">Strong password</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Confirm Password *"
+                      value={formData.confirmPassword}
+                      onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 pr-12 ${
+                        errors.confirmPassword ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.confirmPassword && formData.confirmPassword ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                    {errors.confirmPassword && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.confirmPassword}</p>
+                      </div>
+                    )}
+                    {!errors.confirmPassword && fieldValidation.confirmPassword && formData.confirmPassword && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <CheckCircle2 className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-green-600">Passwords match</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <Input
+                      type="tel"
+                      placeholder="Contact Number"
+                      value={formData.contactNumber}
+                      onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+                      className={`h-12 border-gray-200 bg-white/80 focus:border-primary focus:ring-primary/20 transition-all duration-200 ${
+                        errors.contactNumber ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 
+                        fieldValidation.contactNumber && formData.contactNumber ? 'border-green-300 focus:border-green-500' : ''
+                      }`}
+                    />
+                    {errors.contactNumber && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <AlertCircle className="w-4 h-4 text-red-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-red-600">{errors.contactNumber}</p>
+                      </div>
+                    )}
+                    {!errors.contactNumber && fieldValidation.contactNumber && formData.contactNumber && (
+                      <div className="flex items-center mt-2 animate-fade-in">
+                        <CheckCircle2 className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
+                        <p className="text-sm text-green-600">Valid contact number</p>
                       </div>
                     )}
                   </div>
