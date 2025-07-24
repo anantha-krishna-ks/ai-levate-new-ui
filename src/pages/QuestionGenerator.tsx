@@ -650,26 +650,6 @@ const QuestionGenerator = () => {
           </div>
         )}
 
-        {/* Export Options */}
-        <div className="mt-8">
-          <Card className="p-6 bg-white border border-gray-200">
-            <h3 className="text-sm font-medium text-gray-700 mb-4">Export Options</h3>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="outline" className="border-gray-200 text-gray-700 hover:bg-gray-50">
-                <FileText className="w-4 h-4 mr-2" />
-                Export to Word
-              </Button>
-              <Button variant="outline" className="border-gray-200 text-gray-700 hover:bg-gray-50">
-                <FileSpreadsheet className="w-4 h-4 mr-2" />
-                Export to Excel
-              </Button>
-              <Button variant="outline" className="border-gray-200 text-gray-700 hover:bg-gray-50">
-                <Save className="w-4 h-4 mr-2" />
-                Save to Repository
-              </Button>
-            </div>
-          </Card>
-        </div>
 
         {/* Footer */}
         <div className="mt-12 text-center">
