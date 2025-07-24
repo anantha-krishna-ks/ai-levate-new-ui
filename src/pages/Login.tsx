@@ -56,11 +56,9 @@ const Login = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmail = emailRegex.test(formData.username);
     
-    // Simulate login validation with multiple demo accounts
+    // Simulate login validation with demo account
     const validAccounts = [
-      { username: "demo@example.com", password: "password123", type: "email" },
-      { username: "admin", password: "admin123", type: "username" },
-      { username: "user1", password: "user123", type: "username" }
+      { username: "demo@example.com", password: "password123", type: "email" }
     ];
     
     const matchedAccount = validAccounts.find(account => 
@@ -71,7 +69,7 @@ const Login = () => {
       if (isEmail) {
         newErrors.username = `No account found with email "${formData.username}". Please check the spelling or create a new account.`;
       } else {
-        newErrors.username = `Username "${formData.username}" doesn't exist. Try: admin, user1, or demo@example.com`;
+        newErrors.username = `Username "${formData.username}" doesn't exist. Try using: demo@example.com`;
       }
       setErrors(newErrors);
       return;
@@ -252,11 +250,9 @@ const Login = () => {
 
                   {/* Help section with demo credentials */}
                   <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-xs font-medium text-blue-800 mb-2">Demo Accounts (for testing):</p>
-                    <div className="text-xs text-blue-700 space-y-1">
+                    <p className="text-xs font-medium text-blue-800 mb-2">Demo Account (for testing):</p>
+                    <div className="text-xs text-blue-700">
                       <div><strong>Email:</strong> demo@example.com / password123</div>
-                      <div><strong>Admin:</strong> admin / admin123</div>
-                      <div><strong>User:</strong> user1 / user123</div>
                     </div>
                   </div>
 
