@@ -368,7 +368,7 @@ const QuestionResults = () => {
             <Button 
               variant="outline" 
               className="text-gray-600"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/question-generator/cyber-risk')}
             >
               Back to Setup
             </Button>
