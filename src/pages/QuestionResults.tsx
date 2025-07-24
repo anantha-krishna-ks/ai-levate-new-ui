@@ -45,6 +45,35 @@ const QuestionResults = () => {
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
   const [questionType, setQuestionType] = useState("multiple-choice")
   const [selectedQuestionType, setSelectedQuestionType] = useState("Multiple Choice")
+  const [isRegenerating, setIsRegenerating] = useState(false)
+  const [questions, setQuestions] = useState([
+    {
+      id: 1,
+      text: "Why are speculative risks generally excluded from insurance coverage, and how does this differ from the treatment of pure risks?",
+      type: "multiple-choice",
+      marks: 5,
+      options: [
+        { id: "A", text: "Pure risk involves only the possibility of loss or no loss, making it insurable.", isCorrect: true },
+        { id: "B", text: "Speculative risk involves the possibility of gain, making it insurable.", isCorrect: false },
+        { id: "C", text: "Pure risk involves both gain and loss, making it uninsurable.", isCorrect: false },
+        { id: "D", text: "Speculative risk involves only loss, making it insurable.", isCorrect: false }
+      ],
+      answer: "Speculative risks involve the possibility of gain or loss, making them unsuitable for insurance coverage, which is designed for predictable and measurable risks like pure risks. Pure risks only involve the chance of loss or no loss, allowing insurers to calculate premiums and manage claims effectively."
+    },
+    {
+      id: 2,
+      text: "What role does statistical predictability play in the insurability of pure risks versus speculative risks?",
+      type: "multiple-choice",
+      marks: 5,
+      options: [
+        { id: "A", text: "Statistical predictability makes both pure and speculative risks equally insurable.", isCorrect: false },
+        { id: "B", text: "Pure risks are statistically predictable, allowing insurers to calculate accurate premiums.", isCorrect: true },
+        { id: "C", text: "Speculative risks are more predictable than pure risks.", isCorrect: false },
+        { id: "D", text: "Statistical predictability is irrelevant to insurance coverage.", isCorrect: false }
+      ],
+      answer: "Pure risks are statistically predictable because they follow established patterns of loss occurrence, enabling insurers to calculate accurate premiums and maintain financial stability. Speculative risks involve unpredictable outcomes that could result in gains or losses, making them unsuitable for traditional insurance models."
+    }
+  ])
   const [keyPoints, setKeyPoints] = useState([
     "Speculative risks - Include the potential for financial gain, which is incompatible with insurance principles.",
     "Pure risks - Only involve loss or no loss, making them insurable and predictable.",
@@ -63,7 +92,7 @@ const QuestionResults = () => {
     },
     {
       title: "Questions Generated", 
-      value: "2",
+      value: questions.length.toString(),
       icon: <CheckCircle2 className="w-5 h-5 text-green-600" />,
       bgColor: "bg-green-50",
       borderColor: "border-green-200"
@@ -83,6 +112,63 @@ const QuestionResults = () => {
       borderColor: "border-orange-200"
     }
   ]
+
+  const generateNewQuestions = async () => {
+    setIsRegenerating(true)
+    
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Generate new questions based on the current question type
+    const newQuestions = questionType === "multiple-choice" ? [
+      {
+        id: questions.length + 1,
+        text: "How does the principle of utmost good faith apply differently to pure risks compared to speculative risks in insurance contracts?",
+        type: "multiple-choice",
+        marks: 5,
+        options: [
+          { id: "A", text: "Utmost good faith applies equally to both pure and speculative risks.", isCorrect: false },
+          { id: "B", text: "Pure risks require full disclosure as they are based on factual circumstances that can be verified.", isCorrect: true },
+          { id: "C", text: "Speculative risks require more disclosure than pure risks.", isCorrect: false },
+          { id: "D", text: "Utmost good faith is not applicable to insurance contracts.", isCorrect: false }
+        ],
+        answer: "Pure risks require full disclosure under utmost good faith principles because insurers need accurate information about factual circumstances to assess risk properly. This differs from speculative risks where the element of potential gain makes disclosure requirements more complex."
+      },
+      {
+        id: questions.length + 2,
+        text: "What impact does the law of large numbers have on the insurability of pure risks versus speculative risks?",
+        type: "multiple-choice",
+        marks: 5,
+        options: [
+          { id: "A", text: "The law of large numbers makes speculative risks more predictable than pure risks.", isCorrect: false },
+          { id: "B", text: "Pure risks benefit from the law of large numbers, enabling accurate premium calculations.", isCorrect: true },
+          { id: "C", text: "The law of large numbers has no impact on insurance pricing.", isCorrect: false },
+          { id: "D", text: "Both pure and speculative risks are equally affected by the law of large numbers.", isCorrect: false }
+        ],
+        answer: "The law of large numbers enables insurers to predict the frequency and severity of pure risk losses across a large pool of similar exposures, making premium calculations accurate and sustainable. Speculative risks don't follow predictable patterns, making this principle less applicable."
+      }
+    ] : [
+      {
+        id: questions.length + 1,
+        text: "Analyze the fundamental differences between pure and speculative risks in terms of their characteristics and explain why insurance companies focus primarily on pure risks.",
+        type: "written-response",
+        marks: 5,
+        options: [],
+        answer: "Pure risks are characterized by uncertainty about whether a loss will occur, with only two possible outcomes: loss or no loss. They are typically involuntary, predictable through statistical analysis, and involve circumstances beyond the insured's control. Speculative risks, conversely, involve three possible outcomes: gain, loss, or no change, and are often voluntary decisions made for potential profit. Insurance companies focus on pure risks because they can be quantified, predicted, and managed through risk pooling and the law of large numbers, while speculative risks would create moral hazard and contradict insurance principles by potentially rewarding risky behavior undertaken for profit."
+      },
+      {
+        id: questions.length + 2,
+        text: "Discuss how the principle of indemnity applies to pure risks and explain why this principle would be problematic if applied to speculative risks in insurance coverage.",
+        type: "written-response",
+        marks: 5,
+        options: [],
+        answer: "The principle of indemnity ensures that insurance compensation restores the insured to their financial position before the loss, preventing profit from insurance claims. This works well with pure risks because the loss is measurable and the goal is restoration, not enrichment. With speculative risks, applying indemnity would be problematic because these risks involve potential gains that cannot be measured or predicted. If someone takes a speculative risk expecting profit but suffers a loss, compensating them would essentially guarantee the gain they hoped for while eliminating the risk they voluntarily assumed, creating moral hazard and transforming insurance into a gambling mechanism."
+      }
+    ]
+    
+    setQuestions(prevQuestions => [...prevQuestions, ...newQuestions])
+    setIsRegenerating(false)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -270,9 +356,13 @@ const QuestionResults = () => {
           </div>
           
           <div className="flex gap-3">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              <RotateCcw className="w-4 h-4 mr-2" />
-              Regenerate
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              onClick={generateNewQuestions}
+              disabled={isRegenerating}
+            >
+              <RotateCcw className={`w-4 h-4 mr-2 ${isRegenerating ? 'animate-spin' : ''}`} />
+              {isRegenerating ? 'Generating...' : 'Regenerate'}
             </Button>
             <Button variant="outline" className="text-gray-600">
               Back to Setup
@@ -303,181 +393,104 @@ const QuestionResults = () => {
             </div>
           </div>
 
-          {/* Question 1 */}
-          <Card className="mb-6 border border-gray-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question 1</span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">5 Marks</span>
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">{selectedQuestionType}</span>
-                </div>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-gray-600"
-                    onClick={() => setIsEditDialogOpen(true)}
-                  >
-                    <Edit3 className="w-4 h-4 mr-1" />
-                    Edit
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-purple-600"
-                    onClick={() => setIsPreviewDialogOpen(true)}
-                  >
-                    <Eye className="w-4 h-4 mr-1" />
-                    Preview
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-red-600"
-                    onClick={() => {
-                      if (confirm("Are you sure you want to delete this question?")) {
-                        console.log("Question 1 deleted")
-                        // Remove question from state/list
-                      }
-                    }}
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Delete
-                  </Button>
-                </div>
-              </div>
-              
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
-                1. Why are speculative risks generally excluded from insurance coverage, and how does this differ from the treatment of pure risks?
-              </h4>
-              
-              {questionType === "multiple-choice" ? (
-                <>
-                  <div className="space-y-3 mb-4">
-                    <div className="flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <span className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">A</span>
-                      <span className="text-gray-900">Pure risk involves only the possibility of loss or no loss, making it insurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">B</span>
-                      <span className="text-gray-700">Speculative risk involves the possibility of gain, making it insurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">C</span>
-                      <span className="text-gray-700">Pure risk involves both gain and loss, making it uninsurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">D</span>
-                      <span className="text-gray-700">Speculative risk involves only loss, making it insurable.</span>
-                    </div>
+          {/* Questions List */}
+          {questions.map((question, index) => (
+            <Card key={question.id} className="mb-6 border border-gray-200">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question {index + 1}</span>
+                    <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">{question.marks} Marks</span>
+                    <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">
+                      {question.type === "multiple-choice" ? "Multiple Choice" : "Written Response"}
+                    </span>
                   </div>
-                  
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-sm text-blue-900">
-                      <strong>Correct Answer:</strong> A. Pure risk involves only the possibility of loss or no loss, making it insurable.
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-gray-600"
+                      onClick={() => setIsEditDialogOpen(true)}
+                    >
+                      <Edit3 className="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-purple-600"
+                      onClick={() => setIsPreviewDialogOpen(true)}
+                    >
+                      <Eye className="w-4 h-4 mr-1" />
+                      Preview
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-red-600"
+                      onClick={() => {
+                        if (confirm("Are you sure you want to delete this question?")) {
+                          setQuestions(prevQuestions => prevQuestions.filter(q => q.id !== question.id))
+                        }
+                      }}
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+                
+                <h4 className="text-lg font-medium text-gray-900 mb-4">
+                  {index + 1}. {question.text}
+                </h4>
+                
+                {question.type === "multiple-choice" ? (
+                  <>
+                    <div className="space-y-3 mb-4">
+                      {question.options.map((option) => (
+                        <div 
+                          key={option.id}
+                          className={`flex items-center gap-3 p-3 rounded-lg ${
+                            option.isCorrect 
+                              ? 'bg-green-50 border border-green-200' 
+                              : 'border border-gray-200'
+                          }`}
+                        >
+                          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium ${
+                            option.isCorrect 
+                              ? 'bg-green-600 text-white' 
+                              : 'bg-gray-100 text-gray-700'
+                          }`}>
+                            {option.id}
+                          </span>
+                          <span className={option.isCorrect ? 'text-gray-900' : 'text-gray-700'}>
+                            {option.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <p className="text-sm text-blue-900">
+                        <strong>Correct Answer:</strong> {question.options.find(opt => opt.isCorrect)?.id}. {question.options.find(opt => opt.isCorrect)?.text}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="flex items-start gap-3 mb-3">
+                      <MessageSquare className="w-5 h-5 text-green-600 mt-0.5" />
+                      <h5 className="font-medium text-green-900">Sample Answer:</h5>
+                    </div>
+                    <p className="text-green-800 leading-relaxed">
+                      {question.answer}
                     </p>
                   </div>
-                </>
-              ) : (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <MessageSquare className="w-5 h-5 text-green-600 mt-0.5" />
-                    <h5 className="font-medium text-green-900">Sample Answer:</h5>
-                  </div>
-                  <p className="text-green-800 leading-relaxed">
-                    Speculative risks involve the possibility of gain or loss, making them unsuitable for insurance coverage, which is designed for predictable and measurable risks like pure risks. Pure risks only involve the chance of loss or no loss, allowing insurers to calculate premiums and manage claims effectively.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
+                )}
+              </div>
+            </Card>
+          ))}
 
-          {/* Question 2 */}
-          <Card className="mb-6 border border-gray-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="bg-black text-white px-3 py-1 rounded text-sm font-medium">Question 2</span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">5 Marks</span>
-                  <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded text-sm">{selectedQuestionType}</span>
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="ghost" size="sm" className="text-gray-600">
-                    <Edit3 className="w-4 h-4 mr-1" />
-                    Edit
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-purple-600">
-                    <Eye className="w-4 h-4 mr-1" />
-                    Preview
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-red-600"
-                    onClick={() => {
-                      if (confirm("Are you sure you want to delete this question?")) {
-                        console.log("Question 2 deleted")
-                        // Remove question from state/list
-                      }
-                    }}
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Delete
-                  </Button>
-                </div>
-              </div>
-              
-              <h4 className="text-lg font-medium text-gray-900 mb-4">
-                2. Discuss the characteristics of pure risk that make it insurable and compare these to speculative risk.
-              </h4>
-              
-              {questionType === "multiple-choice" ? (
-                <>
-                  <div className="space-y-3 mb-4">
-                    <div className="flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <span className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">A</span>
-                      <span className="text-gray-900">Speculative risk includes the possibility of financial gain.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">B</span>
-                      <span className="text-gray-700">Speculative risk involves only financial loss.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">C</span>
-                      <span className="text-gray-700">Speculative risk is predictable and measurable.</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
-                      <span className="w-6 h-6 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-medium">D</span>
-                      <span className="text-gray-700">Speculative risk has no impact on financial outcomes.</span>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-sm text-blue-900">
-                      <strong>Correct Answer:</strong> A. Speculative risk includes the possibility of financial gain.
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <MessageSquare className="w-5 h-5 text-green-600 mt-0.5" />
-                    <h5 className="font-medium text-green-900">Sample Answer:</h5>
-                  </div>
-                  <p className="text-green-800 leading-relaxed">
-                    Pure risk is insurable due to its predictable nature and the absence of potential gain, allowing insurers to assess and manage losses effectively. Speculative risk, conversely, involves both potential gain and loss, making it unpredictable and unsuitable for traditional insurance products.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
         </div>
 
         {/* Need More Questions */}
