@@ -58,7 +58,12 @@ const Login = () => {
     if (formData.username === "demo@example.com" && formData.password === "password123") {
       navigate("/dashboard");
     } else {
-      setErrors({ ...newErrors, general: "Invalid username or password. Please try again." });
+      // Check which field is invalid for more specific error
+      if (formData.username !== "demo@example.com") {
+        setErrors({ ...newErrors, general: "Invalid username or email. Please check your credentials." });
+      } else {
+        setErrors({ ...newErrors, general: "Invalid password. Please check your password." });
+      }
     }
   };
 
@@ -219,9 +224,6 @@ const Login = () => {
                     >
                       Forgot password?
                     </button>
-                    <div className="text-xs text-gray-500">
-                      Demo: demo@example.com / password123
-                    </div>
                   </div>
 
                   <Button 
