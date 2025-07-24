@@ -249,6 +249,23 @@ const Dashboard = () => {
             </div>
             
             <div className="flex items-center gap-4">
+              {/* Subscription Filter */}
+              <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-lg">
+                {subscriptionCategories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSubscriptionFilter(category)}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                      subscriptionFilter === category
+                        ? "bg-white text-blue-600 shadow-sm"
+                        : "text-gray-600 hover:text-gray-900"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+              
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-blue-600 rounded flex items-center justify-center">
                   <span className="text-white text-xs">✦</span>
@@ -324,25 +341,6 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 px-6 pb-6">
-          {/* Subscription Filter */}
-          <div className="mb-4">
-            <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-lg w-fit">
-              {subscriptionCategories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSubscriptionFilter(category)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                    subscriptionFilter === category
-                      ? "bg-white text-blue-600 shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Filter Tabs */}
           <div className="flex gap-2 mb-6 overflow-x-auto">
             {tabs.map((tab) => (
