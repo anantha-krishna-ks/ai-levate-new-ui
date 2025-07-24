@@ -38,9 +38,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { useToast } from "@/hooks/use-toast"
 
 const QuestionResults = () => {
   const navigate = useNavigate()
+  const { toast } = useToast()
   const [activeTab, setActiveTab] = useState("generate")
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
@@ -391,7 +393,16 @@ const QuestionResults = () => {
                 <FileSpreadsheet className="w-4 h-4 mr-2" />
                 Export to Excel
               </Button>
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
+              <Button 
+                className="bg-green-600 hover:bg-green-700 text-white"
+                onClick={() => {
+                  toast({
+                    title: "Data Saved Successfully!",
+                    description: `${questions.length} questions have been saved to your repository.`,
+                    duration: 4000,
+                  });
+                }}
+              >
                 <Database className="w-4 h-4 mr-2" />
                 Save Data
               </Button>
