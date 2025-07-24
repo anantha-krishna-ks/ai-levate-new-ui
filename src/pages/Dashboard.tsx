@@ -257,7 +257,7 @@ const Dashboard = () => {
                 </div>
                 <span className="font-medium text-gray-700">Available Tools</span>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">16</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">16</div>
               <div className="text-sm font-medium text-blue-600">AI-Powered Solutions</div>
             </Card>
 
@@ -268,7 +268,7 @@ const Dashboard = () => {
                 </div>
                 <span className="font-medium text-gray-700">Active Access</span>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">12</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">12</div>
               <div className="text-sm font-medium text-green-600">Tools Subscribed</div>
             </Card>
 
@@ -279,7 +279,7 @@ const Dashboard = () => {
                 </div>
                 <span className="font-medium text-gray-700">Explore More</span>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">4</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">4</div>
               <div className="text-sm font-medium text-purple-600">Advanced Features</div>
             </Card>
 
@@ -290,7 +290,7 @@ const Dashboard = () => {
                 </div>
                 <span className="font-medium text-gray-700">Today's Usage</span>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">847</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">847</div>
               <div className="text-sm font-medium text-orange-600">Tokens Generated</div>
             </Card>
           </div>

@@ -136,7 +136,7 @@ const QuestionGenerator = () => {
                     <Zap className="w-4 h-4 text-green-600" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">7,762</div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">7,762</div>
                 <div className="text-sm text-green-600 flex items-center gap-1">
                   <span>+250 today</span>
                 </div>
