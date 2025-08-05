@@ -324,7 +324,7 @@ const ItemRewriter = () => {
         </div>
 
         {/* Enhanced Upload Section */}
-        <Card className="border-2 border-gray-200 hover:border-blue-300 transition-all duration-300">
+        <Card className="border-2 border-gray-200">
           <div className="p-8">
             <div className="text-center space-y-6">
               <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
