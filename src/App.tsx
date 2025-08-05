@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ItemGenerator from "./pages/ItemGenerator";
 import ItemGeneration from "./pages/ItemGeneration";
+import ItemRewriter from "./pages/ItemRewriter";
 import QuestionGenerator from "./pages/QuestionGenerator";
 import QuestionGenerationLoading from "./pages/QuestionGenerationLoading";
 import QuestionResults from "./pages/QuestionResults";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/item-generator" element={<ItemGenerator />} />
           <Route path="/item-generation" element={<ItemGeneration />} />
+          <Route path="/item-rewriter" element={<ItemRewriter />} />
           <Route path="/question-generator/:bookCode" element={<QuestionGenerator />} />
           <Route path="/question-generation-loading" element={<QuestionGenerationLoading />} />
           <Route path="/question-results" element={<QuestionResults />} />
