@@ -315,6 +315,22 @@ const ItemRewriter = () => {
                 Remaining Tokens: 4,651
               </Badge>
               
+              <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline" className="text-xs">Format: .xlsx only</Badge>
+                  <Badge variant="outline" className="text-xs">Limit: 20 Questions</Badge>
+                </div>
+                
+                <Button 
+                  variant="outline" 
+                  className="border-2 border-blue-400 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-500 hover:text-blue-800 transition-all duration-200 hover:scale-105"
+                  onClick={handleDownloadTemplate}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Template
+                </Button>
+              </div>
+              
               {!uploadedFile ? (
                 <div 
                   className={`border-2 border-dashed rounded-xl p-16 transition-all duration-300 cursor-pointer ${
@@ -396,22 +412,6 @@ const ItemRewriter = () => {
                   </div>
                 </div>
               )}
-              
-              <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
-                <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="text-xs">Format: .xlsx only</Badge>
-                  <Badge variant="outline" className="text-xs">Limit: 20 Questions</Badge>
-                </div>
-                
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-blue-400 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-500 hover:text-blue-800 transition-all duration-200 hover:scale-105"
-                  onClick={handleDownloadTemplate}
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Template
-                </Button>
-              </div>
             </div>
           </div>
         </Card>
