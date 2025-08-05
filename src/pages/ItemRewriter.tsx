@@ -376,7 +376,7 @@ const ItemRewriter = () => {
                     />
                     <Button 
                       variant="outline" 
-                      className="border-2 border-gray-400 text-gray-700 bg-white hover:bg-gray-100 hover:border-gray-500 transition-all duration-200"
+                      className="border-2 border-blue-400 text-blue-700 bg-blue-50 hover:bg-blue-100 hover:border-blue-500 hover:text-blue-800 transition-all duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         document.getElementById('file-upload')?.click();
