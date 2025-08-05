@@ -75,6 +75,20 @@ const ItemRewriter = () => {
     return true;
   };
 
+  const handleRemoveFile = () => {
+    setUploadedFile(null);
+    setUploadedData([]);
+    // Reset the file input
+    const fileInput = document.getElementById('file-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+    toast({
+      title: "File Removed",
+      description: "File has been removed successfully",
+    });
+  };
+
   const processFile = (file: File) => {
     if (!validateFile(file)) return;
     
@@ -318,39 +332,41 @@ const ItemRewriter = () => {
                 Remaining Tokens: 4,651
               </Badge>
               
-              <div 
-                className={`border-2 border-dashed rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 transition-all duration-300 cursor-pointer ${
-                  isDragOver 
-                    ? 'border-blue-500 bg-blue-100/50 scale-105' 
-                    : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/50'
-                }`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                onClick={() => document.getElementById('file-upload')?.click()}
-              >
-                <div className="space-y-6">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto border-4 transition-all duration-300 ${
+              {!uploadedFile ? (
+                <div 
+                  className={`border-2 border-dashed rounded-xl p-16 transition-all duration-300 cursor-pointer ${
                     isDragOver 
-                      ? 'bg-blue-700 border-blue-200' 
-                      : 'bg-blue-600 border-blue-100'
-                  }`}>
-                    <Upload className="w-8 h-8 text-white" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-semibold text-gray-900">
-                      {isDragOver ? 'Drop your file here' : 'Upload Your Questions'}
-                    </h3>
-                    <p className="text-gray-600">
-                      {isDragOver 
-                        ? 'Release to upload your Excel file' 
-                        : 'Drag & drop an Excel file here, or click to browse'
-                      }
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center justify-center gap-4">
+                      ? 'border-blue-500 bg-blue-50' 
+                      : 'border-gray-300 hover:border-blue-400 bg-white hover:bg-gray-50'
+                  }`}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => document.getElementById('file-upload')?.click()}
+                >
+                  <div className="text-center space-y-6">
+                    <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto transition-all duration-300 ${
+                      isDragOver 
+                        ? 'bg-blue-600' 
+                        : 'bg-gray-100'
+                    }`}>
+                      <Upload className={`w-10 h-10 transition-all duration-300 ${
+                        isDragOver ? 'text-white' : 'text-gray-400'
+                      }`} />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-semibold text-gray-900">
+                        {isDragOver ? 'Drop your Excel file here' : 'Drop your Excel file here'}
+                      </h3>
+                      <p className="text-gray-500">
+                        or click to browse for files
+                      </p>
+                      <p className="text-sm text-gray-400">
+                        Supported formats: XLSX (Max 20 Questions)
+                      </p>
+                    </div>
+                    
                     <input
                       type="file"
                       accept=".xlsx,.xls"
@@ -360,27 +376,44 @@ const ItemRewriter = () => {
                     />
                     <Button 
                       variant="outline" 
-                      className="border-2 border-blue-400 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-500 hover:text-blue-800 transition-all duration-200 hover:scale-105"
+                      className="border-2 border-gray-300 text-gray-600 bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         document.getElementById('file-upload')?.click();
                       }}
                     >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Choose File
+                      <Upload className="w-4 h-4 mr-2" />
+                      Browse Files
                     </Button>
-                    <span className="text-gray-600 font-medium">
-                      {uploadedFile ? uploadedFile.name : "No file selected"}
-                    </span>
-                    {uploadedFile && (
-                      <Button className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700">
-                        <Upload className="w-4 h-4 mr-2" />
-                        Upload
-                      </Button>
-                    )}
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="border-2 border-gray-200 rounded-xl p-12 bg-white">
+                  <div className="text-center space-y-6">
+                    <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                      <FileText className="w-10 h-10 text-green-600" />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-semibold text-gray-900">
+                        {uploadedFile.name}
+                      </h3>
+                      <p className="text-green-600 font-medium">
+                        File uploaded successfully!
+                      </p>
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="border-2 border-red-300 text-red-600 bg-white hover:bg-red-50 hover:border-red-400 transition-all duration-200"
+                      onClick={handleRemoveFile}
+                    >
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Remove File
+                    </Button>
+                  </div>
+                </div>
+              )}
               
               <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
                 <div className="flex items-center gap-2">
