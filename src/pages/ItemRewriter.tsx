@@ -472,10 +472,9 @@ const ItemRewriter = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border border-gray-200 z-50">
-                        <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                        <SelectItem value="multiple-choice">Multiple Choice Question</SelectItem>
+                        <SelectItem value="multiple-response">Multiple Response Question</SelectItem>
                         <SelectItem value="true-false">True/False</SelectItem>
-                        <SelectItem value="essay">Essay Question</SelectItem>
-                        <SelectItem value="short-answer">Short Answer</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
