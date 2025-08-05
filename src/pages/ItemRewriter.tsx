@@ -18,6 +18,7 @@ interface RewrittenQuestion {
   original: string;
   rewritten: string;
   choices?: string[];
+  correctAnswer?: number; // Index of the correct answer
 }
 
 const ItemRewriter = () => {
@@ -190,7 +191,8 @@ const ItemRewriter = () => {
           "b. She uses medication daily for asthma control.",
           "c. She has mild asthma and uses medication once or twice weekly.",
           "d. She is a smoker with moderate asthma."
-        ]
+        ],
+        correctAnswer: 2
       },
       {
         original: "Ms. Brien starts a part-time job at a construction site. Over the next few weeks she notices that her asthma symptoms are occurring more frequently, and require her to use the medication in question 1 at least once daily. What is the most likely cause of her asthma exacerbation?",
@@ -200,7 +202,8 @@ const ItemRewriter = () => {
           "b. Moderate asthma", 
           "c. Mild asthma",
           "d. Chronic asthma"
-        ]
+        ],
+        correctAnswer: 2
       },
       {
         original: "What class of medication should be the mainstay of Ms. Brien's pharmacological therapy at this point?",
@@ -210,7 +213,8 @@ const ItemRewriter = () => {
           "b. 20",
           "c. 22", 
           "d. 25"
-        ]
+        ],
+        correctAnswer: 1
       },
       {
         original: "Ms. Brien would like to be able to manage her own asthma therapy. What device would you recommend she purchase?",
@@ -220,7 +224,8 @@ const ItemRewriter = () => {
           "b. Moderate asthma",
           "c. Mild asthma",
           "d. Chronic asthma"
-        ]
+        ],
+        correctAnswer: 2
       }
     ];
     
@@ -564,15 +569,29 @@ const ItemRewriter = () => {
                           <td className="px-8 py-6 text-gray-700 leading-relaxed align-top">{item.original}</td>
                           <td className="px-8 py-6 space-y-4 align-top">
                             <div className="font-semibold text-gray-900 text-lg leading-relaxed">{item.rewritten}</div>
-                            {item.choices && (
+                             {item.choices && (
                               <div className="bg-blue-50 rounded-lg p-4 space-y-2 border border-blue-200">
                                 <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-3">Answer Choices</div>
-                                {item.choices.map((choice, idx) => (
-                                  <div key={idx} className="text-sm text-gray-700 flex items-start gap-3 py-1">
-                                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
-                                    <span className="leading-relaxed">{choice}</span>
-                                  </div>
-                                ))}
+                                {item.choices.map((choice, idx) => {
+                                  const isCorrect = item.correctAnswer === idx;
+                                  return (
+                                    <div key={idx} className={`text-sm flex items-start gap-3 py-2 px-3 rounded-md ${
+                                      isCorrect 
+                                        ? 'bg-green-100 border border-green-300 text-green-800' 
+                                        : 'text-gray-700'
+                                    }`}>
+                                      <span className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                                        isCorrect ? 'bg-green-500' : 'bg-blue-400'
+                                      }`}></span>
+                                      <span className="leading-relaxed font-medium">{choice}</span>
+                                      {isCorrect && (
+                                        <span className="ml-auto text-xs font-semibold text-green-600 bg-green-200 px-2 py-1 rounded-full">
+                                          Correct
+                                        </span>
+                                      )}
+                                    </div>
+                                  );
+                                })}
                               </div>
                             )}
                           </td>
