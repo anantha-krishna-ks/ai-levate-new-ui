@@ -418,34 +418,39 @@ const ItemRewriter = () => {
 
         {/* Enhanced Uploaded Data Section */}
         {uploadedData.length > 0 && (
-          <Card className="border-2 border-gray-200 hover:border-green-300 transition-all duration-300 animate-fade-in">
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center border-2 border-green-100">
-                  <FileText className="w-4 h-4 text-white" />
+          <div className="bg-white rounded-xl border border-gray-200 animate-fade-in">
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Uploaded Data</h2>
+                    <p className="text-gray-600 mt-1">Review your uploaded questions before processing</p>
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">Uploaded Data</h2>
-                <Badge className="bg-green-100 text-green-700 border-green-200">
-                  {uploadedData.length} Questions
+                <Badge className="bg-green-50 text-green-700 border border-green-200 px-4 py-2 text-sm font-medium">
+                  {uploadedData.length} Questions Loaded
                 </Badge>
               </div>
               
-              <div className="overflow-hidden rounded-lg border-2 border-gray-200">
+              <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-gradient-to-r from-gray-50 to-blue-50">
-                      <tr>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Question No</th>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Passage</th>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Question(s)</th>
+                    <thead>
+                      <tr className="bg-gradient-to-r from-gray-100 to-gray-50 border-b border-gray-200">
+                        <th className="px-8 py-5 text-left font-semibold text-gray-900 text-sm uppercase tracking-wide">Question No</th>
+                        <th className="px-8 py-5 text-left font-semibold text-gray-900 text-sm uppercase tracking-wide">Passage</th>
+                        <th className="px-8 py-5 text-left font-semibold text-gray-900 text-sm uppercase tracking-wide">Question(s)</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-100">
                       {uploadedData.map((item, index) => (
-                        <tr key={index} className="hover:bg-blue-50/50 transition-colors">
-                          <td className="px-6 py-4 font-medium text-blue-600">{item.questionNo}</td>
-                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.passage}</td>
-                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.question}</td>
+                        <tr key={index} className="hover:bg-green-50/50 transition-colors duration-200">
+                          <td className="px-8 py-6 font-semibold text-green-600 text-lg">{item.questionNo}</td>
+                          <td className="px-8 py-6 text-gray-700 leading-relaxed max-w-md">{item.passage}</td>
+                          <td className="px-8 py-6 text-gray-700 leading-relaxed max-w-md font-medium">{item.question}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -453,15 +458,15 @@ const ItemRewriter = () => {
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200">
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Question Format</label>
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mt-8 p-6 bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50 rounded-xl border border-blue-200">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1">
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Question Format</label>
                     <Select value={selectedFormat} onValueChange={setSelectedFormat}>
-                      <SelectTrigger className="w-56 border-2 border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors">
+                      <SelectTrigger className="w-64 h-12 border border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors bg-white">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border-2 border-gray-200">
+                      <SelectContent className="bg-white border border-gray-200 z-50">
                         <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
                         <SelectItem value="true-false">True/False</SelectItem>
                         <SelectItem value="essay">Essay Question</SelectItem>
@@ -470,13 +475,13 @@ const ItemRewriter = () => {
                     </Select>
                   </div>
                   
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Language</label>
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Language</label>
                     <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                      <SelectTrigger className="w-32 border-2 border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors">
+                      <SelectTrigger className="w-40 h-12 border border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors bg-white">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border-2 border-gray-200">
+                      <SelectContent className="bg-white border border-gray-200 z-50">
                         <SelectItem value="english">English</SelectItem>
                         <SelectItem value="spanish">Spanish</SelectItem>
                         <SelectItem value="french">French</SelectItem>
@@ -487,74 +492,85 @@ const ItemRewriter = () => {
                 </div>
                 
                 <Button 
-                  className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700 px-8 py-3"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 h-12 text-base font-semibold rounded-lg transition-all duration-200 hover:scale-105"
                   onClick={handleRewriteQuestions}
                   disabled={isRewriting}
                 >
                   {isRewriting ? (
                     <>
-                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                      <RefreshCw className="w-5 h-5 mr-3 animate-spin" />
                       Rewriting Questions...
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 mr-2" />
+                      <Sparkles className="w-5 h-5 mr-3" />
                       Rewrite Questions
                     </>
                   )}
                 </Button>
               </div>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Enhanced Rewritten Questions Section */}
         {rewrittenQuestions.length > 0 && (
-          <Card className="border-2 border-gray-200 hover:border-purple-300 transition-all duration-300 animate-fade-in">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center border-2 border-purple-100">
-                    <Sparkles className="w-4 h-4 text-white" />
+          <div className="bg-white rounded-xl border border-gray-200 animate-fade-in">
+            <div className="p-8">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                  <h2 className="text-xl font-bold text-gray-900">Rewritten Questions</h2>
-                  <Badge className="bg-purple-100 text-purple-700 border-purple-200">
-                    {rewrittenQuestions.length} Completed
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Rewritten Questions</h2>
+                    <p className="text-gray-600 mt-1">AI-generated questions ready for download</p>
+                  </div>
+                  <Badge className="bg-purple-50 text-purple-700 border border-purple-200 px-4 py-2 text-sm font-medium">
+                    {rewrittenQuestions.length} Questions Completed
                   </Badge>
                 </div>
-                <div className="flex gap-3">
-                  <Button variant="outline" onClick={handleClear} className="border-2 border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 transition-all duration-200">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    variant="outline" 
+                    onClick={handleClear} 
+                    className="border border-red-300 text-red-600 bg-white hover:bg-red-50 hover:border-red-400 transition-all duration-200 px-6 py-2"
+                  >
                     <Trash2 className="w-4 h-4 mr-2" />
                     Clear All
                   </Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700" onClick={handleDownload}>
+                  <Button 
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-2 transition-all duration-200 hover:scale-105" 
+                    onClick={handleDownload}
+                  >
                     <Download className="w-4 h-4 mr-2" />
                     Download Results
                   </Button>
                 </div>
               </div>
               
-              <div className="overflow-hidden rounded-lg border-2 border-gray-200">
+              <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-gradient-to-r from-purple-50 to-blue-50">
-                      <tr>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Original Question</th>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Rewritten Question</th>
+                    <thead>
+                      <tr className="bg-gradient-to-r from-purple-100 via-blue-50 to-purple-100 border-b border-gray-200">
+                        <th className="px-8 py-5 text-left font-semibold text-gray-900 text-sm uppercase tracking-wide w-1/2">Original Question</th>
+                        <th className="px-8 py-5 text-left font-semibold text-gray-900 text-sm uppercase tracking-wide w-1/2">Rewritten Question</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-100">
                       {rewrittenQuestions.map((item, index) => (
-                        <tr key={index} className="hover:bg-purple-50/50 transition-colors">
-                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.original}</td>
-                          <td className="px-6 py-4 space-y-3">
-                            <div className="font-medium text-gray-900">{item.rewritten}</div>
+                        <tr key={index} className="hover:bg-purple-50/30 transition-colors duration-200">
+                          <td className="px-8 py-6 text-gray-700 leading-relaxed align-top">{item.original}</td>
+                          <td className="px-8 py-6 space-y-4 align-top">
+                            <div className="font-semibold text-gray-900 text-lg leading-relaxed">{item.rewritten}</div>
                             {item.choices && (
-                              <div className="space-y-1 pl-4">
+                              <div className="bg-blue-50 rounded-lg p-4 space-y-2 border border-blue-200">
+                                <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-3">Answer Choices</div>
                                 {item.choices.map((choice, idx) => (
-                                  <div key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                                    <span className="w-1 h-1 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-                                    {choice}
+                                  <div key={idx} className="text-sm text-gray-700 flex items-start gap-3 py-1">
+                                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                                    <span className="leading-relaxed">{choice}</span>
                                   </div>
                                 ))}
                               </div>
@@ -567,7 +583,7 @@ const ItemRewriter = () => {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Enhanced Footer */}
