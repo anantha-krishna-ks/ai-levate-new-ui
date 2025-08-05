@@ -305,23 +305,6 @@ const ItemRewriter = () => {
           </p>
         </div>
 
-        {/* Enhanced Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-scale-in">
-          {stats.map((stat, index) => (
-            <Card key={index} className={`p-6 ${stat.bgColor} ${stat.borderColor} border-2 hover:scale-105 transition-all duration-300`}>
-              <div className="flex items-center gap-4 mb-4">
-                <div className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center text-white border-2 border-white/20`}>
-                  {stat.icon}
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-800">{stat.title}</span>
-                  <div className="text-xs text-gray-600">{stat.subtitle}</div>
-                </div>
-              </div>
-              <div className={`text-3xl font-bold ${stat.textColor} mb-2`}>{stat.total}</div>
-            </Card>
-          ))}
-        </div>
 
         {/* Enhanced Upload Section */}
         <Card className="border-2 border-gray-200">
