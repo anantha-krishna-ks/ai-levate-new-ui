@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { ArrowLeft, Upload, Download, FileText, RefreshCw, Trash2 } from "lucide-react";
+import { ArrowLeft, Upload, Download, FileText, RefreshCw, Trash2, Sparkles, Clock, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 interface QuestionData {
   questionNo: string;
@@ -26,6 +28,39 @@ const ItemRewriter = () => {
   const [selectedFormat, setSelectedFormat] = useState("multiple-choice");
   const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [isRewriting, setIsRewriting] = useState(false);
+
+  const stats = [
+    {
+      icon: <Sparkles className="w-5 h-5" />,
+      title: "Token Usage",
+      total: "4,651",
+      subtitle: "Available Tokens",
+      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
+      iconBg: "bg-blue-600",
+      textColor: "text-blue-600",
+      borderColor: "border-blue-200"
+    },
+    {
+      icon: <FileText className="w-5 h-5" />,
+      title: "Questions Processed",
+      total: "127",
+      subtitle: "Total Rewritten",
+      bgColor: "bg-gradient-to-br from-green-50 to-green-100",
+      iconBg: "bg-green-600",
+      textColor: "text-green-600",
+      borderColor: "border-green-200"
+    },
+    {
+      icon: <BarChart3 className="w-5 h-5" />,
+      title: "Success Rate",
+      total: "98.5%",
+      subtitle: "Quality Score",
+      bgColor: "bg-gradient-to-br from-purple-50 to-purple-100",
+      iconBg: "bg-purple-600",
+      textColor: "text-purple-600",
+      borderColor: "border-purple-200"
+    }
+  ];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -163,33 +198,31 @@ const ItemRewriter = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b px-6 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20">
+      {/* Enhanced Header */}
+      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/60 px-6 py-4 sticky top-0 z-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg hover-scale">
                 <span className="text-white font-bold text-sm">AL</span>
               </div>
-              <img 
-                src="/lovable-uploads/b5b0f5a8-9552-4635-8c44-d5e6f994179c.png" 
-                alt="AI-Levate" 
-                className="h-5 w-auto"
-              />
-              <span className="text-sm text-gray-500">Item Rewriter</span>
+              <div className="flex flex-col">
+                <span className="font-semibold text-gray-900">Item Rewriter</span>
+                <span className="text-xs text-gray-500">AI-Powered Question Transformation</span>
+              </div>
             </div>
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs">✦</span>
+            <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="w-4 h-4 bg-blue-600 rounded-full flex items-center justify-center">
+                <Sparkles className="w-2 h-2 text-white" />
               </div>
-              <span className="text-sm text-blue-600 font-medium">4,651 Tokens</span>
+              <span className="text-sm text-blue-700 font-medium">4,651 Tokens</span>
             </div>
             <Link to="/dashboard">
-              <Button variant="ghost" size="sm" className="text-gray-600">
+              <Button variant="ghost" size="sm" className="text-gray-600 hover-primary">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Dashboard
               </Button>
@@ -199,198 +232,269 @@ const ItemRewriter = () => {
       </div>
 
       {/* Main Content */}
-      <div className="p-6 max-w-7xl mx-auto">
-        {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Item Rewriter</h1>
-          <p className="text-gray-600">Upload your questions and rewrite them to different formats</p>
+      <div className="p-6 max-w-7xl mx-auto space-y-8">
+        {/* Enhanced Page Title */}
+        <div className="text-center space-y-4 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+            <RefreshCw className="w-4 h-4" />
+            Transform Your Questions
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+            Intelligent Question Rewriter
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Upload your questions and transform them into different formats with AI-powered precision
+          </p>
         </div>
 
-        {/* Upload Section */}
-        <Card className="p-6 mb-8">
-          <div className="text-center">
-            <div className="mb-4">
-              <span className="text-sm text-gray-600">Remaining Tokens:</span>
-            </div>
-            <div className="w-full max-w-2xl mx-auto mb-6">
-              <div className="h-2 bg-blue-200 rounded-full">
-                <div className="h-2 bg-blue-600 rounded-full" style={{ width: '75%' }}></div>
+        {/* Enhanced Statistics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-scale-in">
+          {stats.map((stat, index) => (
+            <Card key={index} className={`p-6 ${stat.bgColor} ${stat.borderColor} border-2 shadow-xl hover-glow hover:scale-105 transition-all duration-300`}>
+              <div className="flex items-center gap-4 mb-4">
+                <div className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center shadow-lg text-white`}>
+                  {stat.icon}
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-800">{stat.title}</span>
+                  <div className="text-xs text-gray-600">{stat.subtitle}</div>
+                </div>
               </div>
-            </div>
-            
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 mb-4">
-              <div className="flex items-center justify-center mb-4">
-                <input
-                  type="file"
-                  accept=".xlsx,.xls"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                  id="file-upload"
-                />
-                <label htmlFor="file-upload" className="cursor-pointer">
-                  <Button variant="outline" className="mr-4">
-                    Choose File
-                  </Button>
-                </label>
-                <span className="text-gray-500">
-                  {uploadedFile ? uploadedFile.name : "No file chosen"}
-                </span>
-                {uploadedFile && (
-                  <Button className="ml-4 bg-blue-600 hover:bg-blue-700">
-                    <Upload className="w-4 h-4 mr-2" />
-                    Upload
-                  </Button>
-                )}
+              <div className={`text-3xl font-bold ${stat.textColor} mb-2`}>{stat.total}</div>
+            </Card>
+          ))}
+        </div>
+
+        {/* Enhanced Upload Section */}
+        <Card className="ai-surface ai-surface-hover transition-all duration-300">
+          <div className="p-8">
+            <div className="text-center space-y-6">
+              <div className="space-y-2">
+                <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
+                  <Clock className="w-3 h-3 mr-1" />
+                  Remaining Tokens: 4,651
+                </Badge>
+                <Progress value={75} className="w-full max-w-md mx-auto h-3 bg-blue-100" />
               </div>
-            </div>
-            
-            <div className="text-right text-sm text-gray-500 mb-2">
-              Format accepted is only .xlsx
-            </div>
-            <div className="text-right text-sm text-gray-500 mb-4">
-              <strong>Note:</strong> Import only 20 Questions
-            </div>
-            
-            <div className="text-right">
-              <Button 
-                variant="outline" 
-                className="bg-blue-600 text-white hover:bg-blue-700"
-                onClick={handleDownloadTemplate}
-              >
-                Download Sample Template
-              </Button>
+              
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 hover:border-blue-400 transition-all duration-300 hover:bg-blue-50/50">
+                <div className="space-y-6">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                    <Upload className="w-8 h-8 text-white" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-gray-900">Upload Your Questions</h3>
+                    <p className="text-gray-600">Select an Excel file containing your questions to get started</p>
+                  </div>
+                  
+                  <div className="flex items-center justify-center gap-4">
+                    <input
+                      type="file"
+                      accept=".xlsx,.xls"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                      id="file-upload"
+                    />
+                    <label htmlFor="file-upload" className="cursor-pointer">
+                      <Button variant="outline" className="ai-button-secondary">
+                        <FileText className="w-4 h-4 mr-2" />
+                        Choose File
+                      </Button>
+                    </label>
+                    <span className="text-gray-600 font-medium">
+                      {uploadedFile ? uploadedFile.name : "No file selected"}
+                    </span>
+                    {uploadedFile && (
+                      <Button className="ai-button-primary">
+                        <Upload className="w-4 h-4 mr-2" />
+                        Upload
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline" className="text-xs">Format: .xlsx only</Badge>
+                  <Badge variant="outline" className="text-xs">Limit: 20 Questions</Badge>
+                </div>
+                
+                <Button 
+                  variant="outline" 
+                  className="ai-button-secondary"
+                  onClick={handleDownloadTemplate}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Template
+                </Button>
+              </div>
             </div>
           </div>
         </Card>
 
-        {/* Uploaded Data Section */}
+        {/* Enhanced Uploaded Data Section */}
         {uploadedData.length > 0 && (
-          <Card className="p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Uploaded Data:</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Question No</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Passage</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Question(s)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {uploadedData.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border border-gray-300 px-4 py-2">{item.questionNo}</td>
-                      <td className="border border-gray-300 px-4 py-2">{item.passage}</td>
-                      <td className="border border-gray-300 px-4 py-2">{item.question}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            
-            <div className="flex items-center gap-4 mt-6">
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Format</label>
-                <Select value={selectedFormat} onValueChange={setSelectedFormat}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="multiple-choice">Multiple Choice Question</SelectItem>
-                    <SelectItem value="true-false">True/False</SelectItem>
-                    <SelectItem value="essay">Essay Question</SelectItem>
-                    <SelectItem value="short-answer">Short Answer</SelectItem>
-                  </SelectContent>
-                </Select>
+          <Card className="ai-surface animate-fade-in">
+            <div className="p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-white" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900">Uploaded Data</h2>
+                <Badge className="bg-green-100 text-green-700 border-green-200">
+                  {uploadedData.length} Questions
+                </Badge>
               </div>
               
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Language</label>
-                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                  <SelectTrigger className="w-32">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="spanish">Spanish</SelectItem>
-                    <SelectItem value="french">French</SelectItem>
-                    <SelectItem value="german">German</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gradient-to-r from-gray-50 to-blue-50">
+                      <tr>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Question No</th>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Passage</th>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Question(s)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-100">
+                      {uploadedData.map((item, index) => (
+                        <tr key={index} className="hover:bg-blue-50/50 transition-colors">
+                          <td className="px-6 py-4 font-medium text-blue-600">{item.questionNo}</td>
+                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.passage}</td>
+                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.question}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               
-              <Button 
-                className="bg-blue-600 hover:bg-blue-700 text-white ml-auto"
-                onClick={handleRewriteQuestions}
-                disabled={isRewriting}
-              >
-                {isRewriting ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                    Rewriting...
-                  </>
-                ) : (
-                  "Rewrite Questions"
-                )}
-              </Button>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                <div className="flex items-center gap-4 flex-1">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700">Question Format</label>
+                    <Select value={selectedFormat} onValueChange={setSelectedFormat}>
+                      <SelectTrigger className="w-56 ai-input">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                        <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                        <SelectItem value="true-false">True/False</SelectItem>
+                        <SelectItem value="essay">Essay Question</SelectItem>
+                        <SelectItem value="short-answer">Short Answer</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700">Language</label>
+                    <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                      <SelectTrigger className="w-32 ai-input">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                        <SelectItem value="english">English</SelectItem>
+                        <SelectItem value="spanish">Spanish</SelectItem>
+                        <SelectItem value="french">French</SelectItem>
+                        <SelectItem value="german">German</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                <Button 
+                  className="ai-button-primary px-8 py-3"
+                  onClick={handleRewriteQuestions}
+                  disabled={isRewriting}
+                >
+                  {isRewriting ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                      Rewriting Questions...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Rewrite Questions
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </Card>
         )}
 
-        {/* Rewritten Questions Section */}
+        {/* Enhanced Rewritten Questions Section */}
         {rewrittenQuestions.length > 0 && (
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Rewritten Question(s):</h2>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={handleClear}>
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Clear
-                </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleDownload}>
-                  <Download className="w-4 h-4 mr-2" />
-                  Download
-                </Button>
+          <Card className="ai-surface animate-fade-in">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-white" />
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-900">Rewritten Questions</h2>
+                  <Badge className="bg-purple-100 text-purple-700 border-purple-200">
+                    {rewrittenQuestions.length} Completed
+                  </Badge>
+                </div>
+                <div className="flex gap-3">
+                  <Button variant="outline" onClick={handleClear} className="ai-button-secondary">
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Clear All
+                  </Button>
+                  <Button className="ai-button-primary" onClick={handleDownload}>
+                    <Download className="w-4 h-4 mr-2" />
+                    Download Results
+                  </Button>
+                </div>
               </div>
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Question(s)</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Multiple Choice Question(s)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rewrittenQuestions.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border border-gray-300 px-4 py-2">{item.original}</td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        <div className="mb-2">{item.rewritten}</div>
-                        {item.choices && (
-                          <div className="space-y-1">
-                            {item.choices.map((choice, idx) => (
-                              <div key={idx} className="text-sm">{choice}</div>
-                            ))}
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              
+              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gradient-to-r from-purple-50 to-blue-50">
+                      <tr>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Original Question</th>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Rewritten Question</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-100">
+                      {rewrittenQuestions.map((item, index) => (
+                        <tr key={index} className="hover:bg-purple-50/50 transition-colors">
+                          <td className="px-6 py-4 text-gray-800 max-w-md">{item.original}</td>
+                          <td className="px-6 py-4 space-y-3">
+                            <div className="font-medium text-gray-900">{item.rewritten}</div>
+                            {item.choices && (
+                              <div className="space-y-1 pl-4">
+                                {item.choices.map((choice, idx) => (
+                                  <div key={idx} className="text-sm text-gray-700 flex items-start gap-2">
+                                    <span className="w-1 h-1 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
+                                    {choice}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </Card>
         )}
 
-        {/* Footer */}
-        <div className="mt-12 text-center">
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-            <div className="w-4 h-4 bg-blue-600 rounded flex items-center justify-center">
-              <span className="text-white text-xs">⚡</span>
+        {/* Enhanced Footer */}
+        <div className="text-center py-8">
+          <div className="flex items-center justify-center gap-3 text-sm text-gray-500">
+            <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+              <Sparkles className="w-3 h-3 text-white" />
             </div>
-            <span>Powered by advanced AI technology</span>
+            <span className="font-medium">Powered by Advanced AI Technology</span>
           </div>
         </div>
       </div>
