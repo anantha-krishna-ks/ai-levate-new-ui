@@ -269,13 +269,10 @@ const ItemRewriter = () => {
         <Card className="border-2 border-gray-200 hover:border-blue-300 transition-all duration-300">
           <div className="p-8">
             <div className="text-center space-y-6">
-              <div className="space-y-2">
-                <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
-                  <Clock className="w-3 h-3 mr-1" />
-                  Remaining Tokens: 4,651
-                </Badge>
-                <Progress value={75} className="w-full max-w-md mx-auto h-3 bg-blue-100" />
-              </div>
+              <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
+                <Clock className="w-3 h-3 mr-1" />
+                Remaining Tokens: 4,651
+              </Badge>
               
               <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 hover:border-blue-400 transition-all duration-300 hover:bg-blue-50/50">
                 <div className="space-y-6">
