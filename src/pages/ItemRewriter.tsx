@@ -250,9 +250,9 @@ const ItemRewriter = () => {
         {/* Enhanced Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-scale-in">
           {stats.map((stat, index) => (
-            <Card key={index} className={`p-6 ${stat.bgColor} ${stat.borderColor} border-2 shadow-xl hover-glow hover:scale-105 transition-all duration-300`}>
+            <Card key={index} className={`p-6 ${stat.bgColor} ${stat.borderColor} border-2 hover:scale-105 transition-all duration-300`}>
               <div className="flex items-center gap-4 mb-4">
-                <div className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center shadow-lg text-white`}>
+                <div className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center text-white border-2 border-white/20`}>
                   {stat.icon}
                 </div>
                 <div>
@@ -266,7 +266,7 @@ const ItemRewriter = () => {
         </div>
 
         {/* Enhanced Upload Section */}
-        <Card className="ai-surface ai-surface-hover transition-all duration-300">
+        <Card className="border-2 border-gray-200 hover:border-blue-300 transition-all duration-300">
           <div className="p-8">
             <div className="text-center space-y-6">
               <div className="space-y-2">
@@ -279,7 +279,7 @@ const ItemRewriter = () => {
               
               <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 hover:border-blue-400 transition-all duration-300 hover:bg-blue-50/50">
                 <div className="space-y-6">
-                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto border-4 border-blue-100">
                     <Upload className="w-8 h-8 text-white" />
                   </div>
                   
@@ -297,7 +297,7 @@ const ItemRewriter = () => {
                       id="file-upload"
                     />
                     <label htmlFor="file-upload" className="cursor-pointer">
-                      <Button variant="outline" className="ai-button-secondary">
+                      <Button variant="outline" className="border-2 border-gray-300 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200">
                         <FileText className="w-4 h-4 mr-2" />
                         Choose File
                       </Button>
@@ -306,7 +306,7 @@ const ItemRewriter = () => {
                       {uploadedFile ? uploadedFile.name : "No file selected"}
                     </span>
                     {uploadedFile && (
-                      <Button className="ai-button-primary">
+                      <Button className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700">
                         <Upload className="w-4 h-4 mr-2" />
                         Upload
                       </Button>
@@ -323,7 +323,7 @@ const ItemRewriter = () => {
                 
                 <Button 
                   variant="outline" 
-                  className="ai-button-secondary"
+                  className="border-2 border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400"
                   onClick={handleDownloadTemplate}
                 >
                   <Download className="w-4 h-4 mr-2" />
@@ -336,10 +336,10 @@ const ItemRewriter = () => {
 
         {/* Enhanced Uploaded Data Section */}
         {uploadedData.length > 0 && (
-          <Card className="ai-surface animate-fade-in">
+          <Card className="border-2 border-gray-200 hover:border-green-300 transition-all duration-300 animate-fade-in">
             <div className="p-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center border-2 border-green-100">
                   <FileText className="w-4 h-4 text-white" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Uploaded Data</h2>
@@ -348,7 +348,7 @@ const ItemRewriter = () => {
                 </Badge>
               </div>
               
-              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+              <div className="overflow-hidden rounded-lg border-2 border-gray-200">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead className="bg-gradient-to-r from-gray-50 to-blue-50">
@@ -371,15 +371,15 @@ const ItemRewriter = () => {
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200">
                 <div className="flex items-center gap-4 flex-1">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Question Format</label>
                     <Select value={selectedFormat} onValueChange={setSelectedFormat}>
-                      <SelectTrigger className="w-56 ai-input">
+                      <SelectTrigger className="w-56 border-2 border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                      <SelectContent className="bg-white border-2 border-gray-200">
                         <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
                         <SelectItem value="true-false">True/False</SelectItem>
                         <SelectItem value="essay">Essay Question</SelectItem>
@@ -391,10 +391,10 @@ const ItemRewriter = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Language</label>
                     <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                      <SelectTrigger className="w-32 ai-input">
+                      <SelectTrigger className="w-32 border-2 border-gray-300 hover:border-blue-400 focus:border-blue-500 transition-colors">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                      <SelectContent className="bg-white border-2 border-gray-200">
                         <SelectItem value="english">English</SelectItem>
                         <SelectItem value="spanish">Spanish</SelectItem>
                         <SelectItem value="french">French</SelectItem>
@@ -405,7 +405,7 @@ const ItemRewriter = () => {
                 </div>
                 
                 <Button 
-                  className="ai-button-primary px-8 py-3"
+                  className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700 px-8 py-3"
                   onClick={handleRewriteQuestions}
                   disabled={isRewriting}
                 >
@@ -428,11 +428,11 @@ const ItemRewriter = () => {
 
         {/* Enhanced Rewritten Questions Section */}
         {rewrittenQuestions.length > 0 && (
-          <Card className="ai-surface animate-fade-in">
+          <Card className="border-2 border-gray-200 hover:border-purple-300 transition-all duration-300 animate-fade-in">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center border-2 border-purple-100">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
                   <h2 className="text-xl font-bold text-gray-900">Rewritten Questions</h2>
@@ -441,18 +441,18 @@ const ItemRewriter = () => {
                   </Badge>
                 </div>
                 <div className="flex gap-3">
-                  <Button variant="outline" onClick={handleClear} className="ai-button-secondary">
+                  <Button variant="outline" onClick={handleClear} className="border-2 border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 transition-all duration-200">
                     <Trash2 className="w-4 h-4 mr-2" />
                     Clear All
                   </Button>
-                  <Button className="ai-button-primary" onClick={handleDownload}>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-700" onClick={handleDownload}>
                     <Download className="w-4 h-4 mr-2" />
                     Download Results
                   </Button>
                 </div>
               </div>
               
-              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+              <div className="overflow-hidden rounded-lg border-2 border-gray-200">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead className="bg-gradient-to-r from-purple-50 to-blue-50">
@@ -491,7 +491,7 @@ const ItemRewriter = () => {
         {/* Enhanced Footer */}
         <div className="text-center py-8">
           <div className="flex items-center justify-center gap-3 text-sm text-gray-500">
-            <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center border-2 border-blue-200">
               <Sparkles className="w-3 h-3 text-white" />
             </div>
             <span className="font-medium">Powered by Advanced AI Technology</span>
