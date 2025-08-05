@@ -28,6 +28,7 @@ const ItemRewriter = () => {
   const [selectedFormat, setSelectedFormat] = useState("multiple-choice");
   const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [isRewriting, setIsRewriting] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const stats = [
     {
@@ -62,47 +63,90 @@ const ItemRewriter = () => {
     }
   ];
 
+  const validateFile = (file: File) => {
+    if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
+      toast({
+        title: "Invalid File Format",
+        description: "Please upload only .xlsx files",
+        variant: "destructive",
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const processFile = (file: File) => {
+    if (!validateFile(file)) return;
+    
+    setUploadedFile(file);
+    
+    // Mock data simulation - in real app, you'd parse the Excel file
+    const mockData: QuestionData[] = [
+      {
+        questionNo: "Q1",
+        passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
+        question: "What class of medication should be the mainstay of her pharmacological therapy? Be specific."
+      },
+      {
+        questionNo: "Q2", 
+        passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
+        question: "Ms. Brien starts a part-time job at a construction site. Over the next few weeks she notices that her asthma symptoms are occurring more frequently, and require her to use the medication in question 1 at least once daily. What is the most likely cause of her asthma exacerbation?"
+      },
+      {
+        questionNo: "Q3",
+        passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
+        question: "What class of medication should be the mainstay of Ms. Brien's pharmacological therapy at this point?"
+      },
+      {
+        questionNo: "Q4",
+        passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
+        question: "Ms. Brien would like to be able to manage her own asthma therapy. What device would you recommend she purchase?"
+      }
+    ];
+    
+    setUploadedData(mockData);
+    toast({
+      title: "File Uploaded Successfully",
+      description: `Uploaded ${mockData.length} questions`,
+    });
+  };
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
-        toast({
-          title: "Invalid File Format",
-          description: "Please upload only .xlsx files",
-          variant: "destructive",
-        });
-        return;
-      }
-      setUploadedFile(file);
-      
-      // Mock data simulation - in real app, you'd parse the Excel file
-      const mockData: QuestionData[] = [
-        {
-          questionNo: "Q1",
-          passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
-          question: "What class of medication should be the mainstay of her pharmacological therapy? Be specific."
-        },
-        {
-          questionNo: "Q2", 
-          passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
-          question: "Ms. Brien starts a part-time job at a construction site. Over the next few weeks she notices that her asthma symptoms are occurring more frequently, and require her to use the medication in question 1 at least once daily. What is the most likely cause of her asthma exacerbation?"
-        },
-        {
-          questionNo: "Q3",
-          passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
-          question: "What class of medication should be the mainstay of Ms. Brien's pharmacological therapy at this point?"
-        },
-        {
-          questionNo: "Q4",
-          passage: "Jill Brien, age 20, is a university student. She is a non-smoker who has asthma. She has had infrequent asthma symptoms over the years, and uses her medication once or twice a week. You consider her to have mild asthma.",
-          question: "Ms. Brien would like to be able to manage her own asthma therapy. What device would you recommend she purchase?"
-        }
-      ];
-      
-      setUploadedData(mockData);
+      processFile(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    const xlsxFile = files.find(file => 
+      file.name.endsWith('.xlsx') || file.name.endsWith('.xls')
+    );
+    
+    if (xlsxFile) {
+      processFile(xlsxFile);
+    } else {
       toast({
-        title: "File Uploaded Successfully",
-        description: `Uploaded ${mockData.length} questions`,
+        title: "Invalid File Type",
+        description: "Please drop only .xlsx files",
+        variant: "destructive",
       });
     }
   };
@@ -274,15 +318,36 @@ const ItemRewriter = () => {
                 Remaining Tokens: 4,651
               </Badge>
               
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 hover:border-blue-400 transition-all duration-300 hover:bg-blue-50/50">
+              <div 
+                className={`border-2 border-dashed rounded-xl p-12 bg-gradient-to-br from-gray-50 to-blue-50/30 transition-all duration-300 cursor-pointer ${
+                  isDragOver 
+                    ? 'border-blue-500 bg-blue-100/50 scale-105' 
+                    : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/50'
+                }`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={() => document.getElementById('file-upload')?.click()}
+              >
                 <div className="space-y-6">
-                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto border-4 border-blue-100">
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto border-4 transition-all duration-300 ${
+                    isDragOver 
+                      ? 'bg-blue-700 border-blue-200' 
+                      : 'bg-blue-600 border-blue-100'
+                  }`}>
                     <Upload className="w-8 h-8 text-white" />
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-xl font-semibold text-gray-900">Upload Your Questions</h3>
-                    <p className="text-gray-600">Select an Excel file containing your questions to get started</p>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {isDragOver ? 'Drop your file here' : 'Upload Your Questions'}
+                    </h3>
+                    <p className="text-gray-600">
+                      {isDragOver 
+                        ? 'Release to upload your Excel file' 
+                        : 'Drag & drop an Excel file here, or click to browse'
+                      }
+                    </p>
                   </div>
                   
                   <div className="flex items-center justify-center gap-4">
@@ -293,12 +358,17 @@ const ItemRewriter = () => {
                       className="hidden"
                       id="file-upload"
                     />
-                    <label htmlFor="file-upload" className="cursor-pointer">
-                      <Button variant="outline" className="border-2 border-gray-300 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200">
-                        <FileText className="w-4 h-4 mr-2" />
-                        Choose File
-                      </Button>
-                    </label>
+                    <Button 
+                      variant="outline" 
+                      className="border-2 border-blue-400 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-500 hover:text-blue-800 transition-all duration-200 hover:scale-105"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        document.getElementById('file-upload')?.click();
+                      }}
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Choose File
+                    </Button>
                     <span className="text-gray-600 font-medium">
                       {uploadedFile ? uploadedFile.name : "No file selected"}
                     </span>
@@ -320,7 +390,7 @@ const ItemRewriter = () => {
                 
                 <Button 
                   variant="outline" 
-                  className="border-2 border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400"
+                  className="border-2 border-blue-400 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-500 hover:text-blue-800 transition-all duration-200 hover:scale-105"
                   onClick={handleDownloadTemplate}
                 >
                   <Download className="w-4 h-4 mr-2" />
